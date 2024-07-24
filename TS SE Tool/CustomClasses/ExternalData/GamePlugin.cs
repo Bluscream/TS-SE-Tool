@@ -14,28 +14,33 @@
    limitations under the License.
 */
 using System.IO;
-using System.Collections.Generic;
 using TS_SE_Tool.Utilities;
 using System;
+using System.ComponentModel;
 
 namespace TS_SE_Tool {
     public class GamePlugin {
         public bool Enabled {
-            get => File32bit.IsDisabled() || File64bit.IsDisabled();
+            get => !File32bit.IsDisabled() && !File64bit.IsDisabled();
             set {
-                File32bit.Enable();
+                if (x86) File32bit.Toggle(value);
+                if (x64) File64bit.Toggle(value);
             }
         }
-        public FileInfo File32bit { get; private set; }
-        public FileInfo File64bit { get; private set; }
-        //public DateTime LastModifiedDate { get; private set; }
-
-        public GamePlugin(string fileName) {
-
+        public string Name { get => File32bit?.FileNameWithoutExtension().RemoveAll("_win32", "_x86") ?? File64bit?.FileNameWithoutExtension().RemoveAll("_win64", "_x64"); }
+        public DateTime? InstallDate {
+            get {
+                if (File32bit.Exists) return File32bit.LastWriteTime;
+                else if (File64bit.Exists) return File64bit.LastWriteTime;
+                return null;
+            }
         }
 
-        public bool Toggle(bool? enable = false) {
-
-        }
+        public bool x86 { get => File32bit != null && File32bit.Exists; }
+        public bool x64 { get => File64bit != null && File64bit.Exists; }
+        [Browsable(false)]
+        public FileInfo File32bit { get; set; }
+        [Browsable(false)]
+        public FileInfo File64bit { get; set; }
     }
 }

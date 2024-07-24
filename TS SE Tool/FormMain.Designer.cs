@@ -1,7 +1,5 @@
-﻿namespace TS_SE_Tool
-{
-    partial class FormMain
-    {
+﻿namespace TS_SE_Tool {
+    partial class FormMain {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
             this.menuStripMain = new System.Windows.Forms.MenuStrip();
             this.toolStripMenuItemProgram = new System.Windows.Forms.ToolStripMenuItem();
@@ -49,6 +44,7 @@
             this.checkSCSForumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkTMPForumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkGitHubRelesesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBoxProfiles = new System.Windows.Forms.ComboBox();
             this.buttonProfilesAndSavesRefreshAll = new System.Windows.Forms.Button();
             this.comboBoxSaves = new System.Windows.Forms.ComboBox();
@@ -252,8 +248,6 @@
             this.radioButtonMainGameSwitchATS = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonMainCloseSave = new System.Windows.Forms.Button();
-            this.tabPagePlugins = new System.Windows.Forms.TabPage();
-            this.tablePlugins = new System.Windows.Forms.DataGridView();
             this.menuStripMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
@@ -308,8 +302,6 @@
             this.tableLayoutPanel16.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
-            this.tabPagePlugins.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablePlugins)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStripMain
@@ -317,7 +309,8 @@
             this.menuStripMain.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripMenuItemProgram,
             this.toolStripMenuItemLanguage,
-            this.toolStripMenuItemHelp});
+            this.toolStripMenuItemHelp,
+            this.gameToolStripMenuItem});
             this.menuStripMain.Location = new System.Drawing.Point(0, 0);
             this.menuStripMain.Name = "menuStripMain";
             this.menuStripMain.Size = new System.Drawing.Size(834, 25);
@@ -464,6 +457,13 @@
             this.checkGitHubRelesesToolStripMenuItem.Text = "Check GitHub Releases";
             this.checkGitHubRelesesToolStripMenuItem.Click += new System.EventHandler(this.checkGitHubRelesesToolStripMenuItem_Click);
             // 
+            // gameToolStripMenuItem
+            // 
+            this.gameToolStripMenuItem.Name = "gameToolStripMenuItem";
+            this.gameToolStripMenuItem.Size = new System.Drawing.Size(58, 21);
+            this.gameToolStripMenuItem.Text = "Plugins";
+            this.gameToolStripMenuItem.Click += new System.EventHandler(this.gameToolStripMenuItem_Click);
+            // 
             // comboBoxProfiles
             // 
             this.comboBoxProfiles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -520,7 +520,6 @@
             this.tabControlMain.Controls.Add(this.tabPageFreightMarket);
             this.tabControlMain.Controls.Add(this.tabPageCargoMarket);
             this.tabControlMain.Controls.Add(this.tabPageConvoyTools);
-            this.tabControlMain.Controls.Add(this.tabPagePlugins);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabControlMain.ItemSize = new System.Drawing.Size(82, 24);
@@ -826,7 +825,7 @@
             // 
             // labelUserCompanyCompanyName
             // 
-            this.labelUserCompanyCompanyName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.labelUserCompanyCompanyName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.labelUserCompanyCompanyName.AutoSize = true;
             this.labelUserCompanyCompanyName.Location = new System.Drawing.Point(115, 0);
@@ -838,7 +837,7 @@
             // 
             // labelUserCompanyMoneyAccount
             // 
-            this.labelUserCompanyMoneyAccount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.labelUserCompanyMoneyAccount.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.labelUserCompanyMoneyAccount.AutoSize = true;
             this.labelUserCompanyMoneyAccount.Location = new System.Drawing.Point(115, 33);
@@ -850,7 +849,7 @@
             // 
             // labelUserCompanyHQcity
             // 
-            this.labelUserCompanyHQcity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.labelUserCompanyHQcity.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.labelUserCompanyHQcity.AutoSize = true;
             this.labelUserCompanyHQcity.Location = new System.Drawing.Point(115, 66);
@@ -882,8 +881,8 @@
             // 
             // labelCompanyNameSize
             // 
-            this.labelCompanyNameSize.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelCompanyNameSize.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelCompanyNameSize.AutoSize = true;
             this.labelCompanyNameSize.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
@@ -1082,7 +1081,7 @@
             // 
             // labelUserCompanyGaragesCurrent
             // 
-            this.labelUserCompanyGaragesCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.labelUserCompanyGaragesCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelUserCompanyGaragesCurrent.Location = new System.Drawing.Point(460, 14);
             this.labelUserCompanyGaragesCurrent.Name = "labelUserCompanyGaragesCurrent";
@@ -1093,7 +1092,7 @@
             // 
             // labelUserCompanyGaragesDelimetry
             // 
-            this.labelUserCompanyGaragesDelimetry.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.labelUserCompanyGaragesDelimetry.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelUserCompanyGaragesDelimetry.AutoSize = true;
             this.labelUserCompanyGaragesDelimetry.Location = new System.Drawing.Point(491, 14);
@@ -1104,8 +1103,8 @@
             // 
             // labelUserCompanyGaragesTotal
             // 
-            this.labelUserCompanyGaragesTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelUserCompanyGaragesTotal.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelUserCompanyGaragesTotal.AutoSize = true;
             this.labelUserCompanyGaragesTotal.Location = new System.Drawing.Point(506, 14);
@@ -1117,7 +1116,7 @@
             // 
             // labelUserCompanyGarages
             // 
-            this.labelUserCompanyGarages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.labelUserCompanyGarages.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Left)));
             this.labelUserCompanyGarages.AutoSize = true;
             this.labelUserCompanyGarages.Location = new System.Drawing.Point(3, 14);
@@ -1133,7 +1132,7 @@
             this.tabPageDrivers.Location = new System.Drawing.Point(4, 22);
             this.tabPageDrivers.Name = "tabPageDrivers";
             this.tabPageDrivers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDrivers.Size = new System.Drawing.Size(550, 399);
+            this.tabPageDrivers.Size = new System.Drawing.Size(550, 398);
             this.tabPageDrivers.TabIndex = 2;
             this.tabPageDrivers.Text = "Drivers";
             this.tabPageDrivers.UseVisualStyleBackColor = true;
@@ -1152,7 +1151,7 @@
             this.tableLayoutPanelCompanyBottomDataDrivers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanelCompanyBottomDataDrivers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelCompanyBottomDataDrivers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 72F));
-            this.tableLayoutPanelCompanyBottomDataDrivers.Size = new System.Drawing.Size(544, 393);
+            this.tableLayoutPanelCompanyBottomDataDrivers.Size = new System.Drawing.Size(544, 392);
             this.tableLayoutPanelCompanyBottomDataDrivers.TabIndex = 0;
             // 
             // tableLayoutPanelCompanyBottomDataDriversControls
@@ -1166,7 +1165,7 @@
             this.tableLayoutPanelCompanyBottomDataDriversControls.Controls.Add(this.buttonUserCompanyDriversSelectAll, 2, 0);
             this.tableLayoutPanelCompanyBottomDataDriversControls.Controls.Add(this.buttonUserCompanyDriversUnSelectAll, 2, 1);
             this.tableLayoutPanelCompanyBottomDataDriversControls.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanelCompanyBottomDataDriversControls.Location = new System.Drawing.Point(0, 321);
+            this.tableLayoutPanelCompanyBottomDataDriversControls.Location = new System.Drawing.Point(0, 320);
             this.tableLayoutPanelCompanyBottomDataDriversControls.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanelCompanyBottomDataDriversControls.Name = "tableLayoutPanelCompanyBottomDataDriversControls";
             this.tableLayoutPanelCompanyBottomDataDriversControls.RowCount = 2;
@@ -1259,7 +1258,7 @@
             // 
             // labelUserCompanyDriversCurrent
             // 
-            this.labelUserCompanyDriversCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.labelUserCompanyDriversCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelUserCompanyDriversCurrent.Location = new System.Drawing.Point(460, 14);
             this.labelUserCompanyDriversCurrent.Name = "labelUserCompanyDriversCurrent";
@@ -1286,7 +1285,7 @@
             this.listBoxUserCompanyDrivers.Location = new System.Drawing.Point(3, 43);
             this.listBoxUserCompanyDrivers.Name = "listBoxUserCompanyDrivers";
             this.listBoxUserCompanyDrivers.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBoxUserCompanyDrivers.Size = new System.Drawing.Size(538, 275);
+            this.listBoxUserCompanyDrivers.Size = new System.Drawing.Size(538, 274);
             this.listBoxUserCompanyDrivers.TabIndex = 1;
             this.listBoxUserCompanyDrivers.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBoxUserCompanyDrivers_DrawItem);
             this.listBoxUserCompanyDrivers.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.listBoxUserCompanyDrivers_MeasureItem);
@@ -1298,7 +1297,7 @@
             this.tabPageVisitedCities.Location = new System.Drawing.Point(4, 22);
             this.tabPageVisitedCities.Name = "tabPageVisitedCities";
             this.tabPageVisitedCities.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageVisitedCities.Size = new System.Drawing.Size(550, 399);
+            this.tabPageVisitedCities.Size = new System.Drawing.Size(550, 398);
             this.tabPageVisitedCities.TabIndex = 1;
             this.tabPageVisitedCities.Text = "VisitedCities";
             this.tabPageVisitedCities.UseVisualStyleBackColor = true;
@@ -1318,7 +1317,7 @@
             this.tableLayoutPanelCompanyBottomDataVisitedCities.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanelCompanyBottomDataVisitedCities.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelCompanyBottomDataVisitedCities.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 72F));
-            this.tableLayoutPanelCompanyBottomDataVisitedCities.Size = new System.Drawing.Size(544, 393);
+            this.tableLayoutPanelCompanyBottomDataVisitedCities.Size = new System.Drawing.Size(544, 392);
             this.tableLayoutPanelCompanyBottomDataVisitedCities.TabIndex = 30;
             // 
             // listBoxVisitedCities
@@ -1331,7 +1330,7 @@
             this.listBoxVisitedCities.Location = new System.Drawing.Point(3, 43);
             this.listBoxVisitedCities.Name = "listBoxVisitedCities";
             this.listBoxVisitedCities.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBoxVisitedCities.Size = new System.Drawing.Size(538, 275);
+            this.listBoxVisitedCities.Size = new System.Drawing.Size(538, 274);
             this.listBoxVisitedCities.TabIndex = 19;
             this.listBoxVisitedCities.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBoxVisitedCities_DrawItem);
             this.listBoxVisitedCities.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.listBoxVisitedCities_MeasureItem);
@@ -1347,7 +1346,7 @@
             this.tableLayoutPanel5.Controls.Add(this.buttonUserCompanyCitiesSelectAll, 2, 0);
             this.tableLayoutPanel5.Controls.Add(this.buttonUserCompanyCitiesUnSelectAll, 2, 1);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 321);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 320);
             this.tableLayoutPanel5.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 2;
@@ -1440,7 +1439,7 @@
             // 
             // labelUserCompanyVisitedCitiesCurrent
             // 
-            this.labelUserCompanyVisitedCitiesCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.labelUserCompanyVisitedCitiesCurrent.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelUserCompanyVisitedCitiesCurrent.Location = new System.Drawing.Point(460, 14);
             this.labelUserCompanyVisitedCitiesCurrent.Name = "labelUserCompanyVisitedCitiesCurrent";
@@ -2801,7 +2800,7 @@
             // 
             // labelHelpText
             // 
-            this.labelHelpText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.labelHelpText.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.labelHelpText.AutoSize = true;
             this.labelHelpText.Cursor = System.Windows.Forms.Cursors.Help;
@@ -2976,27 +2975,6 @@
             this.buttonMainCloseSave.Visible = false;
             this.buttonMainCloseSave.Click += new System.EventHandler(this.buttonMainCloseSave_Click);
             // 
-            // tabPagePlugins
-            // 
-            this.tabPagePlugins.Controls.Add(this.tablePlugins);
-            this.tabPagePlugins.Location = new System.Drawing.Point(4, 28);
-            this.tabPagePlugins.Name = "tabPagePlugins";
-            this.tabPagePlugins.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePlugins.Size = new System.Drawing.Size(570, 536);
-            this.tabPagePlugins.TabIndex = 7;
-            this.tabPagePlugins.Text = "Plugins";
-            this.tabPagePlugins.ToolTipText = "Manage Game Plugins";
-            this.tabPagePlugins.UseVisualStyleBackColor = true;
-            // 
-            // tablePlugins
-            // 
-            this.tablePlugins.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablePlugins.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tablePlugins.Location = new System.Drawing.Point(3, 3);
-            this.tablePlugins.Name = "tablePlugins";
-            this.tablePlugins.Size = new System.Drawing.Size(564, 530);
-            this.tablePlugins.TabIndex = 0;
-            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3082,8 +3060,6 @@
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
             this.tableLayoutPanel11.ResumeLayout(false);
-            this.tabPagePlugins.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.tablePlugins)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3314,8 +3290,7 @@
         private System.Windows.Forms.Button buttonUserCompanyCitiesUnSelectAll;
         private System.Windows.Forms.Button buttonUserCompanyDriversSelectAll;
         private System.Windows.Forms.Button buttonUserCompanyDriversUnSelectAll;
-        private System.Windows.Forms.TabPage tabPagePlugins;
-        private System.Windows.Forms.DataGridView tablePlugins;
+        private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
     }
 }
 

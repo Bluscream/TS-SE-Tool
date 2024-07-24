@@ -32,6 +32,8 @@ using System.Threading;
 
 using TS_SE_Tool.Utilities;
 using JR.Utils.GUI.Forms;
+using Narod.SteamGameFinder;
+using TS_SE_Tool.Forms;
 
 namespace TS_SE_Tool {
     public partial class FormMain : Form {
@@ -149,6 +151,10 @@ namespace TS_SE_Tool {
         internal Image[] MainIcons, ADRImgS, ADRImgSGrey, SkillImgSBG, SkillImgS, GaragesImg, GaragesHQImg, CitiesImg, UrgencyImg, CargoTypeImg, CargoType2Img,
             TruckPartsImg, TrailerPartsImg, VehicleIntegrityPBImg, GameIconeImg, AccessoriesImg; //Program
 
+        private void gameToolStripMenuItem_Click(object sender, EventArgs e) {
+            new FormPluginManager().Show();
+        }
+
         internal Dictionary<string, Image> ProgUIImgsDict;
 
         private ImageList TabpagesImages; //Program
@@ -192,6 +198,10 @@ namespace TS_SE_Tool {
             UpdateStatusBarMessage.OnNewMessageBox += ShowMessageBox_OnNewMessageBox;
             this.Icon = Properties.Resources.MainIco;
             this.Text += " [ " + AssemblyData.AssemblyVersion + " ]";
+
+            IO_Utilities.LogWriter("Getting Game Paths...");
+            Globals.SteamGameLocator = new SteamGameLocator();
+            IO_Utilities.LogWriter("Done.");
 
             SetDefaultValues(true);
             IO_Utilities.LogWriter("Loading config...");
@@ -308,7 +318,9 @@ namespace TS_SE_Tool {
         public static int[] PlayerLevelUps = new int[0];
         public static string CurrencyName = "";
         //
-        public static List<GamePlugin> Plugins = new List<GamePlugin>();
+        public static SteamGameLocator SteamGameLocator = null;
+        public static DirectoryInfo SteamDir = null;
+        public static DirectoryInfo SelectedGameDir = null;
     }
 
 }
