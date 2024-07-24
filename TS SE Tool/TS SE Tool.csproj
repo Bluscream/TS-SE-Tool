@@ -147,6 +147,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomClasses\ExternalData\GamePlugin.cs" />
     <Compile Include="CustomClasses\ExternalData\ScsFont.cs" />
     <Compile Include="CustomClasses\Global\EnumerableExt.cs" />
     <Compile Include="CustomClasses\Global\FloatList.cs" />

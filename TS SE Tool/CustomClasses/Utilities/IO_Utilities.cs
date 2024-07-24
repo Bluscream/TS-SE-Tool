@@ -19,28 +19,38 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Runtime.CompilerServices;
 
-namespace TS_SE_Tool.Utilities
-{
-    class IO_Utilities
-    {
-        internal static void DirectoryCopy(string _sourceDirName, string _destDirName, bool _copySubDirs)
-        {
+namespace TS_SE_Tool.Utilities {
+    static class IO_Extensions {
+        internal static bool IsDisabled(this FileInfo file) => file.Extension.ToLowerInvariant() == IO_Utilities.DisabledFileExtension;
+        internal static void Toggle(this FileInfo file, bool? enable = null) {
+            var disabled = file.IsDisabled();
+            if (disabled && (!enable.HasValue || enable.Value)) file.Enable();
+            else if (!disabled && (!enable.HasValue || !enable.Value)) file.Disable();
+        }
+        internal static void Enable(this FileInfo file) {
+            if (file.IsDisabled()) file.MoveTo(file.Name.Replace(IO_Utilities.DisabledFileExtension, string.Empty));
+        }
+        internal static void Disable(this FileInfo file) {
+            if (!file.IsDisabled()) file.MoveTo(file.Name + ".disabled");
+        }
+    }
+    class IO_Utilities {
+        internal const string DisabledFileExtension = ".disabled";
+        internal static void DirectoryCopy(string _sourceDirName, string _destDirName, bool _copySubDirs) {
             DirectoryCopy(_sourceDirName, _destDirName, _copySubDirs, null);
         }
 
-        internal static void DirectoryCopy(string _sourceDirName, string _destDirName, bool _copySubDirs, string[] _fileList)
-        {
+        internal static void DirectoryCopy(string _sourceDirName, string _destDirName, bool _copySubDirs, string[] _fileList) {
             // Get the subdirectories for the specified directory.
             DirectoryInfo dirInfo = new DirectoryInfo(_sourceDirName);
 
-            if (!dirInfo.Exists)
-            {
+            if (!dirInfo.Exists) {
                 throw new DirectoryNotFoundException("Source directory does not exist or could not be found: " + _sourceDirName);
             }
             // If the destination directory doesn't exist, create it.
-            if (!Directory.Exists(_destDirName))
-            {
+            if (!Directory.Exists(_destDirName)) {
                 Directory.CreateDirectory(_destDirName);
             }
 
@@ -48,10 +58,9 @@ namespace TS_SE_Tool.Utilities
             FileInfo[] files = dirInfo.GetFiles();
             string tempPath = "";
 
-            foreach (FileInfo file in files)
-            {
-                if ( _fileList != null )
-                    if ( !_fileList.Contains(file.Name) )
+            foreach (FileInfo file in files) {
+                if (_fileList != null)
+                    if (!_fileList.Contains(file.Name))
                         continue;
 
                 tempPath = Path.Combine(_destDirName, file.Name);
@@ -60,56 +69,41 @@ namespace TS_SE_Tool.Utilities
             }
 
             // If copying subdirectories, copy them and their contents to new location.
-            if (_copySubDirs)
-            {
+            if (_copySubDirs) {
                 DirectoryInfo[] dirInfoArray = dirInfo.GetDirectories();
 
-                foreach (DirectoryInfo subdir in dirInfoArray)
-                {
+                foreach (DirectoryInfo subdir in dirInfoArray) {
                     tempPath = Path.Combine(_destDirName, subdir.Name);
                     DirectoryCopy(subdir.FullName, tempPath, _copySubDirs, _fileList);
                 }
             }
         }
 
-        internal static void LogWriter(string _error)
-        {
-            try
-            {
-                using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + @"\log.log", true))
-                {
+        internal static void LogWriter(string _error) {
+            try {
+                using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + @"\log.log", true)) {
                     writer.WriteLine(DateTime.Now + " " + _error);
                 }
-            }
-            catch
-            { }
+            } catch { }
         }
 
-        internal static void ErrorLogWriter(string _error)
-        {
-            try
-            {
-                using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + @"\errorlog.log", true))
-                {
-                    writer.WriteLine(DateTime.Now + " | " + AssemblyData.AssemblyProduct + " - " + AssemblyData.AssemblyVersion + " | " + 
-                                    Globals.SelectedProfileName + " [ " + Globals.SelectedProfile + " ] >> " + 
+        internal static void ErrorLogWriter(string _error) {
+            try {
+                using (StreamWriter writer = new StreamWriter(Directory.GetCurrentDirectory() + @"\errorlog.log", true)) {
+                    writer.WriteLine(DateTime.Now + " | " + AssemblyData.AssemblyProduct + " - " + AssemblyData.AssemblyVersion + " | " +
+                                    Globals.SelectedProfileName + " [ " + Globals.SelectedProfile + " ] >> " +
                                     Globals.SelectedSaveName + " [ " + Globals.SelectedSave + " ] ");
                     writer.WriteLine(_error + Environment.NewLine);
                 }
-            }
-            catch
-            { }
+            } catch { }
         }
 
-        internal static void WritePreviewTOBJ(string _path, string _name, string _pathToTGA)
-        {
+        internal static void WritePreviewTOBJ(string _path, string _name, string _pathToTGA) {
             WritePreviewTOBJ(_path + "\\" + _name + ".tobj", _pathToTGA);
         }
 
-        internal static void WritePreviewTOBJ(string _pathToTOBJ, string _pathToTGA)
-        {
-            using (BinaryWriter binWriter = new BinaryWriter(File.Open(_pathToTOBJ, FileMode.Create)))
-            {
+        internal static void WritePreviewTOBJ(string _pathToTOBJ, string _pathToTGA) {
+            using (BinaryWriter binWriter = new BinaryWriter(File.Open(_pathToTOBJ, FileMode.Create))) {
                 byte[] preview_tobj = new byte[] { 1, 10, 177, 112, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 2, 0, 3, 3, 2, 0, 2, 2, 2, 1, 0, 0, 0, 1, 0, 0 };
 
                 binWriter.Write(preview_tobj);

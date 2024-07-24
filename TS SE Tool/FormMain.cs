@@ -33,10 +33,8 @@ using System.Threading;
 using TS_SE_Tool.Utilities;
 using JR.Utils.GUI.Forms;
 
-namespace TS_SE_Tool
-{
-    public partial class FormMain : Form
-    {
+namespace TS_SE_Tool {
+    public partial class FormMain : Form {
         #region  Accesslevels
 
         internal int[] SupportedSavefileVersionETS2; //Program
@@ -120,7 +118,7 @@ namespace TS_SE_Tool
         private Random RandomValue;//Program
 
         private CountryDictionary CountryDictionary;//Program
-        private Dictionary<string,Country> CountriesDataList;
+        private Dictionary<string, Country> CountriesDataList;
 
         private Routes RouteList;//Program DB
 
@@ -148,7 +146,7 @@ namespace TS_SE_Tool
 
         private Image RepairImg, RefuelImg, CustomizeImg; //Program
 
-        internal Image[] MainIcons, ADRImgS, ADRImgSGrey, SkillImgSBG, SkillImgS, GaragesImg, GaragesHQImg, CitiesImg, UrgencyImg, CargoTypeImg, CargoType2Img, 
+        internal Image[] MainIcons, ADRImgS, ADRImgSGrey, SkillImgSBG, SkillImgS, GaragesImg, GaragesHQImg, CitiesImg, UrgencyImg, CargoTypeImg, CargoType2Img,
             TruckPartsImg, TrailerPartsImg, VehicleIntegrityPBImg, GameIconeImg, AccessoriesImg; //Program
 
         internal Dictionary<string, Image> ProgUIImgsDict;
@@ -181,8 +179,7 @@ namespace TS_SE_Tool
 
         #endregion
 
-        public FormMain()
-        {
+        public FormMain() {
             IO_Utilities.LogWriter("Initializing form...");
             InitializeComponent();
             IO_Utilities.LogWriter("Form initialized.");
@@ -237,18 +234,14 @@ namespace TS_SE_Tool
             IO_Utilities.LogWriter("Caching finished.");
         }
 
-        private void FormMain_Shown(object sender, EventArgs e)
-        {
+        private void FormMain_Shown(object sender, EventArgs e) {
             IO_Utilities.LogWriter("Opening form...");
-            try
-            {
+            try {
                 IO_Utilities.LogWriter("Done.");
 
                 if (Properties.Settings.Default.ShowSplashOnStartup || Properties.Settings.Default.CheckUpdatesOnStartup)
-                    OpenSplashScreen();                
-            }
-            catch
-            {
+                    OpenSplashScreen();
+            } catch {
                 IO_Utilities.LogWriter("Done. Settings error.");
 
                 OpenSplashScreen();
@@ -256,44 +249,38 @@ namespace TS_SE_Tool
 
             DetectGame();
 
-            void OpenSplashScreen()
-            {
+            void OpenSplashScreen() {
                 FormSplash WindowSplash = new FormSplash();
                 WindowSplash.ShowDialog();
             }
         }
 
-        private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        private void FormMain_FormClosing(object sender, FormClosingEventArgs e) {
             DialogResult exitDR;
 
-            if (this.ForseExit)            
+            if (this.ForseExit)
                 return;
 
             if (AddedJobsDictionary != null && AddedJobsDictionary.Count > 0)
-                exitDR = FlexibleMessageBox.Show(this, "You have unsaved changes."+ Environment.NewLine + "Do you really want to close down application?", "Close Application without saving changes", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
+                exitDR = FlexibleMessageBox.Show(this, "You have unsaved changes." + Environment.NewLine + "Do you really want to close down application?", "Close Application without saving changes", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button2);
             else
                 exitDR = FlexibleMessageBox.Show(this, "Do you really want to close down application?", "Close Application", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
 
-            if (exitDR == DialogResult.Yes)
-            {
+            if (exitDR == DialogResult.Yes) {
                 ProgSettingsV.WriteConfigToFile();
-            }
-            else
-            {
+            } else {
                 e.Cancel = true;
                 Activate();
             }
         }
 
-        private void makeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
+        private void makeToolStripMenuItem_Click(object sender, EventArgs e) {
             //Set default culture
             string sysCI = CultureInfo.InstalledUICulture.Name;
 
             string folderPath = Directory.GetCurrentDirectory() + @"\lang\" + sysCI;
 
-            if(!Directory.Exists(folderPath))
+            if (!Directory.Exists(folderPath))
                 Directory.CreateDirectory(folderPath);
 
             Process.Start(folderPath);
@@ -303,8 +290,7 @@ namespace TS_SE_Tool
         }
     }
 
-    public class Globals
-    {
+    public class Globals {
         //-----
         public static string[] ProfilesPaths = new string[0];
         public static List<string> ProfilesHex = new List<string>();
@@ -321,6 +307,8 @@ namespace TS_SE_Tool
         //----
         public static int[] PlayerLevelUps = new int[0];
         public static string CurrencyName = "";
+        //
+        public static List<GamePlugin> Plugins = new List<GamePlugin>();
     }
 
 }

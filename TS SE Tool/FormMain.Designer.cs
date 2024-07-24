@@ -107,6 +107,8 @@
             this.tableLayoutPanelCompanyBottomDataDriversControls = new System.Windows.Forms.TableLayoutPanel();
             this.buttonUserCompanyDriversHire = new System.Windows.Forms.Button();
             this.buttonUserCompanyDriversFire = new System.Windows.Forms.Button();
+            this.buttonUserCompanyDriversSelectAll = new System.Windows.Forms.Button();
+            this.buttonUserCompanyDriversUnSelectAll = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.labelUserCompanyDriversTotal = new System.Windows.Forms.Label();
             this.labelUserCompanyDriversDivider = new System.Windows.Forms.Label();
@@ -250,8 +252,8 @@
             this.radioButtonMainGameSwitchATS = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonMainCloseSave = new System.Windows.Forms.Button();
-            this.buttonUserCompanyDriversSelectAll = new System.Windows.Forms.Button();
-            this.buttonUserCompanyDriversUnSelectAll = new System.Windows.Forms.Button();
+            this.tabPagePlugins = new System.Windows.Forms.TabPage();
+            this.tablePlugins = new System.Windows.Forms.DataGridView();
             this.menuStripMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
@@ -306,6 +308,8 @@
             this.tableLayoutPanel16.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
+            this.tabPagePlugins.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePlugins)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStripMain
@@ -316,7 +320,7 @@
             this.toolStripMenuItemHelp});
             this.menuStripMain.Location = new System.Drawing.Point(0, 0);
             this.menuStripMain.Name = "menuStripMain";
-            this.menuStripMain.Size = new System.Drawing.Size(834, 24);
+            this.menuStripMain.Size = new System.Drawing.Size(834, 25);
             this.menuStripMain.TabIndex = 0;
             this.menuStripMain.Text = "menuStripMain";
             // 
@@ -328,39 +332,39 @@
             this.toolStripSeparator1,
             this.toolStripMenuItemExit});
             this.toolStripMenuItemProgram.Name = "toolStripMenuItemProgram";
-            this.toolStripMenuItemProgram.Size = new System.Drawing.Size(65, 20);
+            this.toolStripMenuItemProgram.Size = new System.Drawing.Size(64, 21);
             this.toolStripMenuItemProgram.Text = "Program";
             // 
             // toolStripMenuItemProgramSettings
             // 
             this.toolStripMenuItemProgramSettings.Name = "toolStripMenuItemProgramSettings";
-            this.toolStripMenuItemProgramSettings.Size = new System.Drawing.Size(164, 22);
+            this.toolStripMenuItemProgramSettings.Size = new System.Drawing.Size(170, 22);
             this.toolStripMenuItemProgramSettings.Text = "Program settings";
             this.toolStripMenuItemProgramSettings.Click += new System.EventHandler(this.programSettingsToolStripMenuItem_Click);
             // 
             // toolStripMenuItemSettings
             // 
             this.toolStripMenuItemSettings.Name = "toolStripMenuItemSettings";
-            this.toolStripMenuItemSettings.Size = new System.Drawing.Size(164, 22);
+            this.toolStripMenuItemSettings.Size = new System.Drawing.Size(170, 22);
             this.toolStripMenuItemSettings.Text = "Settings";
             this.toolStripMenuItemSettings.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(161, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(167, 6);
             // 
             // toolStripMenuItemExit
             // 
             this.toolStripMenuItemExit.Name = "toolStripMenuItemExit";
-            this.toolStripMenuItemExit.Size = new System.Drawing.Size(164, 22);
+            this.toolStripMenuItemExit.Size = new System.Drawing.Size(170, 22);
             this.toolStripMenuItemExit.Text = "Exit";
             this.toolStripMenuItemExit.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // toolStripMenuItemLanguage
             // 
             this.toolStripMenuItemLanguage.Name = "toolStripMenuItemLanguage";
-            this.toolStripMenuItemLanguage.Size = new System.Drawing.Size(71, 20);
+            this.toolStripMenuItemLanguage.Size = new System.Drawing.Size(69, 21);
             this.toolStripMenuItemLanguage.Text = "Language";
             // 
             // toolStripMenuItemHelp
@@ -372,20 +376,20 @@
             this.toolStripSeparator4,
             this.toolStripMenuItemDownload});
             this.toolStripMenuItemHelp.Name = "toolStripMenuItemHelp";
-            this.toolStripMenuItemHelp.Size = new System.Drawing.Size(44, 20);
+            this.toolStripMenuItemHelp.Size = new System.Drawing.Size(45, 21);
             this.toolStripMenuItemHelp.Text = "Help";
             // 
             // toolStripMenuItemAbout
             // 
             this.toolStripMenuItemAbout.Name = "toolStripMenuItemAbout";
-            this.toolStripMenuItemAbout.Size = new System.Drawing.Size(128, 22);
+            this.toolStripMenuItemAbout.Size = new System.Drawing.Size(127, 22);
             this.toolStripMenuItemAbout.Text = "About";
             this.toolStripMenuItemAbout.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(125, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(124, 6);
             // 
             // toolStripMenuItemTutorial
             // 
@@ -393,27 +397,27 @@
             this.toolStripMenuItemLocalPDF,
             this.toolStripMenuItemYouTubeVideo});
             this.toolStripMenuItemTutorial.Name = "toolStripMenuItemTutorial";
-            this.toolStripMenuItemTutorial.Size = new System.Drawing.Size(128, 22);
+            this.toolStripMenuItemTutorial.Size = new System.Drawing.Size(127, 22);
             this.toolStripMenuItemTutorial.Text = "How To";
             // 
             // toolStripMenuItemLocalPDF
             // 
             this.toolStripMenuItemLocalPDF.Name = "toolStripMenuItemLocalPDF";
-            this.toolStripMenuItemLocalPDF.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemLocalPDF.Size = new System.Drawing.Size(154, 22);
             this.toolStripMenuItemLocalPDF.Text = "Local PDF";
             this.toolStripMenuItemLocalPDF.Click += new System.EventHandler(this.localPDFToolStripMenuItem_Click);
             // 
             // toolStripMenuItemYouTubeVideo
             // 
             this.toolStripMenuItemYouTubeVideo.Name = "toolStripMenuItemYouTubeVideo";
-            this.toolStripMenuItemYouTubeVideo.Size = new System.Drawing.Size(152, 22);
+            this.toolStripMenuItemYouTubeVideo.Size = new System.Drawing.Size(154, 22);
             this.toolStripMenuItemYouTubeVideo.Text = "YouTube video";
             this.toolStripMenuItemYouTubeVideo.Click += new System.EventHandler(this.youTubeVideoToolStripMenuItem_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(125, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(124, 6);
             // 
             // toolStripMenuItemDownload
             // 
@@ -424,39 +428,39 @@
             this.checkTMPForumToolStripMenuItem,
             this.checkGitHubRelesesToolStripMenuItem});
             this.toolStripMenuItemDownload.Name = "toolStripMenuItemDownload";
-            this.toolStripMenuItemDownload.Size = new System.Drawing.Size(128, 22);
+            this.toolStripMenuItemDownload.Size = new System.Drawing.Size(127, 22);
             this.toolStripMenuItemDownload.Text = "Download";
             // 
             // toolStripMenuItemCheckUpdates
             // 
             this.toolStripMenuItemCheckUpdates.Name = "toolStripMenuItemCheckUpdates";
-            this.toolStripMenuItemCheckUpdates.Size = new System.Drawing.Size(195, 22);
+            this.toolStripMenuItemCheckUpdates.Size = new System.Drawing.Size(201, 22);
             this.toolStripMenuItemCheckUpdates.Text = "Check updates";
             this.toolStripMenuItemCheckUpdates.Click += new System.EventHandler(this.latestStableToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(192, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(198, 6);
             // 
             // checkSCSForumToolStripMenuItem
             // 
             this.checkSCSForumToolStripMenuItem.Name = "checkSCSForumToolStripMenuItem";
-            this.checkSCSForumToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.checkSCSForumToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.checkSCSForumToolStripMenuItem.Text = "Check SCS Forum";
             this.checkSCSForumToolStripMenuItem.Click += new System.EventHandler(this.checkSCSForumToolStripMenuItem_Click);
             // 
             // checkTMPForumToolStripMenuItem
             // 
             this.checkTMPForumToolStripMenuItem.Name = "checkTMPForumToolStripMenuItem";
-            this.checkTMPForumToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.checkTMPForumToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.checkTMPForumToolStripMenuItem.Text = "Check TMP Forum";
             this.checkTMPForumToolStripMenuItem.Click += new System.EventHandler(this.checkTMPForumToolStripMenuItem_Click);
             // 
             // checkGitHubRelesesToolStripMenuItem
             // 
             this.checkGitHubRelesesToolStripMenuItem.Name = "checkGitHubRelesesToolStripMenuItem";
-            this.checkGitHubRelesesToolStripMenuItem.Size = new System.Drawing.Size(195, 22);
+            this.checkGitHubRelesesToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.checkGitHubRelesesToolStripMenuItem.Text = "Check GitHub Releases";
             this.checkGitHubRelesesToolStripMenuItem.Click += new System.EventHandler(this.checkGitHubRelesesToolStripMenuItem_Click);
             // 
@@ -516,13 +520,15 @@
             this.tabControlMain.Controls.Add(this.tabPageFreightMarket);
             this.tabControlMain.Controls.Add(this.tabPageCargoMarket);
             this.tabControlMain.Controls.Add(this.tabPageConvoyTools);
+            this.tabControlMain.Controls.Add(this.tabPagePlugins);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabControlMain.ItemSize = new System.Drawing.Size(82, 24);
             this.tabControlMain.Location = new System.Drawing.Point(3, 3);
+            this.tabControlMain.Multiline = true;
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 0;
-            this.tabControlMain.Size = new System.Drawing.Size(578, 569);
+            this.tabControlMain.Size = new System.Drawing.Size(578, 568);
             this.tabControlMain.TabIndex = 6;
             // 
             // tabPageProfile
@@ -533,7 +539,7 @@
             this.tabPageProfile.Location = new System.Drawing.Point(4, 28);
             this.tabPageProfile.Name = "tabPageProfile";
             this.tabPageProfile.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageProfile.Size = new System.Drawing.Size(570, 537);
+            this.tabPageProfile.Size = new System.Drawing.Size(570, 536);
             this.tabPageProfile.TabIndex = 0;
             this.tabPageProfile.Text = "Profile";
             this.tabPageProfile.UseVisualStyleBackColor = true;
@@ -756,7 +762,7 @@
             this.tabPageCompany.Location = new System.Drawing.Point(4, 28);
             this.tabPageCompany.Name = "tabPageCompany";
             this.tabPageCompany.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageCompany.Size = new System.Drawing.Size(570, 537);
+            this.tabPageCompany.Size = new System.Drawing.Size(570, 536);
             this.tabPageCompany.TabIndex = 5;
             this.tabPageCompany.Text = "Company";
             this.tabPageCompany.UseVisualStyleBackColor = true;
@@ -774,7 +780,7 @@
             this.tableLayoutPanelCompanyMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanelCompanyMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelCompanyMain.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanelCompanyMain.Size = new System.Drawing.Size(564, 531);
+            this.tableLayoutPanelCompanyMain.Size = new System.Drawing.Size(564, 530);
             this.tableLayoutPanelCompanyMain.TabIndex = 29;
             this.tableLayoutPanelCompanyMain.EnabledChanged += new System.EventHandler(this.tableLayoutPanel2_EnabledChanged);
             // 
@@ -909,7 +915,7 @@
             this.tabControlCompanyBottomData.Location = new System.Drawing.Point(3, 103);
             this.tabControlCompanyBottomData.Name = "tabControlCompanyBottomData";
             this.tabControlCompanyBottomData.SelectedIndex = 0;
-            this.tabControlCompanyBottomData.Size = new System.Drawing.Size(558, 425);
+            this.tabControlCompanyBottomData.Size = new System.Drawing.Size(558, 424);
             this.tabControlCompanyBottomData.TabIndex = 31;
             // 
             // tabPageGarages
@@ -918,7 +924,7 @@
             this.tabPageGarages.Location = new System.Drawing.Point(4, 22);
             this.tabPageGarages.Name = "tabPageGarages";
             this.tabPageGarages.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGarages.Size = new System.Drawing.Size(550, 399);
+            this.tabPageGarages.Size = new System.Drawing.Size(550, 398);
             this.tabPageGarages.TabIndex = 0;
             this.tabPageGarages.Text = "Garages";
             this.tabPageGarages.UseVisualStyleBackColor = true;
@@ -938,7 +944,7 @@
             this.tableLayoutPanelCompanyBottomDataGarages.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanelCompanyBottomDataGarages.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanelCompanyBottomDataGarages.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 72F));
-            this.tableLayoutPanelCompanyBottomDataGarages.Size = new System.Drawing.Size(544, 393);
+            this.tableLayoutPanelCompanyBottomDataGarages.Size = new System.Drawing.Size(544, 392);
             this.tableLayoutPanelCompanyBottomDataGarages.TabIndex = 30;
             // 
             // listBoxGarages
@@ -951,7 +957,7 @@
             this.listBoxGarages.Location = new System.Drawing.Point(3, 43);
             this.listBoxGarages.Name = "listBoxGarages";
             this.listBoxGarages.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBoxGarages.Size = new System.Drawing.Size(538, 275);
+            this.listBoxGarages.Size = new System.Drawing.Size(538, 274);
             this.listBoxGarages.TabIndex = 17;
             this.listBoxGarages.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.listBoxGarages_DrawItem);
             this.listBoxGarages.MeasureItem += new System.Windows.Forms.MeasureItemEventHandler(this.listBoxGarages_MeasureItem);
@@ -972,7 +978,7 @@
             this.tableLayoutPanel6.Controls.Add(this.buttonUserCompanyGaragesSelectAll, 4, 0);
             this.tableLayoutPanel6.Controls.Add(this.buttonUserCompanyGaragesUnSelectAll, 4, 1);
             this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 321);
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 320);
             this.tableLayoutPanel6.Margin = new System.Windows.Forms.Padding(0);
             this.tableLayoutPanel6.Name = "tableLayoutPanel6";
             this.tableLayoutPanel6.RowCount = 2;
@@ -1194,6 +1200,28 @@
             this.buttonUserCompanyDriversFire.Text = "Fire";
             this.buttonUserCompanyDriversFire.UseVisualStyleBackColor = true;
             this.buttonUserCompanyDriversFire.Click += new System.EventHandler(this.buttonUserCompanyDriversFire_Click);
+            // 
+            // buttonUserCompanyDriversSelectAll
+            // 
+            this.buttonUserCompanyDriversSelectAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonUserCompanyDriversSelectAll.Location = new System.Drawing.Point(457, 3);
+            this.buttonUserCompanyDriversSelectAll.Name = "buttonUserCompanyDriversSelectAll";
+            this.buttonUserCompanyDriversSelectAll.Size = new System.Drawing.Size(84, 30);
+            this.buttonUserCompanyDriversSelectAll.TabIndex = 28;
+            this.buttonUserCompanyDriversSelectAll.Text = "Select All";
+            this.buttonUserCompanyDriversSelectAll.UseVisualStyleBackColor = true;
+            this.buttonUserCompanyDriversSelectAll.Click += new System.EventHandler(this.buttonUserCompanyDriversSelectAll_Click);
+            // 
+            // buttonUserCompanyDriversUnSelectAll
+            // 
+            this.buttonUserCompanyDriversUnSelectAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.buttonUserCompanyDriversUnSelectAll.Location = new System.Drawing.Point(457, 39);
+            this.buttonUserCompanyDriversUnSelectAll.Name = "buttonUserCompanyDriversUnSelectAll";
+            this.buttonUserCompanyDriversUnSelectAll.Size = new System.Drawing.Size(84, 30);
+            this.buttonUserCompanyDriversUnSelectAll.TabIndex = 29;
+            this.buttonUserCompanyDriversUnSelectAll.Text = "Unselect All";
+            this.buttonUserCompanyDriversUnSelectAll.UseVisualStyleBackColor = true;
+            this.buttonUserCompanyDriversUnSelectAll.Click += new System.EventHandler(this.buttonUserCompanyDriversUnSelectAll_Click);
             // 
             // panel1
             // 
@@ -1437,7 +1465,7 @@
             this.tabPageTruck.Location = new System.Drawing.Point(4, 28);
             this.tabPageTruck.Name = "tabPageTruck";
             this.tabPageTruck.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTruck.Size = new System.Drawing.Size(570, 537);
+            this.tabPageTruck.Size = new System.Drawing.Size(570, 536);
             this.tabPageTruck.TabIndex = 1;
             this.tabPageTruck.Text = "Truck";
             this.tabPageTruck.UseVisualStyleBackColor = true;
@@ -1456,7 +1484,7 @@
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel9.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 110F));
-            this.tableLayoutPanel9.Size = new System.Drawing.Size(564, 531);
+            this.tableLayoutPanel9.Size = new System.Drawing.Size(564, 530);
             this.tableLayoutPanel9.TabIndex = 28;
             // 
             // groupBoxUserTruckTruck
@@ -1546,7 +1574,7 @@
             // 
             this.groupBoxUserTruckShareTruckSettings.Controls.Add(this.tableLayoutPanel7);
             this.groupBoxUserTruckShareTruckSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxUserTruckShareTruckSettings.Location = new System.Drawing.Point(1, 422);
+            this.groupBoxUserTruckShareTruckSettings.Location = new System.Drawing.Point(1, 421);
             this.groupBoxUserTruckShareTruckSettings.Margin = new System.Windows.Forms.Padding(1);
             this.groupBoxUserTruckShareTruckSettings.Name = "groupBoxUserTruckShareTruckSettings";
             this.groupBoxUserTruckShareTruckSettings.Size = new System.Drawing.Size(562, 108);
@@ -1650,7 +1678,7 @@
             this.groupBoxUserTruckTruckDetails.Location = new System.Drawing.Point(1, 101);
             this.groupBoxUserTruckTruckDetails.Margin = new System.Windows.Forms.Padding(1);
             this.groupBoxUserTruckTruckDetails.Name = "groupBoxUserTruckTruckDetails";
-            this.groupBoxUserTruckTruckDetails.Size = new System.Drawing.Size(562, 319);
+            this.groupBoxUserTruckTruckDetails.Size = new System.Drawing.Size(562, 318);
             this.groupBoxUserTruckTruckDetails.TabIndex = 25;
             this.groupBoxUserTruckTruckDetails.TabStop = false;
             this.groupBoxUserTruckTruckDetails.Text = "Details";
@@ -1676,7 +1704,7 @@
             this.tableLayoutPanelTruckDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanelTruckDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanelTruckDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tableLayoutPanelTruckDetails.Size = new System.Drawing.Size(556, 300);
+            this.tableLayoutPanelTruckDetails.Size = new System.Drawing.Size(556, 299);
             this.tableLayoutPanelTruckDetails.TabIndex = 15;
             // 
             // tableLayoutPanelTruckLP
@@ -1695,7 +1723,7 @@
             this.tableLayoutPanelTruckLP.Name = "tableLayoutPanelTruckLP";
             this.tableLayoutPanelTruckLP.RowCount = 1;
             this.tableLayoutPanelTruckLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelTruckLP.Size = new System.Drawing.Size(554, 33);
+            this.tableLayoutPanelTruckLP.Size = new System.Drawing.Size(554, 32);
             this.tableLayoutPanelTruckLP.TabIndex = 0;
             // 
             // tableLayoutPanelTruckFuel
@@ -1719,7 +1747,7 @@
             this.tabPageTrailer.Location = new System.Drawing.Point(4, 28);
             this.tabPageTrailer.Name = "tabPageTrailer";
             this.tabPageTrailer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTrailer.Size = new System.Drawing.Size(570, 537);
+            this.tabPageTrailer.Size = new System.Drawing.Size(570, 536);
             this.tabPageTrailer.TabIndex = 2;
             this.tabPageTrailer.Text = "Trailer";
             this.tabPageTrailer.UseVisualStyleBackColor = true;
@@ -1738,14 +1766,14 @@
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel12.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 110F));
-            this.tableLayoutPanel12.Size = new System.Drawing.Size(564, 531);
+            this.tableLayoutPanel12.Size = new System.Drawing.Size(564, 530);
             this.tableLayoutPanel12.TabIndex = 32;
             // 
             // groupBoxUserTrailerShareTrailerSettings
             // 
             this.groupBoxUserTrailerShareTrailerSettings.Controls.Add(this.tableLayoutPanel14);
             this.groupBoxUserTrailerShareTrailerSettings.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBoxUserTrailerShareTrailerSettings.Location = new System.Drawing.Point(1, 422);
+            this.groupBoxUserTrailerShareTrailerSettings.Location = new System.Drawing.Point(1, 421);
             this.groupBoxUserTrailerShareTrailerSettings.Margin = new System.Windows.Forms.Padding(1);
             this.groupBoxUserTrailerShareTrailerSettings.Name = "groupBoxUserTrailerShareTrailerSettings";
             this.groupBoxUserTrailerShareTrailerSettings.Size = new System.Drawing.Size(562, 108);
@@ -1929,7 +1957,7 @@
             this.groupBoxUserTrailerTrailerDetails.Location = new System.Drawing.Point(1, 101);
             this.groupBoxUserTrailerTrailerDetails.Margin = new System.Windows.Forms.Padding(1);
             this.groupBoxUserTrailerTrailerDetails.Name = "groupBoxUserTrailerTrailerDetails";
-            this.groupBoxUserTrailerTrailerDetails.Size = new System.Drawing.Size(562, 319);
+            this.groupBoxUserTrailerTrailerDetails.Size = new System.Drawing.Size(562, 318);
             this.groupBoxUserTrailerTrailerDetails.TabIndex = 30;
             this.groupBoxUserTrailerTrailerDetails.TabStop = false;
             this.groupBoxUserTrailerTrailerDetails.Text = "Details";
@@ -1954,7 +1982,7 @@
             this.tableLayoutPanelTrailerDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanelTrailerDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
             this.tableLayoutPanelTrailerDetails.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
-            this.tableLayoutPanelTrailerDetails.Size = new System.Drawing.Size(556, 300);
+            this.tableLayoutPanelTrailerDetails.Size = new System.Drawing.Size(556, 299);
             this.tableLayoutPanelTrailerDetails.TabIndex = 16;
             // 
             // tableLayoutPanelTrailerLP
@@ -1973,7 +2001,7 @@
             this.tableLayoutPanelTrailerLP.Name = "tableLayoutPanelTrailerLP";
             this.tableLayoutPanelTrailerLP.RowCount = 1;
             this.tableLayoutPanelTrailerLP.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelTrailerLP.Size = new System.Drawing.Size(554, 33);
+            this.tableLayoutPanelTrailerLP.Size = new System.Drawing.Size(554, 32);
             this.tableLayoutPanelTrailerLP.TabIndex = 0;
             // 
             // tabPageFreightMarket
@@ -2011,7 +2039,7 @@
             this.tabPageFreightMarket.Location = new System.Drawing.Point(4, 28);
             this.tabPageFreightMarket.Name = "tabPageFreightMarket";
             this.tabPageFreightMarket.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageFreightMarket.Size = new System.Drawing.Size(570, 537);
+            this.tabPageFreightMarket.Size = new System.Drawing.Size(570, 536);
             this.tabPageFreightMarket.TabIndex = 3;
             this.tabPageFreightMarket.Text = "FreightMarket";
             this.tabPageFreightMarket.UseVisualStyleBackColor = true;
@@ -2100,7 +2128,7 @@
             // 
             this.listBoxFreightMarketAddedJobs.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.listBoxFreightMarketAddedJobs.FormattingEnabled = true;
-            this.listBoxFreightMarketAddedJobs.Location = new System.Drawing.Point(3, 270);
+            this.listBoxFreightMarketAddedJobs.Location = new System.Drawing.Point(3, 269);
             this.listBoxFreightMarketAddedJobs.Name = "listBoxFreightMarketAddedJobs";
             this.listBoxFreightMarketAddedJobs.ScrollAlwaysVisible = true;
             this.listBoxFreightMarketAddedJobs.Size = new System.Drawing.Size(564, 264);
@@ -2343,7 +2371,8 @@
             this.tabPageCargoMarket.Controls.Add(this.comboBoxCargoMarketSourceCompany);
             this.tabPageCargoMarket.Location = new System.Drawing.Point(4, 28);
             this.tabPageCargoMarket.Name = "tabPageCargoMarket";
-            this.tabPageCargoMarket.Size = new System.Drawing.Size(570, 537);
+            this.tabPageCargoMarket.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageCargoMarket.Size = new System.Drawing.Size(570, 536);
             this.tabPageCargoMarket.TabIndex = 6;
             this.tabPageCargoMarket.Text = "CargoMarket";
             this.tabPageCargoMarket.UseVisualStyleBackColor = true;
@@ -2361,7 +2390,7 @@
             // labelCMTrailerType
             // 
             this.labelCMTrailerType.AutoSize = true;
-            this.labelCMTrailerType.Location = new System.Drawing.Point(3, 265);
+            this.labelCMTrailerType.Location = new System.Drawing.Point(6, 268);
             this.labelCMTrailerType.Name = "labelCMTrailerType";
             this.labelCMTrailerType.Size = new System.Drawing.Size(63, 13);
             this.labelCMTrailerType.TabIndex = 19;
@@ -2436,7 +2465,7 @@
             // labelCargoMarketSource
             // 
             this.labelCargoMarketSource.AutoSize = true;
-            this.labelCargoMarketSource.Location = new System.Drawing.Point(3, 28);
+            this.labelCargoMarketSource.Location = new System.Drawing.Point(6, 31);
             this.labelCargoMarketSource.Name = "labelCargoMarketSource";
             this.labelCargoMarketSource.Size = new System.Drawing.Size(41, 13);
             this.labelCargoMarketSource.TabIndex = 6;
@@ -2445,7 +2474,7 @@
             // labelCargoMarketCompany
             // 
             this.labelCargoMarketCompany.AutoSize = true;
-            this.labelCargoMarketCompany.Location = new System.Drawing.Point(239, 6);
+            this.labelCargoMarketCompany.Location = new System.Drawing.Point(242, 9);
             this.labelCargoMarketCompany.Name = "labelCargoMarketCompany";
             this.labelCargoMarketCompany.Size = new System.Drawing.Size(51, 13);
             this.labelCargoMarketCompany.TabIndex = 5;
@@ -2463,7 +2492,7 @@
             // labelCargoMarketCity
             // 
             this.labelCargoMarketCity.AutoSize = true;
-            this.labelCargoMarketCity.Location = new System.Drawing.Point(72, 6);
+            this.labelCargoMarketCity.Location = new System.Drawing.Point(75, 9);
             this.labelCargoMarketCity.Name = "labelCargoMarketCity";
             this.labelCargoMarketCity.Size = new System.Drawing.Size(24, 13);
             this.labelCargoMarketCity.TabIndex = 1;
@@ -2485,7 +2514,7 @@
             this.tabPageConvoyTools.Location = new System.Drawing.Point(4, 28);
             this.tabPageConvoyTools.Name = "tabPageConvoyTools";
             this.tabPageConvoyTools.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageConvoyTools.Size = new System.Drawing.Size(570, 537);
+            this.tabPageConvoyTools.Size = new System.Drawing.Size(570, 536);
             this.tabPageConvoyTools.TabIndex = 4;
             this.tabPageConvoyTools.Text = "Convoy Control";
             this.tabPageConvoyTools.UseVisualStyleBackColor = true;
@@ -2598,50 +2627,50 @@
             this.contextMenuStripCompanyDriversHire,
             this.contextMenuStripCompanyDriversFire});
             this.contextMenuStripMain.Name = "contextMenuStripFreightMarketJobList";
-            this.contextMenuStripMain.Size = new System.Drawing.Size(108, 126);
+            this.contextMenuStripMain.Size = new System.Drawing.Size(114, 126);
             // 
             // contextMenuStripFreightMarketJobListEdit
             // 
             this.contextMenuStripFreightMarketJobListEdit.Name = "contextMenuStripFreightMarketJobListEdit";
-            this.contextMenuStripFreightMarketJobListEdit.Size = new System.Drawing.Size(107, 22);
+            this.contextMenuStripFreightMarketJobListEdit.Size = new System.Drawing.Size(113, 22);
             this.contextMenuStripFreightMarketJobListEdit.Text = "Edit";
             this.contextMenuStripFreightMarketJobListEdit.Click += new System.EventHandler(this.contextMenuStripFreightMarketJobListEdit_Click);
             // 
             // contextMenuStripFreightMarketJobListSeparator
             // 
             this.contextMenuStripFreightMarketJobListSeparator.Name = "contextMenuStripFreightMarketJobListSeparator";
-            this.contextMenuStripFreightMarketJobListSeparator.Size = new System.Drawing.Size(104, 6);
+            this.contextMenuStripFreightMarketJobListSeparator.Size = new System.Drawing.Size(110, 6);
             // 
             // contextMenuStripFreightMarketJobListDelete
             // 
             this.contextMenuStripFreightMarketJobListDelete.Name = "contextMenuStripFreightMarketJobListDelete";
-            this.contextMenuStripFreightMarketJobListDelete.Size = new System.Drawing.Size(107, 22);
+            this.contextMenuStripFreightMarketJobListDelete.Size = new System.Drawing.Size(113, 22);
             this.contextMenuStripFreightMarketJobListDelete.Text = "Delete";
             this.contextMenuStripFreightMarketJobListDelete.Click += new System.EventHandler(this.contextMenuStripFreightMarketJobListDelete_Click);
             // 
             // contextMenuStripCompanyDriversEdit
             // 
             this.contextMenuStripCompanyDriversEdit.Name = "contextMenuStripCompanyDriversEdit";
-            this.contextMenuStripCompanyDriversEdit.Size = new System.Drawing.Size(107, 22);
+            this.contextMenuStripCompanyDriversEdit.Size = new System.Drawing.Size(113, 22);
             this.contextMenuStripCompanyDriversEdit.Text = "Edit";
             this.contextMenuStripCompanyDriversEdit.Click += new System.EventHandler(this.contextMenuStripCompanyDriversEdit_Click);
             // 
             // contextMenuStripCompanyDriversSeparator
             // 
             this.contextMenuStripCompanyDriversSeparator.Name = "contextMenuStripCompanyDriversSeparator";
-            this.contextMenuStripCompanyDriversSeparator.Size = new System.Drawing.Size(104, 6);
+            this.contextMenuStripCompanyDriversSeparator.Size = new System.Drawing.Size(110, 6);
             // 
             // contextMenuStripCompanyDriversHire
             // 
             this.contextMenuStripCompanyDriversHire.Name = "contextMenuStripCompanyDriversHire";
-            this.contextMenuStripCompanyDriversHire.Size = new System.Drawing.Size(107, 22);
+            this.contextMenuStripCompanyDriversHire.Size = new System.Drawing.Size(113, 22);
             this.contextMenuStripCompanyDriversHire.Text = "Hire";
             this.contextMenuStripCompanyDriversHire.Click += new System.EventHandler(this.contextMenuStripCompanyDriversHire_Click);
             // 
             // contextMenuStripCompanyDriversFire
             // 
             this.contextMenuStripCompanyDriversFire.Name = "contextMenuStripCompanyDriversFire";
-            this.contextMenuStripCompanyDriversFire.Size = new System.Drawing.Size(107, 22);
+            this.contextMenuStripCompanyDriversFire.Size = new System.Drawing.Size(113, 22);
             this.contextMenuStripCompanyDriversFire.Text = "Fire";
             this.contextMenuStripCompanyDriversFire.Click += new System.EventHandler(this.contextMenuStripCompanyDriversFire_Click);
             // 
@@ -2650,7 +2679,7 @@
             this.buttonMainWriteSave.Dock = System.Windows.Forms.DockStyle.Fill;
             this.buttonMainWriteSave.Enabled = false;
             this.buttonMainWriteSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonMainWriteSave.Location = new System.Drawing.Point(3, 486);
+            this.buttonMainWriteSave.Location = new System.Drawing.Point(3, 485);
             this.buttonMainWriteSave.Name = "buttonMainWriteSave";
             this.buttonMainWriteSave.Size = new System.Drawing.Size(238, 84);
             this.buttonMainWriteSave.TabIndex = 7;
@@ -2835,11 +2864,11 @@
             this.tableLayoutPanel15.Controls.Add(this.tableLayoutPanel16, 1, 0);
             this.tableLayoutPanel15.Controls.Add(this.tabControlMain, 0, 0);
             this.tableLayoutPanel15.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel15.Location = new System.Drawing.Point(0, 24);
+            this.tableLayoutPanel15.Location = new System.Drawing.Point(0, 25);
             this.tableLayoutPanel15.Name = "tableLayoutPanel15";
             this.tableLayoutPanel15.RowCount = 1;
             this.tableLayoutPanel15.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel15.Size = new System.Drawing.Size(834, 575);
+            this.tableLayoutPanel15.Size = new System.Drawing.Size(834, 574);
             this.tableLayoutPanel15.TabIndex = 10;
             // 
             // tableLayoutPanel16
@@ -2863,7 +2892,7 @@
             this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel16.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 90F));
-            this.tableLayoutPanel16.Size = new System.Drawing.Size(244, 573);
+            this.tableLayoutPanel16.Size = new System.Drawing.Size(244, 572);
             this.tableLayoutPanel16.TabIndex = 0;
             // 
             // tableLayoutPanel10
@@ -2947,27 +2976,26 @@
             this.buttonMainCloseSave.Visible = false;
             this.buttonMainCloseSave.Click += new System.EventHandler(this.buttonMainCloseSave_Click);
             // 
-            // buttonUserCompanyDriversSelectAll
+            // tabPagePlugins
             // 
-            this.buttonUserCompanyDriversSelectAll.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonUserCompanyDriversSelectAll.Location = new System.Drawing.Point(457, 3);
-            this.buttonUserCompanyDriversSelectAll.Name = "buttonUserCompanyDriversSelectAll";
-            this.buttonUserCompanyDriversSelectAll.Size = new System.Drawing.Size(84, 30);
-            this.buttonUserCompanyDriversSelectAll.TabIndex = 28;
-            this.buttonUserCompanyDriversSelectAll.Text = "Select All";
-            this.buttonUserCompanyDriversSelectAll.UseVisualStyleBackColor = true;
-            this.buttonUserCompanyDriversSelectAll.Click += new System.EventHandler(this.buttonUserCompanyDriversSelectAll_Click);
+            this.tabPagePlugins.Controls.Add(this.tablePlugins);
+            this.tabPagePlugins.Location = new System.Drawing.Point(4, 28);
+            this.tabPagePlugins.Name = "tabPagePlugins";
+            this.tabPagePlugins.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPagePlugins.Size = new System.Drawing.Size(570, 536);
+            this.tabPagePlugins.TabIndex = 7;
+            this.tabPagePlugins.Text = "Plugins";
+            this.tabPagePlugins.ToolTipText = "Manage Game Plugins";
+            this.tabPagePlugins.UseVisualStyleBackColor = true;
             // 
-            // buttonUserCompanyDriversUnSelectAll
+            // tablePlugins
             // 
-            this.buttonUserCompanyDriversUnSelectAll.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonUserCompanyDriversUnSelectAll.Location = new System.Drawing.Point(457, 39);
-            this.buttonUserCompanyDriversUnSelectAll.Name = "buttonUserCompanyDriversUnSelectAll";
-            this.buttonUserCompanyDriversUnSelectAll.Size = new System.Drawing.Size(84, 30);
-            this.buttonUserCompanyDriversUnSelectAll.TabIndex = 29;
-            this.buttonUserCompanyDriversUnSelectAll.Text = "Unselect All";
-            this.buttonUserCompanyDriversUnSelectAll.UseVisualStyleBackColor = true;
-            this.buttonUserCompanyDriversUnSelectAll.Click += new System.EventHandler(this.buttonUserCompanyDriversUnSelectAll_Click);
+            this.tablePlugins.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablePlugins.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tablePlugins.Location = new System.Drawing.Point(3, 3);
+            this.tablePlugins.Name = "tablePlugins";
+            this.tablePlugins.Size = new System.Drawing.Size(564, 530);
+            this.tablePlugins.TabIndex = 0;
             // 
             // FormMain
             // 
@@ -3054,6 +3082,8 @@
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
             this.tableLayoutPanel11.ResumeLayout(false);
+            this.tabPagePlugins.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tablePlugins)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3284,6 +3314,8 @@
         private System.Windows.Forms.Button buttonUserCompanyCitiesUnSelectAll;
         private System.Windows.Forms.Button buttonUserCompanyDriversSelectAll;
         private System.Windows.Forms.Button buttonUserCompanyDriversUnSelectAll;
+        private System.Windows.Forms.TabPage tabPagePlugins;
+        private System.Windows.Forms.DataGridView tablePlugins;
     }
 }
 
