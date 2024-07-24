@@ -23,6 +23,7 @@ namespace TS_SE_Tool.Forms {
         }
 
         public static DirectoryInfo GetPluginsDir(DirectoryInfo gameDir, string arch = "win_x64") => gameDir.Combine("bin", arch, "plugins");
+        public static DirectoryInfo GetGameDir(string _game) => _game == "ATS" ? ATSGameDir : ETS2GameDir;
 
         public static void Initialize() {
             if (Globals.SteamGameLocator.getIsSteamInstalled()) {
@@ -48,31 +49,42 @@ namespace TS_SE_Tool.Forms {
 
         public static List<GamePlugin> FindMatchingPlugins(DirectoryInfo gameDir) {
             var plugins = new List<GamePlugin>();
-            var allFiles = gameDir.GetFiles("*.dll").Concat(gameDir.GetFiles("*.disabled"));
-            var x86Files = allFiles.Where(f => !f.Is64Bit());
-            var x64Files = allFiles.Where(f => f.Is64Bit());
+            var x86Dir = GetPluginsDir(gameDir, "win_x86");
+            var all86Files = x86Dir.GetFiles("*.dll").Concat(x86Dir.GetFiles("*.disabled"));
+            var x64Dir = GetPluginsDir(gameDir, "win_x64");
+            var all64Files = x64Dir.GetFiles("*.dll").Concat(x64Dir.GetFiles("*.disabled"));
+            var x86Files = all86Files.Where(f => !f.Is64Bit(true)).Concat(all64Files.Where(f => !f.Is64Bit()));
+            var x64Files = all64Files.Where(f => f.Is64Bit(true)).Concat(all86Files.Where(f => f.Is64Bit()));
             foreach (var x86File in x86Files) {
                 var plugin = new GamePlugin() { File32bit = x86File };
+                //FileInfo foundMatch = null;
                 foreach (var x64File in x64Files) {
                     var matchScore = Fuzz.Ratio(x86File.Name, x64File.Name);
-                    if (matchScore > 80) {
+                    if (matchScore > 70) {
                         plugin.File64bit = x64File;
                         break;
                     }
                 }
-                plugins.Add(plugin);
+                //if (!plugin.x64) {
+                //    foreach (var _x86file in x86Files) {
+                //        var matchScore = Fuzz.Ratio(x86File.Name, _x86file.Name);
+                //        if (matchScore > 80) {
+                //            plugin.File64bit = x86File;
+                //            plugin.File32bit = _x86file;
+                //            break;
+                //        }
+                //    }
+                //}
+                if (plugin.x86 || plugin.x64) plugins.Add(plugin);
             }
             plugins = plugins.Distinct().ToList();
             IO_Utilities.LogWriter($"Found {plugins.Count} distinct plugin pairs in {gameDir}");
             return plugins;
         }
         private void PopulatePlugins(string _game) {
-            DirectoryInfo pluginsDir;
-            if (_game == "ATS") pluginsDir = ATSPluginsDir; else pluginsDir = ETS2PluginsDir;
-            if (pluginsDir is null) { Initialize(); PopulatePlugins(_game); return; }
             //tablePlugins.Rows.Clear();
             Plugins.Clear();
-            FindMatchingPlugins(pluginsDir).ForEach(p => Plugins.Add(p));
+            FindMatchingPlugins(GetGameDir(_game)).ForEach(p => Plugins.Add(p));
             //foreach (var plugin in Plugins) {
             //    tablePlugins.Rows.Add(plugin.Enabled, plugin.Name, plugin.InstallDate, plugin.File32bit != null, plugin.File64bit != null);
             //}
@@ -82,10 +94,22 @@ namespace TS_SE_Tool.Forms {
             Text = $"Manage Plugins for {MainForm.GameType}";
             Initialize();
             tablePlugins.Columns.Clear();
+            tablePlugins.Rows.Clear();
             tablePlugins.DataSource = Plugins;
+            tablePlugins.RowHeadersVisible = false;
+            tablePlugins.AllowUserToAddRows = false;
+            tablePlugins.AllowUserToDeleteRows = false;
+            tablePlugins.CellContentClick += tablePlugins_CellContentClick;
+            tablePlugins.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             PopulatePlugins(MainForm.GameType);
             foreach (var i in new[] { 0, 3, 4 })
                 tablePlugins.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            Plugins.ListChanged += Plugins_ListChanged;
+            Plugins.AddingNew += Plugins_ListChanged;
+        }
+
+        private void Plugins_ListChanged(object sender, object e) {
+            throw new NotImplementedException();
         }
 
         private void tablePlugins_CellContentClick(object sender, DataGridViewCellEventArgs e) {
@@ -93,8 +117,9 @@ namespace TS_SE_Tool.Forms {
         }
 
         private void openPluginsDirToolStripMenuItem_Click(object sender, EventArgs e) {
-            var dir = MainForm.GameType == "ATS" ? GetPluginsDir(ATSGameDir, "win_x86") : GetPluginsDir(ETS2GameDir, "win_x86");
-            dir.OpenInExplorer();
+            var arch = ((ToolStripItem)sender).Text;
+            var dir = MainForm.GameType == "ATS" ? ATSGameDir : ETS2GameDir;
+            GetPluginsDir(dir, "win_" + arch).OpenInExplorer();
         }
 
         //private void tablePlugins_CellValueChanged(object sender, DataGridViewCellEventArgs e) {

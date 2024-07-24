@@ -26,12 +26,14 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPluginManager));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.enumerableExtBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.openPluginsDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x64ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x86ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enumerableExtBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.tablePlugins = new System.Windows.Forms.DataGridView();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.enumerableExtBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePlugins)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -40,10 +42,6 @@
             this.openPluginsDirectoryToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
-            // 
-            // enumerableExtBindingSource
-            // 
-            this.enumerableExtBindingSource.DataSource = typeof(TS_SE_Tool.Global.EnumerableExt);
             // 
             // openPluginsDirectoryToolStripMenuItem
             // 
@@ -65,10 +63,21 @@
             resources.ApplyResources(this.x86ToolStripMenuItem, "x86ToolStripMenuItem");
             this.x86ToolStripMenuItem.Click += new System.EventHandler(this.openPluginsDirToolStripMenuItem_Click);
             // 
+            // enumerableExtBindingSource
+            // 
+            this.enumerableExtBindingSource.DataSource = typeof(TS_SE_Tool.Global.EnumerableExt);
+            // 
+            // tablePlugins
+            // 
+            this.tablePlugins.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            resources.ApplyResources(this.tablePlugins, "tablePlugins");
+            this.tablePlugins.Name = "tablePlugins";
+            // 
             // FormPluginManager
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tablePlugins);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormPluginManager";
@@ -76,6 +85,7 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.enumerableExtBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablePlugins)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -88,5 +98,6 @@
         private System.Windows.Forms.ToolStripMenuItem openPluginsDirectoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem x64ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem x86ToolStripMenuItem;
+        private System.Windows.Forms.DataGridView tablePlugins;
     }
 }

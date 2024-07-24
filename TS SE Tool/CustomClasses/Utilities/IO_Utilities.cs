@@ -119,13 +119,15 @@ namespace TS_SE_Tool.Utilities {
             File.Copy(file.FullName, backupFilePath, overwrite);
             return true;
         }
-        public static bool Is64Bit(this FileInfo fileInfo) {
+        public static bool Is64Bit(this FileInfo fileInfo, bool _default = false) {
             //try {
             //var peFile = new PeFile(fileInfo.FullName);
             //return peFile.ImageNtHeaders.OptionalHeader.DataDirectory[(int)DataDirectoryType.Import].VirtualAddress == 0;
             //} catch (Exception ex) {
             //IO_Utilities.ErrorLogWriter(ex.Message);
-            return Regex.IsMatch(fileInfo.FileNameWithoutExtension(), @"(x64|x86_64|64bit|64)$", RegexOptions.IgnoreCase);
+            var matches64 = Regex.IsMatch(fileInfo.FileNameWithoutExtension(), @"(x64|x86_64|64bit|64)$", RegexOptions.IgnoreCase);
+            var matches32 = Regex.IsMatch(fileInfo.FileNameWithoutExtension(), @"(x86|32bit|86|32)$", RegexOptions.IgnoreCase);
+            return matches64 || (_default && !matches32);
             //}
         }
         internal static bool IsDisabled(this FileInfo file) => file != null && file.Extension.ToLowerInvariant() == IO_Utilities.DisabledFileExtension;

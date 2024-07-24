@@ -30,8 +30,8 @@ namespace TS_SE_Tool {
         public string Name { get => File32bit?.FileNameWithoutExtension().RemoveAll("_win32", "_x86") ?? File64bit?.FileNameWithoutExtension().RemoveAll("_win64", "_x64"); }
         public DateTime? InstallDate {
             get {
-                if (File32bit.Exists) return File32bit.LastWriteTime;
-                else if (File64bit.Exists) return File64bit.LastWriteTime;
+                if (x86) return File32bit.LastWriteTime;
+                else if (x64) return File64bit.LastWriteTime;
                 return null;
             }
         }
