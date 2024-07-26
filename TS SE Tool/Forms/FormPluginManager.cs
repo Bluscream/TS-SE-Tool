@@ -67,8 +67,8 @@ namespace TS_SE_Tool.Forms {
             var x64Files = all64Files.Where(f => f.Is64BitDll()).Concat(all86Files.Where(f => f.Is64BitDll()));
             foreach (var x86File in x86Files) {
                 var plugin = FindPluginByPath(plugins, x86File);
-                if (plugin != null && !plugin.x86) plugin.File32bit = x86File;
-                else plugin = new GamePlugin() { File32bit = x86File };
+                //if (plugin != null && !plugin.x86) plugin.File32bit = x86File;
+                if (plugin is null) plugin = new GamePlugin() { File32bit = x86File };
                 //FileInfo foundMatch = null;
                 foreach (var x64File in x64Files) {
                     var matchScore = Fuzz.Ratio(x86File.Name, x64File.Name);
@@ -77,22 +77,12 @@ namespace TS_SE_Tool.Forms {
                         break;
                     }
                 }
-                //if (!plugin.x64) {
-                //    foreach (var _x86file in x86Files) {
-                //        var matchScore = Fuzz.Ratio(x86File.Name, _x86file.Name);
-                //        if (matchScore > 80) {
-                //            plugin.File64bit = x86File;
-                //            plugin.File32bit = _x86file;
-                //            break;
-                //        }
-                //    }
-                //}
                 if (plugin.x86 || plugin.x64) plugins.Add(plugin);
             }
             foreach (var x64File in x64Files) {
                 var plugin = FindPluginByPath(plugins, x64File);
-                if (plugin != null && !plugin.x64) plugin.File64bit = x64File;
-                else plugin = new GamePlugin() { File64bit = x64File };
+                //if (plugin != null && !plugin.x64) plugin.File64bit = x64File;
+                if (plugin is null) plugin = new GamePlugin() { File64bit = x64File };
                 //FileInfo foundMatch = null;
                 foreach (var x86File in x86Files) {
                     var matchScore = Fuzz.Ratio(x64File.Name, x86File.Name);
@@ -101,16 +91,6 @@ namespace TS_SE_Tool.Forms {
                         break;
                     }
                 }
-                //if (!plugin.x64) {
-                //    foreach (var _x86file in x86Files) {
-                //        var matchScore = Fuzz.Ratio(x86File.Name, _x86file.Name);
-                //        if (matchScore > 80) {
-                //            plugin.File64bit = x86File;
-                //            plugin.File32bit = _x86file;
-                //            break;
-                //        }
-                //    }
-                //}
                 if (plugin.x86 || plugin.x64) plugins.Add(plugin);
             }
             plugins = Enumerable.ToHashSet(plugins.Distinct());

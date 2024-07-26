@@ -20,6 +20,7 @@ using System.ComponentModel;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Linq;
 
 namespace TS_SE_Tool {
     public class GamePlugin {
@@ -82,27 +83,14 @@ namespace TS_SE_Tool {
             }
             return true;
         }
-        //public string ToJson() {
-        //    try {
-        //        var json = JsonSerializer.Serialize(new {
-        //            Enabled,
-        //            Name,
-        //            File32bit = File32bit.FullName,
-        //            InstallDate32bit = File32bit.LastWriteTime,
-        //            File64bit = File64bit.FullName,
-        //            InstallDate64bit = File64bit.LastWriteTime
-        //        });
-
-        //        return json;
-        //    } catch (Exception ex) {
-        //        Console.WriteLine($"Error serializing GamePlugin object: {ex.Message}");
-        //        return "{}";
-        //    }
-        //}
     }
     public static class GamePluginExtensions {
-        public static IEnumerable<GamePlugin> AddSafe(this IEnumerable<GamePlugin> plugins, GamePlugin plugin) {
-
+        public static IEnumerable<GamePlugin> AddSafe(this IEnumerable<GamePlugin> plugins, GamePlugin pluginToAdd) {
+            List<GamePlugin> pluginsList = new List<GamePlugin>(plugins);
+            if (!pluginsList.Any(plugin => plugin.Path32bit == pluginToAdd.Path32bit || plugin.Path64bit == pluginToAdd.Path64bit)) {
+                pluginsList.Add(pluginToAdd);
+            }
+            return pluginsList;
         }
     }
 }
