@@ -36,8 +36,8 @@
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.showDebugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.enumerableExtBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enumerableExtBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.tablePlugins)).BeginInit();
             this.pluginContextMenu.SuspendLayout();
@@ -78,8 +78,6 @@
             resources.ApplyResources(this.tablePlugins, "tablePlugins");
             this.tablePlugins.Name = "tablePlugins";
             this.tablePlugins.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.tablePlugins_CellContextMenuStripNeeded);
-            this.tablePlugins.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablePlugins_CellMouseEnter);
-            this.tablePlugins.MouseHover += new System.EventHandler(this.tablePlugins_MouseHover);
             // 
             // pluginContextMenu
             // 
@@ -121,15 +119,15 @@
             resources.ApplyResources(this.showDebugToolStripMenuItem, "showDebugToolStripMenuItem");
             this.showDebugToolStripMenuItem.Click += new System.EventHandler(this.showDebugToolStripMenuItem_Click);
             // 
-            // enumerableExtBindingSource
-            // 
-            this.enumerableExtBindingSource.DataSource = typeof(TS_SE_Tool.Global.EnumerableExt);
-            // 
             // reloadToolStripMenuItem
             // 
             this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
             resources.ApplyResources(this.reloadToolStripMenuItem, "reloadToolStripMenuItem");
             this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
+            // 
+            // enumerableExtBindingSource
+            // 
+            this.enumerableExtBindingSource.DataSource = typeof(TS_SE_Tool.Global.EnumerableExt);
             // 
             // FormPluginManager
             // 

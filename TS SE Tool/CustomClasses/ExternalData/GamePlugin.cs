@@ -21,6 +21,7 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Linq;
+using FuzzySharp;
 
 namespace TS_SE_Tool {
     public class GamePlugin {
@@ -31,7 +32,7 @@ namespace TS_SE_Tool {
                 if (x64) File64bit.Toggle(value);
             }
         }
-        public string Name { get => File32bit?.FileNameWithoutExtension().RemoveAll("_win32", "_x86") ?? File64bit?.FileNameWithoutExtension().RemoveAll("_win64", "_x64"); }
+        public string Name { get => File32bit?.FileNameWithoutExtension().RemoveAll("_win32", "_x86").Trim() ?? File64bit?.FileNameWithoutExtension().RemoveAll("_win64", "_x64").Trim(); }
         public DateTime? InstallDate {
             get {
                 if (x86) return File32bit.LastWriteTime;
@@ -83,6 +84,24 @@ namespace TS_SE_Tool {
             }
             return true;
         }
+
+        public override bool Equals(object obj) {
+            if (obj == null || GetType() != obj.GetType())
+                return false;
+            GamePlugin other = (GamePlugin)obj;
+            return Path32bit == other.Path32bit && Path64bit == other.Path64bit;
+        }
+
+        public override int GetHashCode() {
+            // Combine hashes of Name, Path32bit, and Path64bit
+            unchecked {
+                int hash = 17;
+                //hash = hash * 23 + (Name ?? "").GetHashCode();
+                hash = hash * 23 + (Path32bit ?? "").GetHashCode();
+                hash = hash * 23 + (Path64bit ?? "").GetHashCode();
+                return hash;
+            }
+        }
     }
     public static class GamePluginExtensions {
         public static IEnumerable<GamePlugin> AddSafe(this IEnumerable<GamePlugin> plugins, GamePlugin pluginToAdd) {
@@ -91,6 +110,12 @@ namespace TS_SE_Tool {
                 pluginsList.Add(pluginToAdd);
             }
             return pluginsList;
+        }
+        public static GamePlugin? GetDirectMatch(this IEnumerable<GamePlugin> plugins, FileInfo file) {
+            return plugins.FirstOrDefault(f => f.Name == file.FileNameWithoutExtension().RemoveAll("_win32", "_x86", "_win64", "_x64").Trim());
+        }
+        public static GamePlugin? GetFuzzyMatch(this IEnumerable<GamePlugin> plugins, FileInfo file, int ratio = 70) {
+            return plugins.FirstOrDefault(f => Fuzz.Ratio(file.Name, f.Name) > 70);
         }
     }
 }

@@ -1860,9 +1860,6 @@
         nt5ut7815OSAnCGUywQcJ0BpPpXelR6WXv7vhF+Ndu3+D6LWAdnKS/AsAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Manage Plugins</value>
   </data>
@@ -1914,17 +1911,17 @@
   <data name="&gt;&gt;showDebugToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;enumerableExtBindingSource.Name" xml:space="preserve">
-    <value>enumerableExtBindingSource</value>
-  </data>
-  <data name="&gt;&gt;enumerableExtBindingSource.Type" xml:space="preserve">
-    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;reloadToolStripMenuItem.Name" xml:space="preserve">
     <value>reloadToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;reloadToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;enumerableExtBindingSource.Name" xml:space="preserve">
+    <value>enumerableExtBindingSource</value>
+  </data>
+  <data name="&gt;&gt;enumerableExtBindingSource.Type" xml:space="preserve">
+    <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormPluginManager</value>

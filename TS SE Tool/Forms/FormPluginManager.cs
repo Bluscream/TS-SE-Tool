@@ -51,8 +51,8 @@ namespace TS_SE_Tool.Forms {
 
         public static GamePlugin? FindPluginByPath(IEnumerable<GamePlugin> plugins, FileInfo file) {
             foreach (var plugin in plugins) {
-                if (plugin.File32bit.FullName == file.FullName) return plugin;
-                if (plugin.File64bit.FullName == file.FullName) return plugin;
+                if (plugin.x86 && plugin.File32bit.FullName == file.FullName) return plugin;
+                if (plugin.x64 && plugin.File64bit.FullName == file.FullName) return plugin;
             }
             return null;
         }
@@ -60,43 +60,37 @@ namespace TS_SE_Tool.Forms {
         public static HashSet<GamePlugin> FindMatchingPlugins(DirectoryInfo gameDir) {
             var plugins = new HashSet<GamePlugin>();
             var x86Dir = GetPluginsDir(gameDir, "win_x86");
-            var all86Files = x86Dir.GetFiles("*.dll").Concat(x86Dir.GetFiles("*.disabled"));
             var x64Dir = GetPluginsDir(gameDir, "win_x64");
-            var all64Files = x64Dir.GetFiles("*.dll").Concat(x64Dir.GetFiles("*.disabled"));
-            var x86Files = all86Files.Where(f => !f.Is64BitDll()).Concat(all64Files.Where(f => !f.Is64BitDll()));
-            var x64Files = all64Files.Where(f => f.Is64BitDll()).Concat(all86Files.Where(f => f.Is64BitDll()));
-            foreach (var x86File in x86Files) {
-                var plugin = FindPluginByPath(plugins, x86File);
-                //if (plugin != null && !plugin.x86) plugin.File32bit = x86File;
-                if (plugin is null) plugin = new GamePlugin() { File32bit = x86File };
-                //FileInfo foundMatch = null;
-                foreach (var x64File in x64Files) {
-                    var matchScore = Fuzz.Ratio(x86File.Name, x64File.Name);
-                    if (matchScore > 70) {
-                        plugin.File64bit = x64File;
-                        break;
-                    }
+            var filesToProcess = x86Dir.GetFiles("*.dll").Concat(x86Dir.GetFiles("*.disabled").Concat(x64Dir.GetFiles("*.dll")).Concat(x64Dir.GetFiles("*.disabled"))).ToList();
+
+            // While there are files left to process...
+            while (filesToProcess.Count > 0) {
+                // Take the next file to process
+                var file = filesToProcess[0];
+                filesToProcess.RemoveAt(0);
+
+                // Try to find a matching plugin for this file
+                var plugin = FindPluginByPath(plugins, file); // FindPluginByPath uses FileInfo for comparison
+                if (plugin is null) plugin = plugins.GetDirectMatch(file);
+                if (plugin is null) plugin = plugins.GetFuzzyMatch(file);
+                if (plugin is null) {
+                    // If no matching plugin is found, create a new one
+                    plugin = new GamePlugin() { };
+                    plugins.Add(plugin);
                 }
-                if (plugin.x86 || plugin.x64) plugins.Add(plugin);
+                if (file.Is64BitDll()) plugin.File64bit = file;
+                else plugin.File32bit = file;
             }
-            foreach (var x64File in x64Files) {
-                var plugin = FindPluginByPath(plugins, x64File);
-                //if (plugin != null && !plugin.x64) plugin.File64bit = x64File;
-                if (plugin is null) plugin = new GamePlugin() { File64bit = x64File };
-                //FileInfo foundMatch = null;
-                foreach (var x86File in x86Files) {
-                    var matchScore = Fuzz.Ratio(x64File.Name, x86File.Name);
-                    if (matchScore > 70) {
-                        plugin.File32bit = x86File;
-                        break;
-                    }
-                }
-                if (plugin.x86 || plugin.x64) plugins.Add(plugin);
-            }
-            plugins = Enumerable.ToHashSet(plugins.Distinct());
+
+            // Convert to a distinct HashSet to remove duplicates
+            plugins = new HashSet<GamePlugin>(plugins.Distinct());
+
             IO_Utilities.LogWriter($"Found {plugins.Count} distinct plugin pairs in {gameDir}");
+
             return plugins;
         }
+
+
         private void PopulatePlugins(string _game) {
             //tablePlugins.Rows.Clear();
             Plugins.Clear();
@@ -219,15 +213,7 @@ namespace TS_SE_Tool.Forms {
             //tablePlugins.Rows[0].Cells
         }
         private void tablePlugins_CellMouseEnter(object sender, DataGridViewCellEventArgs e) {
-            var src = sender as DataGridView;
-            if (sender is null || src is null || e.RowIndex < 0 || e.RowIndex > src.RowCount) return;
-            var plugin = GetPluginFromRow(e.RowIndex, tablePlugins);
-            var files = plugin.Files;
-            switch (e.ColumnIndex) {
-                case 2:
-                    if (files.Count > 0) new ToolTip().Show(string.Join("\n", files.Select(f => $"{f.Name.Quote()} = {f.LastWriteTime}")), this, Cursor.Position);
-                    break;
-            }
+
         }
 
         private void showDebugToolStripMenuItem_Click(object sender, EventArgs e) {
