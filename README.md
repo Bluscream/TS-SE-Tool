@@ -1,5 +1,5 @@
-# TS SET
-Truck Simulator Save Editor Tool
+# TS SET (Fork)
+Truck Simulator Save Editor Tool with Plugin and Mod Manager
 
 ## Description
 Small tool for editing save files of Euro Truck Simulator 2 and American Truck Simulator.
