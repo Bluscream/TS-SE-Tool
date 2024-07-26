@@ -41,20 +41,20 @@ namespace TS_SE_Tool {
             }
         }
 
+        [JsonIgnore]
         public bool x86 { get => File32bit != null && File32bit.Exists; }
+        [JsonIgnore]
         public bool x64 { get => File64bit != null && File64bit.Exists; }
 
         [JsonIgnore]
         [Browsable(false)]
         public FileInfo File32bit { get; set; }
-
         [Browsable(false)]
         public string Path32bit { get => File32bit?.FullName; }
 
         [JsonIgnore]
         [Browsable(false)]
         public FileInfo File64bit { get; set; }
-
         [Browsable(false)]
         public string Path64bit { get => File64bit?.FullName; }
 

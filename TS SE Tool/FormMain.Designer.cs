@@ -248,6 +248,10 @@
             this.radioButtonMainGameSwitchATS = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonMainCloseSave = new System.Windows.Forms.Button();
+            this.tabMods = new System.Windows.Forms.TabPage();
+            this.tableMods = new System.Windows.Forms.DataGridView();
+            this.modLoadOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStripMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
@@ -302,6 +306,8 @@
             this.tableLayoutPanel16.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
+            this.tabMods.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tableMods)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStripMain
@@ -520,6 +526,7 @@
             this.tabControlMain.Controls.Add(this.tabPageFreightMarket);
             this.tabControlMain.Controls.Add(this.tabPageCargoMarket);
             this.tabControlMain.Controls.Add(this.tabPageConvoyTools);
+            this.tabControlMain.Controls.Add(this.tabMods);
             this.tabControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlMain.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.tabControlMain.ItemSize = new System.Drawing.Size(82, 24);
@@ -2975,6 +2982,46 @@
             this.buttonMainCloseSave.Visible = false;
             this.buttonMainCloseSave.Click += new System.EventHandler(this.buttonMainCloseSave_Click);
             // 
+            // tabMods
+            // 
+            this.tabMods.Controls.Add(this.tableMods);
+            this.tabMods.Location = new System.Drawing.Point(4, 28);
+            this.tabMods.Name = "tabMods";
+            this.tabMods.Padding = new System.Windows.Forms.Padding(3);
+            this.tabMods.Size = new System.Drawing.Size(570, 536);
+            this.tabMods.TabIndex = 7;
+            this.tabMods.Text = "Mods";
+            this.tabMods.UseVisualStyleBackColor = true;
+            // 
+            // tableMods
+            // 
+            this.tableMods.AllowUserToAddRows = false;
+            this.tableMods.AllowUserToDeleteRows = false;
+            this.tableMods.AllowUserToOrderColumns = true;
+            this.tableMods.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.tableMods.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tableMods.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.modLoadOrder,
+            this.modName});
+            this.tableMods.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableMods.Location = new System.Drawing.Point(3, 3);
+            this.tableMods.Name = "tableMods";
+            this.tableMods.RowHeadersVisible = false;
+            this.tableMods.ShowCellErrors = false;
+            this.tableMods.ShowRowErrors = false;
+            this.tableMods.Size = new System.Drawing.Size(564, 530);
+            this.tableMods.TabIndex = 0;
+            // 
+            // modLoadOrder
+            // 
+            this.modLoadOrder.HeaderText = "Order";
+            this.modLoadOrder.Name = "modLoadOrder";
+            // 
+            // modName
+            // 
+            this.modName.HeaderText = "Name";
+            this.modName.Name = "modName";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3060,6 +3107,8 @@
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
             this.tableLayoutPanel11.ResumeLayout(false);
+            this.tabMods.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tableMods)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3291,6 +3340,10 @@
         private System.Windows.Forms.Button buttonUserCompanyDriversSelectAll;
         private System.Windows.Forms.Button buttonUserCompanyDriversUnSelectAll;
         private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
+        private System.Windows.Forms.TabPage tabMods;
+        private System.Windows.Forms.DataGridView tableMods;
+        private System.Windows.Forms.DataGridViewTextBoxColumn modLoadOrder;
+        private System.Windows.Forms.DataGridViewTextBoxColumn modName;
     }
 }
 
