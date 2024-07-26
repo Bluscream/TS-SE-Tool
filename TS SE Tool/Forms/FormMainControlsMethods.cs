@@ -484,8 +484,7 @@ namespace TS_SE_Tool {
 
         public void FillRootFoldersPaths() {
             try {
-                string MyDocumentsPath = "",
-                       RemoteUserdataDirectory = "",
+                string RemoteUserdataDirectory = "",
                        SteamError = "", MyDocError = "";
 
                 bool SteamFolderExist = false, MyDocFolderExist = true;
@@ -545,9 +544,9 @@ namespace TS_SE_Tool {
                     IO_Utilities.LogWriter(SteamError);
                 //
 
-                MyDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + dictionaryProfiles[GameType];
+                Globals.MyDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + dictionaryProfiles[GameType];
 
-                if (!Directory.Exists(MyDocumentsPath)) {
+                if (!Directory.Exists(Globals.MyDocumentsPath)) {
                     MyDocError = "Folder in \"My documents\" for - " + GameType + " game does not exist.";
                     MyDocFolderExist = false;
                     IO_Utilities.LogWriter(MyDocError);
@@ -574,7 +573,7 @@ namespace TS_SE_Tool {
                         //If backups selected
                         //My docs Profiles
                         if (MyDocFolderExist)
-                            foreach (string folder in Directory.GetDirectories(MyDocumentsPath)) {
+                            foreach (string folder in Directory.GetDirectories(Globals.MyDocumentsPath)) {
                                 if (Path.GetFileName(folder).StartsWith("profiles")) //Documents
                                 {
                                     if (Directory.Exists(folder) && Directory.GetDirectories(folder).Count() > 0) {
@@ -601,7 +600,7 @@ namespace TS_SE_Tool {
 
                         //My docs Profiles
                         if (MyDocFolderExist) {
-                            folder = MyDocumentsPath + @"\profiles";
+                            folder = Globals.MyDocumentsPath + @"\profiles";
 
                             if (Directory.Exists(folder) && Directory.GetDirectories(folder).Count() > 0) {
                                 combDT.Rows.Add(folder, "[L] profiles", "local");

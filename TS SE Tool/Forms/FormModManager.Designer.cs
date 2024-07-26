@@ -1,5 +1,5 @@
 ﻿namespace TS_SE_Tool.Forms {
-    partial class FormPluginManager {
+    partial class FormModManager {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -24,22 +24,21 @@
         /// </summary>
         private void InitializeComponent() {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormPluginManager));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormModManager));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openPluginsDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.x64ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.x86ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tablePlugins = new System.Windows.Forms.DataGridView();
-            this.pluginContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.tableMods = new System.Windows.Forms.DataGridView();
+            this.modContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toggleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.showDebugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modEnabled = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.modName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablePlugins)).BeginInit();
-            this.pluginContextMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tableMods)).BeginInit();
+            this.modContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -58,53 +57,37 @@
             // 
             // openPluginsDirectoryToolStripMenuItem
             // 
-            this.openPluginsDirectoryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.x64ToolStripMenuItem,
-            this.x86ToolStripMenuItem});
             this.openPluginsDirectoryToolStripMenuItem.Name = "openPluginsDirectoryToolStripMenuItem";
             resources.ApplyResources(this.openPluginsDirectoryToolStripMenuItem, "openPluginsDirectoryToolStripMenuItem");
+            this.openPluginsDirectoryToolStripMenuItem.Click += new System.EventHandler(this.openModsDirectoryToolStripMenuItem_Click);
             // 
-            // x64ToolStripMenuItem
+            // tableMods
             // 
-            this.x64ToolStripMenuItem.Name = "x64ToolStripMenuItem";
-            resources.ApplyResources(this.x64ToolStripMenuItem, "x64ToolStripMenuItem");
-            this.x64ToolStripMenuItem.Click += new System.EventHandler(this.openPluginsDirToolStripMenuItem_Click);
+            this.tableMods.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.tableMods.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tableMods.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.modEnabled,
+            this.modName});
+            resources.ApplyResources(this.tableMods, "tableMods");
+            this.tableMods.Name = "tableMods";
+            this.tableMods.RowHeadersVisible = false;
+            this.tableMods.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.tableMods_CellContextMenuStripNeeded);
             // 
-            // x86ToolStripMenuItem
+            // modContextMenu
             // 
-            this.x86ToolStripMenuItem.Name = "x86ToolStripMenuItem";
-            resources.ApplyResources(this.x86ToolStripMenuItem, "x86ToolStripMenuItem");
-            this.x86ToolStripMenuItem.Click += new System.EventHandler(this.openPluginsDirToolStripMenuItem_Click);
-            // 
-            // tablePlugins
-            // 
-            this.tablePlugins.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            resources.ApplyResources(this.tablePlugins, "tablePlugins");
-            this.tablePlugins.Name = "tablePlugins";
-            this.tablePlugins.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.tablePlugins_CellContextMenuStripNeeded);
-            // 
-            // pluginContextMenu
-            // 
-            this.pluginContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.modContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toggleToolStripMenuItem,
-            this.openFoldersToolStripMenuItem,
             this.deleteToolStripMenuItem,
             this.toolStripSeparator1,
             this.showDebugToolStripMenuItem});
-            this.pluginContextMenu.Name = "pluginContextMenu";
-            resources.ApplyResources(this.pluginContextMenu, "pluginContextMenu");
+            this.modContextMenu.Name = "pluginContextMenu";
+            resources.ApplyResources(this.modContextMenu, "modContextMenu");
             // 
             // toggleToolStripMenuItem
             // 
             this.toggleToolStripMenuItem.Name = "toggleToolStripMenuItem";
             resources.ApplyResources(this.toggleToolStripMenuItem, "toggleToolStripMenuItem");
             this.toggleToolStripMenuItem.Click += new System.EventHandler(this.toggleToolStripMenuItem_Click);
-            // 
-            // openFoldersToolStripMenuItem
-            // 
-            this.openFoldersToolStripMenuItem.Name = "openFoldersToolStripMenuItem";
-            resources.ApplyResources(this.openFoldersToolStripMenuItem, "openFoldersToolStripMenuItem");
-            this.openFoldersToolStripMenuItem.Click += new System.EventHandler(this.openFoldersToolStripMenuItem_Click);
             // 
             // deleteToolStripMenuItem
             // 
@@ -123,19 +106,29 @@
             resources.ApplyResources(this.showDebugToolStripMenuItem, "showDebugToolStripMenuItem");
             this.showDebugToolStripMenuItem.Click += new System.EventHandler(this.showDebugToolStripMenuItem_Click);
             // 
-            // FormPluginManager
+            // modEnabled
+            // 
+            resources.ApplyResources(this.modEnabled, "modEnabled");
+            this.modEnabled.Name = "modEnabled";
+            // 
+            // modName
+            // 
+            resources.ApplyResources(this.modName, "modName");
+            this.modName.Name = "modName";
+            // 
+            // FormModManager
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.tablePlugins);
+            this.Controls.Add(this.tableMods);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "FormPluginManager";
-            this.Load += new System.EventHandler(this.FormPluginManager_Load);
+            this.Name = "FormModManager";
+            this.Load += new System.EventHandler(this.FormModManager_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tablePlugins)).EndInit();
-            this.pluginContextMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.tableMods)).EndInit();
+            this.modContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,15 +138,14 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem openPluginsDirectoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem x64ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem x86ToolStripMenuItem;
-        private System.Windows.Forms.DataGridView tablePlugins;
-        private System.Windows.Forms.ContextMenuStrip pluginContextMenu;
+        private System.Windows.Forms.DataGridView tableMods;
+        private System.Windows.Forms.ContextMenuStrip modContextMenu;
         private System.Windows.Forms.ToolStripMenuItem toggleToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openFoldersToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem showDebugToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem reloadToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn modEnabled;
+        private System.Windows.Forms.DataGridViewTextBoxColumn modName;
     }
 }

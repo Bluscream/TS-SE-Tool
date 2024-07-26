@@ -121,30 +121,6 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="reloadToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>55, 21</value>
-  </data>
-  <data name="reloadToolStripMenuItem.Text" xml:space="preserve">
-    <value>Reload</value>
-  </data>
-  <data name="x64ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 22</value>
-  </data>
-  <data name="x64ToolStripMenuItem.Text" xml:space="preserve">
-    <value>x64</value>
-  </data>
-  <data name="x86ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>97, 22</value>
-  </data>
-  <data name="x86ToolStripMenuItem.Text" xml:space="preserve">
-    <value>x86</value>
-  </data>
-  <data name="openPluginsDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 21</value>
-  </data>
-  <data name="openPluginsDirectoryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Open Plugins Directory</value>
-  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -170,72 +146,90 @@
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
     <value>2</value>
   </data>
+  <data name="reloadToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 21</value>
+  </data>
+  <data name="reloadToolStripMenuItem.Text" xml:space="preserve">
+    <value>Reload</value>
+  </data>
+  <data name="openPluginsDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>119, 21</value>
+  </data>
+  <data name="openPluginsDirectoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Open Mods Folder</value>
+  </data>
+  <metadata name="modEnabled.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="modEnabled.HeaderText" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <metadata name="modName.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <data name="modName.HeaderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="tablePlugins.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+  <data name="tableMods.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
   </data>
-  <data name="tablePlugins.Location" type="System.Drawing.Point, System.Drawing">
+  <data name="tableMods.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 25</value>
   </data>
-  <data name="tablePlugins.Size" type="System.Drawing.Size, System.Drawing">
+  <data name="tableMods.Size" type="System.Drawing.Size, System.Drawing">
     <value>736, 531</value>
   </data>
-  <data name="tablePlugins.TabIndex" type="System.Int32, mscorlib">
+  <data name="tableMods.TabIndex" type="System.Int32, mscorlib">
     <value>1</value>
   </data>
-  <data name="&gt;&gt;tablePlugins.Name" xml:space="preserve">
-    <value>tablePlugins</value>
+  <data name="&gt;&gt;tableMods.Name" xml:space="preserve">
+    <value>tableMods</value>
   </data>
-  <data name="&gt;&gt;tablePlugins.Type" xml:space="preserve">
+  <data name="&gt;&gt;tableMods.Type" xml:space="preserve">
     <value>System.Windows.Forms.DataGridView, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;tablePlugins.Parent" xml:space="preserve">
+  <data name="&gt;&gt;tableMods.Parent" xml:space="preserve">
     <value>$this</value>
   </data>
-  <data name="&gt;&gt;tablePlugins.ZOrder" xml:space="preserve">
+  <data name="&gt;&gt;tableMods.ZOrder" xml:space="preserve">
     <value>1</value>
   </data>
-  <metadata name="pluginContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+  <metadata name="modContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>347, 17</value>
   </metadata>
+  <data name="modContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 76</value>
+  </data>
+  <data name="modContextMenu.Text" xml:space="preserve">
+    <value>penis</value>
+  </data>
+  <data name="&gt;&gt;modContextMenu.Name" xml:space="preserve">
+    <value>modContextMenu</value>
+  </data>
+  <data name="&gt;&gt;modContextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="toggleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="toggleToolStripMenuItem.Text" xml:space="preserve">
     <value>Toggle</value>
   </data>
-  <data name="openFoldersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 22</value>
-  </data>
-  <data name="openFoldersToolStripMenuItem.Text" xml:space="preserve">
-    <value>Open Folder(s)</value>
-  </data>
   <data name="deleteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="deleteToolStripMenuItem.Text" xml:space="preserve">
     <value>Delete</value>
   </data>
   <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>173, 6</value>
+    <value>177, 6</value>
   </data>
   <data name="showDebugToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>176, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="showDebugToolStripMenuItem.Text" xml:space="preserve">
     <value>Show Debug Infos</value>
-  </data>
-  <data name="pluginContextMenu.Size" type="System.Drawing.Size, System.Drawing">
-    <value>177, 98</value>
-  </data>
-  <data name="pluginContextMenu.Text" xml:space="preserve">
-    <value>penis</value>
-  </data>
-  <data name="&gt;&gt;pluginContextMenu.Name" xml:space="preserve">
-    <value>pluginContextMenu</value>
-  </data>
-  <data name="&gt;&gt;pluginContextMenu.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -1858,7 +1852,7 @@
 </value>
   </data>
   <data name="$this.Text" xml:space="preserve">
-    <value>Manage Plugins</value>
+    <value>Manage Mods</value>
   </data>
   <data name="&gt;&gt;reloadToolStripMenuItem.Name" xml:space="preserve">
     <value>reloadToolStripMenuItem</value>
@@ -1872,28 +1866,10 @@
   <data name="&gt;&gt;openPluginsDirectoryToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;x64ToolStripMenuItem.Name" xml:space="preserve">
-    <value>x64ToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;x64ToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;x86ToolStripMenuItem.Name" xml:space="preserve">
-    <value>x86ToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;x86ToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;toggleToolStripMenuItem.Name" xml:space="preserve">
     <value>toggleToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;toggleToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;openFoldersToolStripMenuItem.Name" xml:space="preserve">
-    <value>openFoldersToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;openFoldersToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;deleteToolStripMenuItem.Name" xml:space="preserve">
@@ -1914,8 +1890,20 @@
   <data name="&gt;&gt;showDebugToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;modEnabled.Name" xml:space="preserve">
+    <value>modEnabled</value>
+  </data>
+  <data name="&gt;&gt;modEnabled.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewCheckBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;modName.Name" xml:space="preserve">
+    <value>modName</value>
+  </data>
+  <data name="&gt;&gt;modName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.DataGridViewTextBoxColumn, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
-    <value>FormPluginManager</value>
+    <value>FormModManager</value>
   </data>
   <data name="&gt;&gt;$this.Type" xml:space="preserve">
     <value>System.Windows.Forms.Form, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>

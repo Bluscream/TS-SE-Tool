@@ -179,6 +179,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomClasses\ExternalData\GameMod.cs" />
+    <Compile Include="CustomClasses\ExternalData\ProfileMod.cs" />
     <Compile Include="CustomClasses\ExternalData\GamePlugin.cs" />
     <Compile Include="CustomClasses\ExternalData\ScsFont.cs" />
     <Compile Include="CustomClasses\Global\EnumerableExt.cs" />
@@ -280,6 +282,12 @@
     <Compile Include="Forms\FormLicensePlateEdit.Designer.cs">
       <DependentUpon>FormLicensePlateEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\FormModManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FormModManager.Designer.cs">
+      <DependentUpon>FormModManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\FormPluginManager.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -291,6 +299,9 @@
     </Compile>
     <Compile Include="Forms\FormVehicleEditor.Designer.cs">
       <DependentUpon>FormVehicleEditor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\MainTabs\FormMethodsModsTab.cs">
+      <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\ProfileEditor\FormProfileEditor.cs">
       <SubType>Form</SubType>
@@ -440,6 +451,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormLicensePlateEdit.resx">
       <DependentUpon>FormLicensePlateEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormModManager.aa-ER.resx">
+      <DependentUpon>FormModManager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FormModManager.resx">
+      <DependentUpon>FormModManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FormPluginManager.aa-ER.resx">
       <DependentUpon>FormPluginManager.cs</DependentUpon>

@@ -606,6 +606,7 @@ namespace TS_SE_Tool {
             FillUserCompanyTrailerList();       //Trailer
             FillFormFreightMarketControls();    //FreightMarket
             FillFormCargoOffersControls();      //CargoMarket
+            FillModList();
         }
 
         //Help methods for searching controls

@@ -151,6 +151,10 @@ namespace TS_SE_Tool {
         internal Image[] MainIcons, ADRImgS, ADRImgSGrey, SkillImgSBG, SkillImgS, GaragesImg, GaragesHQImg, CitiesImg, UrgencyImg, CargoTypeImg, CargoType2Img,
             TruckPartsImg, TrailerPartsImg, VehicleIntegrityPBImg, GameIconeImg, AccessoriesImg; //Program
 
+        private void modsToolStripMenuItem_Click(object sender, EventArgs e) {
+            new FormModManager().Show();
+        }
+
         private void gameToolStripMenuItem_Click(object sender, EventArgs e) {
             new FormPluginManager().Show();
         }
@@ -302,6 +306,7 @@ namespace TS_SE_Tool {
 
     public class Globals {
         //-----
+        public static string MyDocumentsPath = "";
         public static string[] ProfilesPaths = new string[0];
         public static List<string> ProfilesHex = new List<string>();
         //
