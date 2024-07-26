@@ -24,8 +24,28 @@ using System.Text.RegularExpressions;
 
 namespace TS_SE_Tool.Utilities {
     static class IO_Extensions {
-        public enum FileBitness {
-            Unknown, X32, X64
+        public enum MachineType : ushort {
+            IMAGE_FILE_MACHINE_UNKNOWN = 0x0,
+            IMAGE_FILE_MACHINE_AM33 = 0x1d3,
+            IMAGE_FILE_MACHINE_AMD64 = 0x8664,
+            IMAGE_FILE_MACHINE_ARM = 0x1c0,
+            IMAGE_FILE_MACHINE_EBC = 0xebc,
+            IMAGE_FILE_MACHINE_I386 = 0x14c,
+            IMAGE_FILE_MACHINE_IA64 = 0x200,
+            IMAGE_FILE_MACHINE_M32R = 0x9041,
+            IMAGE_FILE_MACHINE_MIPS16 = 0x266,
+            IMAGE_FILE_MACHINE_MIPSFPU = 0x366,
+            IMAGE_FILE_MACHINE_MIPSFPU16 = 0x466,
+            IMAGE_FILE_MACHINE_POWERPC = 0x1f0,
+            IMAGE_FILE_MACHINE_POWERPCFP = 0x1f1,
+            IMAGE_FILE_MACHINE_R4000 = 0x166,
+            IMAGE_FILE_MACHINE_SH3 = 0x1a2,
+            IMAGE_FILE_MACHINE_SH3DSP = 0x1a3,
+            IMAGE_FILE_MACHINE_SH4 = 0x1a6,
+            IMAGE_FILE_MACHINE_SH5 = 0x1a8,
+            IMAGE_FILE_MACHINE_THUMB = 0x1c2,
+            IMAGE_FILE_MACHINE_WCEMIPSV2 = 0x169,
+            IMAGE_FILE_MACHINE_ARM64 = 0xaa64
         }
         #region DirectoryInfo
         public static DirectoryInfo Combine(this DirectoryInfo dir, params string[] paths) {
@@ -70,7 +90,7 @@ namespace TS_SE_Tool.Utilities {
             if (!dir.Exists) dir.Create();
             Process_Utilities.StartProcess("explorer.exe", args: dir.FullName);
         }
-        public static void ShowInExplorer(this DirectoryInfo dir) => Process_Utilities.StartProcess("explorer.exe", args: dir.Parent.FullName);
+        //public static void ShowInExplorer(this DirectoryInfo dir) => Process_Utilities.StartProcess("explorer.exe", args: dir.Parent.FullName);
         #endregion
         #region FileInfo
         public static FileInfo CombineFile(this DirectoryInfo dir, params string[] paths) {
@@ -119,17 +139,47 @@ namespace TS_SE_Tool.Utilities {
             File.Copy(file.FullName, backupFilePath, overwrite);
             return true;
         }
-        public static bool Is64Bit(this FileInfo fileInfo, bool _default = false) {
+        public static MachineType GetDllMachineType(FileInfo file) {
+            // See http://www.microsoft.com/whdc/system/platform/firmware/PECOFF.mspx
+            // Offset to PE header is always at 0x3C.
+            // The PE header starts with "PE\0\0" =  0x50 0x45 0x00 0x00,
+            // followed by a 2-byte machine type field (see the document above for the enum).
+            //
+            using (var fs = file.OpenRead())
+            using (var br = new BinaryReader(fs)) {
+                fs.Seek(0x3c, SeekOrigin.Begin);
+                Int32 peOffset = br.ReadInt32();
+                fs.Seek(peOffset, SeekOrigin.Begin);
+                UInt32 peHead = br.ReadUInt32();
+                if (peHead != 0x00004550) // "PE\0\0", little-endian
+                    return MachineType.IMAGE_FILE_MACHINE_UNKNOWN;
+                //throw new Exception("Can't find PE header");
+                return (MachineType)br.ReadUInt16();
+            }
+        }
+        public static bool Is64Bit(this FileInfo file, bool _default = false) {
             //try {
             //var peFile = new PeFile(fileInfo.FullName);
             //return peFile.ImageNtHeaders.OptionalHeader.DataDirectory[(int)DataDirectoryType.Import].VirtualAddress == 0;
             //} catch (Exception ex) {
             //IO_Utilities.ErrorLogWriter(ex.Message);
-            var matches64 = Regex.IsMatch(fileInfo.FileNameWithoutExtension(), @"(x64|x86_64|64bit|64)$", RegexOptions.IgnoreCase);
-            var matches32 = Regex.IsMatch(fileInfo.FileNameWithoutExtension(), @"(x86|32bit|86|32)$", RegexOptions.IgnoreCase);
+            var matches64 = Regex.IsMatch(file.FileNameWithoutExtension(), @"(x64|x86_64|64bit|64)$", RegexOptions.IgnoreCase);
+            var matches32 = Regex.IsMatch(file.FileNameWithoutExtension(), @"(x86|32bit|86|32)$", RegexOptions.IgnoreCase);
             return matches64 || (_default && !matches32);
             //}
         }
+        public static bool Is64BitDll(this FileInfo file, bool _default = false) {
+            switch (GetDllMachineType(file)) {
+                case MachineType.IMAGE_FILE_MACHINE_AMD64:
+                case MachineType.IMAGE_FILE_MACHINE_IA64:
+                    return true;
+                case MachineType.IMAGE_FILE_MACHINE_I386:
+                    return false;
+                default:
+                    return _default;
+            }
+        }
+
         internal static bool IsDisabled(this FileInfo file) => file != null && file.Extension.ToLowerInvariant() == IO_Utilities.DisabledFileExtension;
         internal static void Toggle(this FileInfo file, bool? enable = null) {
             var disabled = file.IsDisabled();

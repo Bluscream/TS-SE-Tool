@@ -13,15 +13,34 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
+using MoreLinq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace TS_SE_Tool.Utilities {
     public static class TextExtensions {
+        /// <summary>
+        /// Serializes the given object to a JSON string with optional indentation.
+        /// </summary>
+        /// <param name="input">The object to serialize.</param>
+        /// <param name="indent">Indicates whether to apply indentation to the output JSON.</param>
+        /// <returns>A JSON string representation of the object.</returns>
+        public static string ToJson(this object input, bool indent = false) {
+            //try {
+            return JsonSerializer.Serialize(input, new JsonSerializerOptions() { ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve, WriteIndented = indent });
+            //} catch (Exception ex) {
+            //    IO_Utilities.ErrorLogWriter($"Error serializing object: {ex.Message}");
+            //    return input.ToString();
+            //}
+        }
+        public static string Join(this IEnumerable<object> inputs, string seperator = ", ") {
+            return string.Join(seperator, inputs.Select(i => i.ToString()));
+        }
         /// <summary>
         /// Returns a new string in which all occurrences of a specified string in the current instance are replaced with another specified string.
         /// </summary>
@@ -48,7 +67,35 @@ namespace TS_SE_Tool.Utilities {
             }
             return _input;
         }
+        public static string ReplaceLastOccurrence(this string Source, string Find, string Replace) {
+            int place = Source.LastIndexOf(Find);
+            if (place == -1) {
+                return Source;
+            }
+
+            string result = Source.Remove(place, Find.Length).Insert(place, Replace);
+            return result;
+        }
+        public static string Ext(this string text, string extension) {
+            return text + "." + extension;
+        }
+        public static string Quote(this string text) {
+            return SurroundWith(text, "\"");
+        }
+        public static string Enclose(this string text) {
+            return SurroundWith(text, "(", ")");
+        }
+        public static string Brackets(this string text) {
+            return SurroundWith(text, "[", "]");
+        }
+        public static string SurroundWith(this string text, string surrounds) {
+            return surrounds + text + surrounds;
+        }
+        public static string SurroundWith(this string text, string starts, string ends) {
+            return starts + text + ends;
+        }
     }
+
     public class TextUtilities {
         public static string FromHexToString(string _input) {
             try {

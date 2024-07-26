@@ -121,6 +121,30 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="reloadToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>55, 21</value>
+  </data>
+  <data name="reloadToolStripMenuItem.Text" xml:space="preserve">
+    <value>Reload</value>
+  </data>
+  <data name="x64ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 22</value>
+  </data>
+  <data name="x64ToolStripMenuItem.Text" xml:space="preserve">
+    <value>x64</value>
+  </data>
+  <data name="x86ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>97, 22</value>
+  </data>
+  <data name="x86ToolStripMenuItem.Text" xml:space="preserve">
+    <value>x86</value>
+  </data>
+  <data name="openPluginsDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 21</value>
+  </data>
+  <data name="openPluginsDirectoryToolStripMenuItem.Text" xml:space="preserve">
+    <value>Open Plugins Directory</value>
+  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -144,29 +168,8 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;menuStrip1.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
-  <data name="openPluginsDirectoryToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>149, 21</value>
-  </data>
-  <data name="openPluginsDirectoryToolStripMenuItem.Text" xml:space="preserve">
-    <value>Open Plugins Directory</value>
-  </data>
-  <data name="x64ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="x64ToolStripMenuItem.Text" xml:space="preserve">
-    <value>x64</value>
-  </data>
-  <data name="x86ToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="x86ToolStripMenuItem.Text" xml:space="preserve">
-    <value>x86</value>
-  </data>
-  <metadata name="enumerableExtBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>133, 17</value>
-  </metadata>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="tablePlugins.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
     <value>Fill</value>
@@ -190,8 +193,53 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;tablePlugins.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
+  <metadata name="pluginContextMenu.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>347, 17</value>
+  </metadata>
+  <data name="toggleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 22</value>
+  </data>
+  <data name="toggleToolStripMenuItem.Text" xml:space="preserve">
+    <value>Toggle</value>
+  </data>
+  <data name="openFoldersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 22</value>
+  </data>
+  <data name="openFoldersToolStripMenuItem.Text" xml:space="preserve">
+    <value>Open Folder(s)</value>
+  </data>
+  <data name="deleteToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 22</value>
+  </data>
+  <data name="deleteToolStripMenuItem.Text" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="toolStripSeparator1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>173, 6</value>
+  </data>
+  <data name="showDebugToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>176, 22</value>
+  </data>
+  <data name="showDebugToolStripMenuItem.Text" xml:space="preserve">
+    <value>Show Debug Infos</value>
+  </data>
+  <data name="pluginContextMenu.Size" type="System.Drawing.Size, System.Drawing">
+    <value>177, 98</value>
+  </data>
+  <data name="pluginContextMenu.Text" xml:space="preserve">
+    <value>penis</value>
+  </data>
+  <data name="&gt;&gt;pluginContextMenu.Name" xml:space="preserve">
+    <value>pluginContextMenu</value>
+  </data>
+  <data name="&gt;&gt;pluginContextMenu.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ContextMenuStrip, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <metadata name="enumerableExtBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>133, 17</value>
+  </metadata>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
   </metadata>
@@ -1812,6 +1860,9 @@
         nt5ut7815OSAnCGUywQcJ0BpPpXelR6WXv7vhF+Ndu3+D6LWAdnKS/AsAAAAAElFTkSuQmCC
 </value>
   </data>
+  <data name="$this.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
   <data name="$this.Text" xml:space="preserve">
     <value>Manage Plugins</value>
   </data>
@@ -1833,11 +1884,47 @@
   <data name="&gt;&gt;x86ToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
+  <data name="&gt;&gt;toggleToolStripMenuItem.Name" xml:space="preserve">
+    <value>toggleToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;toggleToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;openFoldersToolStripMenuItem.Name" xml:space="preserve">
+    <value>openFoldersToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;openFoldersToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;deleteToolStripMenuItem.Name" xml:space="preserve">
+    <value>deleteToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;deleteToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Name" xml:space="preserve">
+    <value>toolStripSeparator1</value>
+  </data>
+  <data name="&gt;&gt;toolStripSeparator1.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripSeparator, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;showDebugToolStripMenuItem.Name" xml:space="preserve">
+    <value>showDebugToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;showDebugToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="&gt;&gt;enumerableExtBindingSource.Name" xml:space="preserve">
     <value>enumerableExtBindingSource</value>
   </data>
   <data name="&gt;&gt;enumerableExtBindingSource.Type" xml:space="preserve">
     <value>System.Windows.Forms.BindingSource, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;reloadToolStripMenuItem.Name" xml:space="preserve">
+    <value>reloadToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;reloadToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
     <value>FormPluginManager</value>

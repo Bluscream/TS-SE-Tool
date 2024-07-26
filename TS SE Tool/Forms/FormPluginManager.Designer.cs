@@ -29,16 +29,25 @@
             this.openPluginsDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x64ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.x86ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.enumerableExtBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.tablePlugins = new System.Windows.Forms.DataGridView();
+            this.pluginContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toggleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openFoldersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.showDebugToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.enumerableExtBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.reloadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.enumerableExtBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePlugins)).BeginInit();
+            this.pluginContextMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.enumerableExtBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.reloadToolStripMenuItem,
             this.openPluginsDirectoryToolStripMenuItem});
             resources.ApplyResources(this.menuStrip1, "menuStrip1");
             this.menuStrip1.Name = "menuStrip1";
@@ -63,15 +72,64 @@
             resources.ApplyResources(this.x86ToolStripMenuItem, "x86ToolStripMenuItem");
             this.x86ToolStripMenuItem.Click += new System.EventHandler(this.openPluginsDirToolStripMenuItem_Click);
             // 
-            // enumerableExtBindingSource
-            // 
-            this.enumerableExtBindingSource.DataSource = typeof(TS_SE_Tool.Global.EnumerableExt);
-            // 
             // tablePlugins
             // 
             this.tablePlugins.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(this.tablePlugins, "tablePlugins");
             this.tablePlugins.Name = "tablePlugins";
+            this.tablePlugins.CellContextMenuStripNeeded += new System.Windows.Forms.DataGridViewCellContextMenuStripNeededEventHandler(this.tablePlugins_CellContextMenuStripNeeded);
+            this.tablePlugins.CellMouseEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.tablePlugins_CellMouseEnter);
+            this.tablePlugins.MouseHover += new System.EventHandler(this.tablePlugins_MouseHover);
+            // 
+            // pluginContextMenu
+            // 
+            this.pluginContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toggleToolStripMenuItem,
+            this.openFoldersToolStripMenuItem,
+            this.deleteToolStripMenuItem,
+            this.toolStripSeparator1,
+            this.showDebugToolStripMenuItem});
+            this.pluginContextMenu.Name = "pluginContextMenu";
+            resources.ApplyResources(this.pluginContextMenu, "pluginContextMenu");
+            // 
+            // toggleToolStripMenuItem
+            // 
+            this.toggleToolStripMenuItem.Name = "toggleToolStripMenuItem";
+            resources.ApplyResources(this.toggleToolStripMenuItem, "toggleToolStripMenuItem");
+            this.toggleToolStripMenuItem.Click += new System.EventHandler(this.toggleToolStripMenuItem_Click);
+            // 
+            // openFoldersToolStripMenuItem
+            // 
+            this.openFoldersToolStripMenuItem.Name = "openFoldersToolStripMenuItem";
+            resources.ApplyResources(this.openFoldersToolStripMenuItem, "openFoldersToolStripMenuItem");
+            this.openFoldersToolStripMenuItem.Click += new System.EventHandler(this.openFoldersToolStripMenuItem_Click);
+            // 
+            // deleteToolStripMenuItem
+            // 
+            this.deleteToolStripMenuItem.Name = "deleteToolStripMenuItem";
+            resources.ApplyResources(this.deleteToolStripMenuItem, "deleteToolStripMenuItem");
+            this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            resources.ApplyResources(this.toolStripSeparator1, "toolStripSeparator1");
+            // 
+            // showDebugToolStripMenuItem
+            // 
+            this.showDebugToolStripMenuItem.Name = "showDebugToolStripMenuItem";
+            resources.ApplyResources(this.showDebugToolStripMenuItem, "showDebugToolStripMenuItem");
+            this.showDebugToolStripMenuItem.Click += new System.EventHandler(this.showDebugToolStripMenuItem_Click);
+            // 
+            // enumerableExtBindingSource
+            // 
+            this.enumerableExtBindingSource.DataSource = typeof(TS_SE_Tool.Global.EnumerableExt);
+            // 
+            // reloadToolStripMenuItem
+            // 
+            this.reloadToolStripMenuItem.Name = "reloadToolStripMenuItem";
+            resources.ApplyResources(this.reloadToolStripMenuItem, "reloadToolStripMenuItem");
+            this.reloadToolStripMenuItem.Click += new System.EventHandler(this.reloadToolStripMenuItem_Click);
             // 
             // FormPluginManager
             // 
@@ -84,8 +142,9 @@
             this.Load += new System.EventHandler(this.FormPluginManager_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.enumerableExtBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tablePlugins)).EndInit();
+            this.pluginContextMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.enumerableExtBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -99,5 +158,12 @@
         private System.Windows.Forms.ToolStripMenuItem x64ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem x86ToolStripMenuItem;
         private System.Windows.Forms.DataGridView tablePlugins;
+        private System.Windows.Forms.ContextMenuStrip pluginContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem toggleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem openFoldersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem showDebugToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem reloadToolStripMenuItem;
     }
 }
