@@ -26,7 +26,7 @@ namespace TS_SE_Tool {
         public static BindingList<ProfileMod> ProfileMods = new BindingList<ProfileMod>();
         #region ProfileTab
         private void FillModList() {
-            //Text = $"Manage Plugins for {MainForm.GameType}";
+            //Text = $"Manage Plugins for {MainForm.SelectedGame.Type}";
             tableMods.Columns.Clear();
             tableMods.Rows.Clear();
             tableMods.DataSource = ProfileMods;

@@ -14,23 +14,14 @@
    limitations under the License.
 */
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing;
 using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Threading;
 
-namespace TS_SE_Tool
-{
-    partial class FormAboutBox : Form
-    {
+namespace TS_SE_Tool {
+    partial class FormAboutBox : Form {
         FormMain MainForm = Application.OpenForms.OfType<FormMain>().Single();
 
-        public FormAboutBox()
-        {
+        public FormAboutBox() {
             InitializeComponent();
 
             SetFormVisual();
@@ -38,23 +29,21 @@ namespace TS_SE_Tool
             TranslateForm();
         }
 
-        private void SetFormVisual()
-        {
+        private void SetFormVisual() {
             this.Icon = Utilities.Graphics_TSSET.IconFromImage(MainForm.ProgUIImgsDict["Info"]);
         }
 
-        private void PopulateFormControls()
-        {
+        private void PopulateFormControls() {
             buttonSupportDeveloper.Visible = false;
 
             labelProductName.Text = Utilities.AssemblyData.AssemblyProduct;
             labelCopyright.Text = Utilities.AssemblyData.AssemblyCopyright;
 
-            labelETS2version.Text = String.Join(" - ", MainForm.SupportedSavefileVersionsETS2.Select(p => p.ToString()).ToArray()) + " (" + MainForm.SupportedGameVersionETS2 + ")";
-            labelATSversion.Text = String.Join(" - ", MainForm.SupportedSavefileVersionsETS2.Select(p => p.ToString()).ToArray()) + " (" + MainForm.SupportedGameVersionATS + ")";
+            labelETS2version.Text = String.Join(" - ", Globals.SupportedGames["ETS2"].SupportedSaveFileVersions.Select(p => p.ToString()).ToArray()) + " (" + Globals.SupportedGames["ETS2"].SupportedGameVersions.Select(v => v.ToString()) + ")";
+            labelATSversion.Text = String.Join(" - ", Globals.SupportedGames["ATS"].SupportedSaveFileVersions.Select(p => p.ToString()).ToArray()) + " (" + Globals.SupportedGames["ATS"].SupportedGameVersions.Select(v => v.ToString()) + ")";
 
             //
-            string[][] referencies = { 
+            string[][] referencies = {
                 new string[] {"SII Decrypt", "https://github.com/ncs-sniper/SII_Decrypt"},
                 new string[] {"PsColorPicker", "https://github.com/exectails/PsColorPicker"},
                 new string[] {"SharpZipLib", "https://github.com/icsharpcode/SharpZipLib"},
@@ -66,8 +55,7 @@ namespace TS_SE_Tool
 
             string referenciesText = "";
 
-            foreach (string[] tmp in referencies)
-            {
+            foreach (string[] tmp in referencies) {
                 referenciesText += tmp[0] + Environment.NewLine + tmp[1] + Environment.NewLine + Environment.NewLine;
             }
             //
@@ -78,16 +66,14 @@ namespace TS_SE_Tool
             //
         }
 
-        private void TranslateForm()
-        {
+        private void TranslateForm() {
             MainForm.HelpTranslateFormMethod(this);
 
             MainForm.HelpTranslateControlExt(this, Utilities.AssemblyData.AssemblyTitle);
             MainForm.HelpTranslateControlExt(labelVersion, Utilities.AssemblyData.AssemblyVersion);
         }
 
-        private void buttonSupportDeveloper_Click(object sender, EventArgs e)
-        {
+        private void buttonSupportDeveloper_Click(object sender, EventArgs e) {
             string url = Utilities.Web_Utilities.External.linkHelpDeveloper;
 
             DialogResult result = MessageBox.Show("This will open " + url + " web-page." + Environment.NewLine + "Do you want to continue?",

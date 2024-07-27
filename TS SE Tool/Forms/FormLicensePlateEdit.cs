@@ -150,7 +150,7 @@ namespace TS_SE_Tool
 
             SCS.SCSLicensePlate thisLP = new SCS.SCSLicensePlate(licenseplatetext, SCS.SCSLicensePlate.LPtype.Truck);
 
-            panelLicensePlatePreview.BackgroundImage = Utilities.Graphics_TSSET.ResizeImage(thisLP.LicensePlateIMG, MainForm.LicensePlateWidth[MainForm.GameType], 32); //ETS - 128x32 or ATS - 128x64
+            panelLicensePlatePreview.BackgroundImage = Utilities.Graphics_TSSET.ResizeImage(thisLP.LicensePlateIMG, MainForm.LicensePlateWidth[MainForm.SelectedGame.Type], 32); //ETS - 128x32 or ATS - 128x64
         }
 
         private void buttonOk_Click(object sender, EventArgs e)
