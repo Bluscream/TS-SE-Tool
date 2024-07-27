@@ -23,6 +23,7 @@ using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 using System.Threading;
+using TS_SE_Tool.CustomClasses.Program;
 
 namespace TS_SE_Tool {
     public partial class FormMain {
@@ -180,13 +181,13 @@ namespace TS_SE_Tool {
 
                         // Currency
                         string currencyText = "";
-                        long newValue = (long)Math.Floor(Job.Ferryprice * SelectedGame.Currencies[Globals.CurrencyName].ConversionRate);
+                        long newValue = (long)Math.Floor(Job.Ferryprice * SelectedGame.Currencies.Get(Globals.CurrencyName).ConversionRate);
 
-                        if (SelectedGame.Currencies[Globals.CurrencyName].FormatSymbols[0] != "")
-                            currencyText += SelectedGame.Currencies[Globals.CurrencyName].FormatSymbols[0] + "-";
+                        if (!string.IsNullOrWhiteSpace(SelectedGame.Currencies.Get(Globals.CurrencyName).FormatSymbols[0]))
+                            currencyText += SelectedGame.Currencies.Get(Globals.CurrencyName).FormatSymbols[0] + "-";
 
-                        currencyText += SelectedGame.Currencies[Globals.CurrencyName].FormatSymbols[1] + String.Format(CultureInfo.CurrentCulture, "{0:N0}", newValue) +
-                                        ",-" + SelectedGame.Currencies[Globals.CurrencyName].FormatSymbols[2];
+                        currencyText += SelectedGame.Currencies.Get(Globals.CurrencyName).FormatSymbols[1] + String.Format(CultureInfo.CurrentCulture, "{0:N0}", newValue) +
+                                        ",-" + SelectedGame.Currencies.Get(Globals.CurrencyName).FormatSymbols[2];
 
                         txtToWrite += currencyText + ")";
                     }

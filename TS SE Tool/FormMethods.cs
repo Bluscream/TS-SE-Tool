@@ -146,7 +146,8 @@ namespace TS_SE_Tool {
                 comboBoxSaves.FlatStyle = FlatStyle.Flat;
 
                 try {
-                    SelectedGame = Globals.SupportedGames.First(g => g.Value.Installed).Value;
+                    SelectedGame = Globals.SupportedGames.First(g => g.Installed);
+                    if (SelectedGame is null) throw new Exception("No supported game found!");
                 } catch (Exception ex) {
                     var msg = $"None of the supported games could be found on your system!\n\n{ex.Message}";
                     IO_Utilities.ErrorLogWriter(msg);

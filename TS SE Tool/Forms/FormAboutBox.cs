@@ -16,6 +16,7 @@
 using System;
 using System.Linq;
 using System.Windows.Forms;
+using TS_SE_Tool.CustomClasses.Program;
 using TS_SE_Tool.Utilities;
 
 namespace TS_SE_Tool {
@@ -43,8 +44,8 @@ namespace TS_SE_Tool {
             labelProductName.Text = Utilities.AssemblyData.AssemblyProduct;
             labelCopyright.Text = Utilities.AssemblyData.AssemblyCopyright;
 
-            var ets2 = Globals.SupportedGames["ETS2"];
-            var ats = Globals.SupportedGames["ATS"];
+            var ets2 = Globals.SupportedGames.Get("ETS2");
+            var ats = Globals.SupportedGames.Get("ATS");
 
             labelETS2version.Text = ets2.SupportedGameVersionString;
             if (ets2.SupportedSaveFileVersions.Count > 0) labelETS2version.Text += " (" + ets2.SupportedSaveFileVersionString + ")";

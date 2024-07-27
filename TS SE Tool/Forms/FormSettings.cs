@@ -170,14 +170,14 @@ namespace TS_SE_Tool {
             combDT = new DataTable();
             combDT.Columns.Add("ID");
             combDT.Columns.Add("CurrencyDisplayName");
-            var game = Globals.SupportedGames["ETS2"];
-            foreach (var currency in game.Currencies.Values) {
-                string value = MainForm.ResourceManagerMain.GetString(currency.Name, Thread.CurrentThread.CurrentUICulture);
+            var game = Globals.SupportedGames.Get("ETS2");
+            foreach (var currency in game.Currencies) {
+                var value = MainForm.ResourceManagerMain.GetString(currency.Name, Thread.CurrentThread.CurrentUICulture);
 
-                if (value != null && value != "") {
+                if (!string.IsNullOrWhiteSpace(value)) {
                     combDT.Rows.Add(currency.Name, value);
                 } else {
-                    combDT.Rows.Add(currency.Name, Name);
+                    combDT.Rows.Add(currency.Name, currency.Name);
                 }
             }
 
@@ -195,14 +195,14 @@ namespace TS_SE_Tool {
             combDT.Columns.Add("ID");
             combDT.Columns.Add("CurrencyDisplayName");
 
-            game = Globals.SupportedGames["ETS2"];
-            foreach (var currency in game.Currencies.Values) {
-                string value = MainForm.ResourceManagerMain.GetString(currency.Name, Thread.CurrentThread.CurrentUICulture);
+            game = Globals.SupportedGames.Get("ATS");
+            foreach (var currency in game.Currencies) {
+                var value = MainForm.ResourceManagerMain.GetString(currency.Name, Thread.CurrentThread.CurrentUICulture);
 
-                if (value != null && value != "") {
+                if (!string.IsNullOrWhiteSpace(value)) {
                     combDT.Rows.Add(currency.Name, value);
                 } else {
-                    combDT.Rows.Add(currency.Name, Name);
+                    combDT.Rows.Add(currency.Name, currency.Name);
                 }
             }
 

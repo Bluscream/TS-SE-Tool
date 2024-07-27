@@ -45,6 +45,17 @@ namespace TS_SE_Tool.Utilities {
             }
             return versions;
         }
+        public static string Format(this string format, params object[] args) {
+            return string.Format(format.Remove("\\r").Replace("\\n", Environment.NewLine), args);
+        }
+        public static string TrimTrailingZeros(this string input) {
+            var parts = input.Split('.');
+            for (int i = 0; i < parts.Length - 1; i++) {
+                parts[i] = parts[i].TrimEnd('0');
+                if (parts[i] == "0") parts[i] = "1"; // Check if the part became "0" due to trimming // Keep at least one zero
+            }
+            return string.Join(".", parts);
+        }
         #region Json
         public class DirectoryInfoConverter : JsonConverter<DirectoryInfo> {
             public override DirectoryInfo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {

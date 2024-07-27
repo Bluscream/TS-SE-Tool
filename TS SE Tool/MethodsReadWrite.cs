@@ -32,6 +32,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 using TS_SE_Tool.Utilities;
+using TS_SE_Tool.CustomClasses.Program;
 
 namespace TS_SE_Tool {
     public partial class FormMain : Form {
@@ -717,8 +718,8 @@ namespace TS_SE_Tool {
 
             if (SiiNunitData is null) {
                 MessageBox.Show("SiiNunitData is null!", "?", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                if (Globals.SupportedGames["ETS2"].Installed) radioButtonMainGameSwitchETS.Enabled = true;
-                if (Globals.SupportedGames["ATS"].Installed) radioButtonMainGameSwitchATS.Enabled = true;
+                if (Globals.SupportedGames.Get("ETS2").Installed) radioButtonMainGameSwitchETS.Enabled = true;
+                if (Globals.SupportedGames.Get("ATS").Installed) radioButtonMainGameSwitchATS.Enabled = true;
                 return;
             }
 

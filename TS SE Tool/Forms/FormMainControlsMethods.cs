@@ -257,9 +257,9 @@ namespace TS_SE_Tool {
         //Game select
         public void ToggleGame_Click(object sender, EventArgs e) {
             if (radioButtonMainGameSwitchETS.Checked)
-                ToggleGame(Globals.SupportedGames["ETS2"]);
+                ToggleGame(Globals.SupportedGames.Get("ETS2"));
             else
-                ToggleGame(Globals.SupportedGames["ATS"]);
+                ToggleGame(Globals.SupportedGames.Get("ATS"));
 
             FillRootFoldersPaths(); // Populate with appropriate root folders
         }
@@ -282,16 +282,14 @@ namespace TS_SE_Tool {
 
             if (!ShownUnsupportedMessage) {
                 if (!_game.IsSupported.HasValue || !_game.IsSupported.Value) {
-                    var sb = new StringBuilder($"Your {_game.Name} version is currently not supported by this tool")
-                        .AppendLine()
-                        .AppendLine("Installed Game Version:")
-                        .AppendLine()
-                        .AppendLine(_game.Version.ToString())
-                        .AppendLine()
-                        .AppendLine("Currently Supported Versions:")
-                        .AppendLine()
-                        .AppendLine(_game.SupportedGameVersionString);
-                    var result = MessageBox.Show(sb.ToString(), "Unsupported Game Version", buttons: MessageBoxButtons.OKCancel, icon: MessageBoxIcon.Warning);
+                    //var sb = new StringBuilder($"Your {_game.Name} version is currently not supported by this tool")
+                    //    .AppendLine().AppendLine()
+                    //    .AppendLine($"Installed Game Version: {_game.Version.ToString()}")
+                    //    .AppendLine()
+                    //    .AppendLine($"Currently Supported Versions: {_game.SupportedGameVersionString}");
+                    var result = MessageBox.Show(ResourceManagerMain.GetString("unsupportedGameVersionText").Format(_game.Name, _game.Version, _game.SupportedGameVersionString),
+                        ResourceManagerMain.GetString("unsupportedGameVersionTitle").Format(_game.Type, _game.Version),
+                        buttons: MessageBoxButtons.OKCancel, icon: MessageBoxIcon.Warning);
                     ShownUnsupportedMessage = true;
                     if (result != DialogResult.OK) return;
                 }

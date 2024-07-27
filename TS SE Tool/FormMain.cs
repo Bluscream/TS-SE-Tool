@@ -252,8 +252,8 @@ namespace TS_SE_Tool {
 
             DetectGame();
 
-            if (Globals.SupportedGames["ETS2"].Installed) radioButtonMainGameSwitchETS.Enabled = true;
-            if (Globals.SupportedGames["ATS"].Installed) radioButtonMainGameSwitchATS.Enabled = true;
+            if (Globals.SupportedGames.Get("ETS2").Installed) radioButtonMainGameSwitchETS.Enabled = true;
+            if (Globals.SupportedGames.Get("ATS").Installed) radioButtonMainGameSwitchATS.Enabled = true;
 
             void OpenSplashScreen() {
                 FormSplash WindowSplash = new FormSplash();
@@ -297,7 +297,7 @@ namespace TS_SE_Tool {
     }
 
     public static class Globals {
-        public static Dictionary<string, SupportedGame> SupportedGames = new();
+        public static List<SupportedGame> SupportedGames = new();
         //-----
         public static List<DirectoryInfo> ProfileDirs = new();
         public static List<string> ProfilesHex = new();
@@ -322,7 +322,7 @@ namespace TS_SE_Tool {
 
         public static void Initialize() {
             SupportedGames.Clear();
-            SupportedGames.Add("ETS2",
+            SupportedGames.Add(
                 new SupportedGame() {
                     SteamAppId = 227300,
                     Type = "ETS2",
@@ -335,19 +335,19 @@ namespace TS_SE_Tool {
                     PlayerLevelUps = new() {200, 500, 700, 900, 1000, 1100, 1300, 1600, 1700, 2100, 2300, 2600, 2700,
                     2900, 3000, 3100, 3400, 3700, 4000, 4300, 4600, 4700, 4900, 5200, 5700, 5900, 6000, 6200, 6600, 6800},
                     Currencies = new() {
-                        {  "EUR", new Currency("EUR", 1, new List<string> { "", "€", "" })},
-                        {  "CHF", new Currency("CHF", 1.142, new List<string> { "", "", " CHF" })},
-                        {  "CZK", new Currency("CZK", 25.88, new List<string> { "", "", " Kč" })},
-                        {  "GBP", new Currency("GBP", 0.875, new List<string> { "", "£", "" })},
-                        {  "PLN", new Currency("PLN", 4.317, new List<string> { "", "", " zł" })},
-                        {  "HUF", new Currency("HUF", 325.3, new List<string> { "", "", " Ft" })},
-                        {  "DKK", new Currency("DKK", 7.46, new List<string> { "", "", " kr" })},
-                        {  "SEK", new Currency("SEK", 10.52, new List<string> { "", "", " kr" })},
-                        {  "NOK", new Currency("NOK", 9.51, new List<string> { "", "", " kr" })},
-                        {  "RUB", new Currency("RUB", 77.05, new List<string> { "", "₽", "" })}
+                         new Currency("EUR", 1, new() { "", "€", "" }),
+                         new Currency("CHF", 1.142, new() { "", "", " CHF" }),
+                         new Currency("CZK", 25.88, new() { "", "", " Kč" }),
+                         new Currency("GBP", 0.875, new() { "", "£", "" }),
+                         new Currency("PLN", 4.317, new() { "", "", " zł" }),
+                         new Currency("HUF", 325.3, new() { "", "", " Ft" }),
+                         new Currency("DKK", 7.46, new() { "", "", " kr" }),
+                         new Currency("SEK", 10.52, new() { "", "", " kr" }),
+                          new Currency("NOK", 9.51, new() { "", "", " kr" }),
+                         new Currency("RUB", 77.05, new() { "", "₽", "" })
                     }
                 });
-            SupportedGames.Add("ATS",
+            SupportedGames.Add(
                 new SupportedGame() {
                     SteamAppId = 270880,
                     Type = "ATS",
@@ -359,10 +359,10 @@ namespace TS_SE_Tool {
                     PlayerLevelUps = new() {200, 500, 700, 900, 1100, 1300, 1500, 1700, 1900, 2100, 2300, 2500, 2700,
                     2900, 3100, 3300, 3500, 3700, 4000, 4300, 4600, 4900, 5200, 5500, 5800, 6100, 6400, 6700, 7000, 7300},
                     Currencies = new() {
-                            {  "USD", new Currency("USD", 1, new List<string> { "", "$", "" })},
-                            {  "CAD", new Currency("CAD", 1.3, new List<string> { "", "$", "" })},
-                            {  "MXN", new Currency("MXN", 18.69, new List<string> { "", "$", "" })},
-                            {  "EUR", new Currency("EUR", 0.856, new List<string> { "", "€", "" })}
+                           new Currency("USD", 1, new() { "", "$", "" }),
+                           new Currency("CAD", 1.3, new() { "", "$", "" }),
+                           new Currency("MXN", 18.69, new() { "", "$", "" }),
+                           new Currency("EUR", 0.856, new() { "", "€", "" })
                     }
                 });
         }
