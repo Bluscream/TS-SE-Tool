@@ -16,6 +16,7 @@
 using System;
 using System.Linq;
 using System.Windows.Forms;
+using TS_SE_Tool.Utilities;
 
 namespace TS_SE_Tool {
     partial class FormAboutBox : Form {
@@ -27,6 +28,7 @@ namespace TS_SE_Tool {
             SetFormVisual();
             PopulateFormControls();
             TranslateForm();
+            Globals.SupportedGames.ToJson(true).ToFile("SupportedGames.json", true);
         }
 
         private void SetFormVisual() {
@@ -39,8 +41,8 @@ namespace TS_SE_Tool {
             labelProductName.Text = Utilities.AssemblyData.AssemblyProduct;
             labelCopyright.Text = Utilities.AssemblyData.AssemblyCopyright;
 
-            labelETS2version.Text = String.Join(" - ", Globals.SupportedGames["ETS2"].SupportedSaveFileVersions.Select(p => p.ToString()).ToArray()) + " (" + Globals.SupportedGames["ETS2"].SupportedGameVersions.Select(v => v.ToString()) + ")";
-            labelATSversion.Text = String.Join(" - ", Globals.SupportedGames["ATS"].SupportedSaveFileVersions.Select(p => p.ToString()).ToArray()) + " (" + Globals.SupportedGames["ATS"].SupportedGameVersions.Select(v => v.ToString()) + ")";
+            labelETS2version.Text = Globals.SupportedGames["ETS2"].SupportedGameVersions.ToJson() + " (" + Globals.SupportedGames["ETS2"].SupportedSaveFileVersions.ToJson() + ")";
+            labelATSversion.Text = Globals.SupportedGames["ATS"].SupportedGameVersions.ToJson() + " (" + Globals.SupportedGames["ATS"].SupportedSaveFileVersions.ToJson() + ")";
 
             //
             string[][] referencies = {

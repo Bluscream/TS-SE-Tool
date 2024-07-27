@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Text.Json.Serialization;
 using TS_SE_Tool.Utilities;
 
 namespace TS_SE_Tool.CustomClasses.Program {
@@ -13,8 +15,14 @@ namespace TS_SE_Tool.CustomClasses.Program {
         public string Description { get; internal set; }
         public string ExecutableName { get; internal set; }
 
-        public List<Version> SupportedGameVersions { get; internal set; } = new();
+        public List<string> SupportedGameVersions { get; internal set; } = new();
         public List<long> SupportedSaveFileVersions { get; internal set; } = new();
+        //[JsonIgnore]
+        //[Browsable(false)]
+        //public string SupportedGameVersionsString { get => string.Join(", ", SupportedGameVersions); }
+        //[JsonIgnore]
+        //[Browsable(false)]
+        //public string SupportedSaveFileVersionsString { get => string.Join(", ", SupportedSaveFileVersions.Select(v => v.ToString())); }
 
         public bool Installed {
             get {

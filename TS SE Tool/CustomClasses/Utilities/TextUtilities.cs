@@ -71,7 +71,12 @@ namespace TS_SE_Tool.Utilities {
         /// <returns>A JSON string representation of the object.</returns>
         public static string ToJson(this object input, bool indent = false) {
             //try {
-            var options = new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.Preserve, WriteIndented = indent, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
+            var options = new JsonSerializerOptions() {
+                ReferenceHandler = ReferenceHandler.IgnoreCycles,
+                DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+                //PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.None,
+                WriteIndented = indent
+            };
             options.Converters.Add(new FileInfoConverter()); options.Converters.Add(new DirectoryInfoConverter());
             return JsonSerializer.Serialize(input, options);
             //} catch (Exception ex) {
@@ -80,6 +85,23 @@ namespace TS_SE_Tool.Utilities {
             //}
         }
         #endregion Json
+
+        public static bool ToFile(this string text, string outputFile, bool overwrite = false) => ToFile(text, new FileInfo(outputFile), overwrite);
+        public static bool ToFile(this string text, FileInfo outputFile, bool overwrite = false) {
+            try {
+                if (outputFile.Exists && !overwrite) {
+                    throw new IOException($"Not overwriting existing file: {outputFile.FullString()}");
+                }
+                using (StreamWriter writer = new StreamWriter(outputFile.FullName)) {
+                    writer.Write(text);
+                }
+                return true;
+            } catch (IOException ex) {
+                IO_Utilities.ErrorLogWriter(ex.Message);
+                return false;
+            }
+        }
+
         public static string Join(this IEnumerable<object> inputs, string seperator = ", ") {
             return string.Join(seperator, inputs.Select(i => i.ToString()));
         }
