@@ -267,6 +267,7 @@
     <Compile Include="CustomClasses\Utilities\Process_Utilities.cs" />
     <Compile Include="CustomClasses\Utilities\IO_Utilities.cs" />
     <Compile Include="CustomClasses\Utilities\NumericUtilities.cs" />
+    <Compile Include="CustomClasses\Utilities\UI_Utilities.cs" />
     <Compile Include="CustomClasses\Utilities\TextUtilities.cs" />
     <Compile Include="CustomClasses\Utilities\ZipDataUtilitiescs.cs" />
     <Compile Include="CustomClasses\Utilities\dotNetCheck.cs" />

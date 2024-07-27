@@ -71,7 +71,7 @@ namespace TS_SE_Tool.Utilities {
         /// <returns>A JSON string representation of the object.</returns>
         public static string ToJson(this object input, bool indent = false) {
             //try {
-            var options = new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.Preserve, WriteIndented = indent };
+            var options = new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.Preserve, WriteIndented = indent, DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull };
             options.Converters.Add(new FileInfoConverter()); options.Converters.Add(new DirectoryInfoConverter());
             return JsonSerializer.Serialize(input, options);
             //} catch (Exception ex) {

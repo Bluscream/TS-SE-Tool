@@ -221,7 +221,7 @@
             this.buttonConvoyToolsGPSTruckPositionMultySaveCopy = new System.Windows.Forms.Button();
             this.tabMods = new System.Windows.Forms.TabPage();
             this.tableMods = new System.Windows.Forms.DataGridView();
-            this.modLoadOrder = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.modId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.modName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contextMenuStripMain = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.contextMenuStripFreightMarketJobListEdit = new System.Windows.Forms.ToolStripMenuItem();
@@ -253,6 +253,10 @@
             this.radioButtonMainGameSwitchATS = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonMainCloseSave = new System.Windows.Forms.Button();
+            this.contextMenuStripMods = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.profileModsRemove = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.profileModsDebug = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
@@ -309,6 +313,7 @@
             this.tableLayoutPanel16.SuspendLayout();
             this.tableLayoutPanel10.SuspendLayout();
             this.tableLayoutPanel11.SuspendLayout();
+            this.contextMenuStripMods.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStripMain
@@ -2650,8 +2655,9 @@
             this.tableMods.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.tableMods.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tableMods.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.modLoadOrder,
+            this.modId,
             this.modName});
+            this.tableMods.ContextMenuStrip = this.contextMenuStripMods;
             this.tableMods.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableMods.Location = new System.Drawing.Point(3, 3);
             this.tableMods.Name = "tableMods";
@@ -2660,11 +2666,15 @@
             this.tableMods.ShowRowErrors = false;
             this.tableMods.Size = new System.Drawing.Size(564, 530);
             this.tableMods.TabIndex = 0;
+            this.tableMods.DragDrop += new System.Windows.Forms.DragEventHandler(this.tableMods_DragDrop);
+            this.tableMods.DragOver += new System.Windows.Forms.DragEventHandler(this.tableMods_DragOver);
+            this.tableMods.MouseDown += new System.Windows.Forms.MouseEventHandler(this.tableMods_MouseDown);
+            this.tableMods.MouseMove += new System.Windows.Forms.MouseEventHandler(this.tableMods_MouseMove);
             // 
-            // modLoadOrder
+            // modId
             // 
-            this.modLoadOrder.HeaderText = "Order";
-            this.modLoadOrder.Name = "modLoadOrder";
+            this.modId.HeaderText = "Id";
+            this.modId.Name = "modId";
             // 
             // modName
             // 
@@ -3033,6 +3043,35 @@
             this.buttonMainCloseSave.Visible = false;
             this.buttonMainCloseSave.Click += new System.EventHandler(this.buttonMainCloseSave_Click);
             // 
+            // contextMenuStripMods
+            // 
+            this.contextMenuStripMods.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.profileModsRemove,
+            this.toolStripSeparator2,
+            this.profileModsDebug});
+            this.contextMenuStripMods.Name = "contextMenuStripMods";
+            this.contextMenuStripMods.Size = new System.Drawing.Size(171, 54);
+            this.contextMenuStripMods.Text = "Mods";
+            // 
+            // profileModsRemove
+            // 
+            this.profileModsRemove.Name = "profileModsRemove";
+            this.profileModsRemove.Size = new System.Drawing.Size(170, 22);
+            this.profileModsRemove.Text = "Remove";
+            this.profileModsRemove.Click += new System.EventHandler(this.profileModsRemove_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(167, 6);
+            // 
+            // profileModsDebug
+            // 
+            this.profileModsDebug.Name = "profileModsDebug";
+            this.profileModsDebug.Size = new System.Drawing.Size(170, 22);
+            this.profileModsDebug.Text = "Show Debug Info";
+            this.profileModsDebug.Click += new System.EventHandler(this.profileModsDebug_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -3120,6 +3159,7 @@
             this.tableLayoutPanel10.ResumeLayout(false);
             this.tableLayoutPanel10.PerformLayout();
             this.tableLayoutPanel11.ResumeLayout(false);
+            this.contextMenuStripMods.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3353,9 +3393,13 @@
         private System.Windows.Forms.ToolStripMenuItem gameToolStripMenuItem;
         private System.Windows.Forms.TabPage tabMods;
         private System.Windows.Forms.DataGridView tableMods;
-        private System.Windows.Forms.DataGridViewTextBoxColumn modLoadOrder;
-        private System.Windows.Forms.DataGridViewTextBoxColumn modName;
         private System.Windows.Forms.ToolStripMenuItem modsToolStripMenuItem;
+        private System.Windows.Forms.DataGridViewTextBoxColumn modId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn modName;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripMods;
+        private System.Windows.Forms.ToolStripMenuItem profileModsRemove;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem profileModsDebug;
     }
 }
 

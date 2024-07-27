@@ -15,39 +15,42 @@
 */
 using System.IO;
 using TS_SE_Tool.Utilities;
-using System;
 using System.ComponentModel;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Linq;
 using FuzzySharp;
+using System.Windows.Forms;
 
 namespace TS_SE_Tool {
     public class ProfileMod {
+        [Browsable(false)]
+        public int LoadOrder { get; set; }
+        [AutoSizeColumnMode(DataGridViewAutoSizeColumnMode.ColumnHeader)]
+        [DisplayName("#")]
+        [JsonIgnore]
+        public int LoadOrderFriendly { get => LoadOrder + 1; }
+        [Browsable(false)]
         public string Id { get; set; }
         public string Name { get; set; } // { get => File?.FileNameWithoutExtension().Trim(); }
 
         [JsonIgnore]
-        public bool hasFile { get => GameMod != null && GameMod.File != null && GameMod.File.Exists; }
+        //[Browsable(false)]
+        [AutoSizeColumnMode(DataGridViewAutoSizeColumnMode.ColumnHeader)]
+        public bool Exists { get => GameMod != null && GameMod.File != null && GameMod.File.Exists; }
 
         [Browsable(false)]
         public GameMod? GameMod { get; set; }
 
-        public ProfileMod(string profileEntry) {
+        public ProfileMod(string profileEntry, int loadOrder) {
             var split = profileEntry.Trim('\"').Split('|');
             Id = split.First();
             Name = split.Last();
+            LoadOrder = loadOrder;
         }
 
         public bool Delete() {
-            //try {
-            //    if (hasFile) File.Delete();
-            //} catch (Exception ex) {
-            //    IO_Utilities.LogWriter($"Failed to delete {File.FullString()}: {ex}");
-            return false;
-            //}
-            //return true;
+            return GameMod.Delete();
         }
 
         public override bool Equals(object obj) {
