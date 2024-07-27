@@ -91,7 +91,8 @@ namespace TS_SE_Tool
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 58F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel.Size = new System.Drawing.Size(265, 443);
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel.Size = new System.Drawing.Size(265, 592);
             this.tableLayoutPanel.TabIndex = 0;
             // 
             // labelProductName
@@ -209,7 +210,7 @@ namespace TS_SE_Tool
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tableLayoutPanel.SetColumnSpan(this.okButton, 2);
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.okButton.Location = new System.Drawing.Point(3, 417);
+            this.okButton.Location = new System.Drawing.Point(3, 566);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(259, 23);
             this.okButton.TabIndex = 24;

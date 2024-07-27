@@ -28,7 +28,9 @@ namespace TS_SE_Tool {
             SetFormVisual();
             PopulateFormControls();
             TranslateForm();
-            Globals.SupportedGames.ToJson(true).ToFile("SupportedGames.json", true);
+#if DEBUG
+            Globals.SupportedGames.ToJson(true).ToFile("SupportedGames.json", true); // todo: remove
+#endif
         }
 
         private void SetFormVisual() {
@@ -36,13 +38,18 @@ namespace TS_SE_Tool {
         }
 
         private void PopulateFormControls() {
-            buttonSupportDeveloper.Visible = false;
+            //buttonSupportDeveloper.Visible = false;
 
             labelProductName.Text = Utilities.AssemblyData.AssemblyProduct;
             labelCopyright.Text = Utilities.AssemblyData.AssemblyCopyright;
 
-            labelETS2version.Text = Globals.SupportedGames["ETS2"].SupportedGameVersions.ToJson() + " (" + Globals.SupportedGames["ETS2"].SupportedSaveFileVersions.ToJson() + ")";
-            labelATSversion.Text = Globals.SupportedGames["ATS"].SupportedGameVersions.ToJson() + " (" + Globals.SupportedGames["ATS"].SupportedSaveFileVersions.ToJson() + ")";
+            var ets2 = Globals.SupportedGames["ETS2"];
+            var ats = Globals.SupportedGames["ATS"];
+
+            labelETS2version.Text = ets2.SupportedGameVersionString;
+            if (ets2.SupportedSaveFileVersions.Count > 0) labelETS2version.Text += " (" + ets2.SupportedSaveFileVersionString + ")";
+            labelATSversion.Text = ats.SupportedGameVersionString;
+            if (ats.SupportedSaveFileVersions.Count > 0) labelATSversion.Text += " (" + ats.SupportedSaveFileVersionString + ")";
 
             //
             string[][] referencies = {
@@ -61,7 +68,8 @@ namespace TS_SE_Tool {
                 referenciesText += tmp[0] + Environment.NewLine + tmp[1] + Environment.NewLine + Environment.NewLine;
             }
             //
-            textBoxDescription.Text = string.Format(MainForm.HelpTranslateString(this.Name + textBoxDescription.Name),
+            textBoxDescription.Text = $"Installed Versions:\r\n\r\n{ets2.Type}: {ets2.Version}\r\n{ats.Type}: {ats.Version}\r\n\r\n";
+            textBoxDescription.Text += string.Format(MainForm.HelpTranslateString(this.Name + textBoxDescription.Name),
                                                      Utilities.Web_Utilities.External.linkMailDeveloper, Utilities.Web_Utilities.External.linkGithub);
 
             textBoxDescription.Text += referenciesText;

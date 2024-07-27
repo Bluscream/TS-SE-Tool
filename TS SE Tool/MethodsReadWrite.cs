@@ -717,6 +717,8 @@ namespace TS_SE_Tool {
 
             if (SiiNunitData is null) {
                 MessageBox.Show("SiiNunitData is null!", "?", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (Globals.SupportedGames["ETS2"].Installed) radioButtonMainGameSwitchETS.Enabled = true;
+                if (Globals.SupportedGames["ATS"].Installed) radioButtonMainGameSwitchATS.Enabled = true;
                 return;
             }
 

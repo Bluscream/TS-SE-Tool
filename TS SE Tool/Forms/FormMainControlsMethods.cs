@@ -35,6 +35,7 @@ using TS_SE_Tool.Utilities;
 using TS_SE_Tool.Forms;
 using Narod.SteamGameFinder;
 using TS_SE_Tool.CustomClasses.Program;
+using System.Text;
 
 namespace TS_SE_Tool {
     public partial class FormMain {
@@ -262,7 +263,7 @@ namespace TS_SE_Tool {
 
             FillRootFoldersPaths(); // Populate with appropriate root folders
         }
-
+        private static bool ShownUnsupportedMessage = false;
         public void ToggleGame(SupportedGame _game) {
             if (tempSavefileInMemory != null) {
                 DialogResult result = MessageBox.Show("Savefile not saved." + Environment.NewLine + "Do you want to discard changes and switch game type?", "Switching game",
@@ -276,6 +277,23 @@ namespace TS_SE_Tool {
                     ToggleControlsAccess(false);
                     SetDefaultValues(false);
                     ClearFormControls(true);
+                }
+            }
+
+            if (!ShownUnsupportedMessage) {
+                if (!_game.IsSupported.HasValue || !_game.IsSupported.Value) {
+                    var sb = new StringBuilder($"Your {_game.Name} version is currently not supported by this tool")
+                        .AppendLine()
+                        .AppendLine("Installed Game Version:")
+                        .AppendLine()
+                        .AppendLine(_game.Version.ToString())
+                        .AppendLine()
+                        .AppendLine("Currently Supported Versions:")
+                        .AppendLine()
+                        .AppendLine(_game.SupportedGameVersionString);
+                    var result = MessageBox.Show(sb.ToString(), "Unsupported Game Version", buttons: MessageBoxButtons.OKCancel, icon: MessageBoxIcon.Warning);
+                    ShownUnsupportedMessage = true;
+                    if (result != DialogResult.OK) return;
                 }
             }
 

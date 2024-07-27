@@ -15,8 +15,16 @@ namespace TS_SE_Tool.CustomClasses.Program {
         public string Description { get; internal set; }
         public string ExecutableName { get; internal set; }
 
-        public List<string> SupportedGameVersions { get; internal set; } = new();
+        public Version MinSupportedGameVersion { get; internal set; } = new();
+        public Version MaxSupportedGameVersion { get; internal set; } = new();
+        [JsonIgnore]
+        [Browsable(false)]
+        public string SupportedGameVersionString { get => $"{MinSupportedGameVersion}-{MaxSupportedGameVersion}"; }
+        [Browsable(false)]
         public List<long> SupportedSaveFileVersions { get; internal set; } = new();
+        [JsonIgnore]
+        [Browsable(false)]
+        public string SupportedSaveFileVersionString { get => SupportedSaveFileVersions.Count < 1 ? string.Empty : string.Join(", ", SupportedSaveFileVersions); }
         //[JsonIgnore]
         //[Browsable(false)]
         //public string SupportedGameVersionsString { get => string.Join(", ", SupportedGameVersions); }
@@ -32,8 +40,11 @@ namespace TS_SE_Tool.CustomClasses.Program {
         public DirectoryInfo SteamUserDataDir { get => Globals.GetLatestSteamUserDataDir().Combine(SteamAppId.ToString()); }
         public DirectoryInfo SteamRemoteDir { get => SteamUserDataDir.Combine("remote"); }
 
-        public DirectoryInfo GameDir { get => Installed ? new DirectoryInfo(Globals.SteamGameLocator.getGameInfoByFolder(Name).steamGameLocation) : null; }
-        public FileInfo Executable { get => Installed ? GameDir.CombineFile("bin", "win_x64", ExecutableName) : null; }
+        public DirectoryInfo? GameDir { get => Installed ? new DirectoryInfo(Globals.SteamGameLocator.getGameInfoByFolder(Name).steamGameLocation) : null; }
+        public FileInfo? Executable { get => Installed ? GameDir.CombineFile("bin", "win_x64", ExecutableName) : null; }
+        public DateTime? LastUpdated { get => Installed ? Executable.LastWriteTime : null; }
+        public Version? Version { get => Installed ? new Version(Executable.GetVersionInfo().ProductVersion) : null; }
+        public bool? IsSupported { get => Installed ? (Version > MinSupportedGameVersion && Version > MaxSupportedGameVersion) : null; }
         public List<DirectoryInfo> PluginDirs { get => new() { GameDir.Combine("bin", "win_x64", "plugins"), GameDir.Combine("bin", "win_x86", "plugins") }; }
 
         public DirectoryInfo DocumentsDir { get => Globals.DocumentsDir.Combine(Name); }

@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using System.Diagnostics;
 
 namespace TS_SE_Tool.Utilities {
     static class IO_Extensions {
@@ -107,6 +108,7 @@ namespace TS_SE_Tool.Utilities {
             }
             return new FileInfo(final);
         }
+        public static FileVersionInfo GetVersionInfo(this FileInfo file) => FileVersionInfo.GetVersionInfo(file.FullName);
         public static string FileNameWithoutExtension(this FileInfo file) {
             return Path.GetFileNameWithoutExtension(file.Name);
         }
