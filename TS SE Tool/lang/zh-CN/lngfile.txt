@@ -202,3 +202,5 @@ currencyRUB;俄罗斯卢布
 currencyUSD;美元
 currencyCAD;加拿大元
 currencyMXN;墨西哥比索
+unsupportedGameVersionTitle;不支持的{0}版本{1}
+unsupportedGameVersionText;您当前安装的{0}版本目前不被此工具支持。\n\n已安装游戏版本：{1}\n\n当前支持的版本：{2}

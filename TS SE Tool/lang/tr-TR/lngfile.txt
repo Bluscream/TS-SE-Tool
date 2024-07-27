@@ -177,3 +177,5 @@ currencyRUB;Rusya Rublesi
 currencyUSD;Amerika Doları
 currencyCAD;Kanada Doları
 currencyMXN;Meksika Pesosu
+unsupportedGameVersionTitle;Desteklenmeyen {0} Versiyonu {1}
+unsupportedGameVersionText;Yüklü olan {0} versiyonunuz şu anki bu araç tarafından desteklenmiyor.\n\nYüklü Oyun Versiyonu: {1}\n\nŞu Anki Desteklenen Versiyonlar: {2}

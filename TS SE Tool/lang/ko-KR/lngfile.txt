@@ -268,3 +268,5 @@ currencyRUB;러시아 루블
 currencyUSD;미국 달러
 currencyCAD;캐나다 달러
 currencyMXN;멕시코 페소
+unsupportedGameVersionTitle;지원되지 않는 {0} 버전 {1}
+unsupportedGameVersionText;당신이 설치한 현재 {0} 버전은 이 도구에 의해 지원되지 않습니다.\n\n설치된 게임 버전: {1}\n\n현재 지원되는 버전: {2}

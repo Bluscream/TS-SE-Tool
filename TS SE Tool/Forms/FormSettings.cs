@@ -172,7 +172,7 @@ namespace TS_SE_Tool {
             combDT.Columns.Add("CurrencyDisplayName");
             var game = Globals.SupportedGames.Get("ETS2");
             foreach (var currency in game.Currencies) {
-                var value = MainForm.ResourceManagerMain.GetString(currency.Name, Thread.CurrentThread.CurrentUICulture);
+                var value = MainForm.ResourceManagerMain.GetString($"currency{currency.Name}", Thread.CurrentThread.CurrentUICulture);
 
                 if (!string.IsNullOrWhiteSpace(value)) {
                     combDT.Rows.Add(currency.Name, value);
@@ -197,7 +197,7 @@ namespace TS_SE_Tool {
 
             game = Globals.SupportedGames.Get("ATS");
             foreach (var currency in game.Currencies) {
-                var value = MainForm.ResourceManagerMain.GetString(currency.Name, Thread.CurrentThread.CurrentUICulture);
+                var value = MainForm.ResourceManagerMain.GetString($"currency{currency.Name}", Thread.CurrentThread.CurrentUICulture);
 
                 if (!string.IsNullOrWhiteSpace(value)) {
                     combDT.Rows.Add(currency.Name, value);

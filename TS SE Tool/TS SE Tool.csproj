@@ -543,8 +543,8 @@
     <None Include="Resources\MainIco.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="lang\Default\lngfile.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <Content Include="lang\**">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="SII_Decrypt.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

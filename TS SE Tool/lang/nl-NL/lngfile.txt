@@ -157,3 +157,5 @@ currencyRUB; Russische Roebel
 currencyUSD; Amerikaanse Dollar
 currencyCAD; Canadese Dollar
 currencyMXN; Mexicaanse Peso
+unsupportedGameVersionTitle;Ondersteunde {0} Versie {1}
+unsupportedGameVersionText;De door u geïnstalleerde {0} versie wordt momenteel niet ondersteund door dit hulpmiddel.\n\nGeïnstalleerde Spelversie: {1}\n\nMomenteel Ondersteunde Versies: {2}

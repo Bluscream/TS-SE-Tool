@@ -112,17 +112,18 @@ toolStripMenuItemLanguage;Linguagem
 toolStripMenuItemProgram;Programa
 toolStripMenuItemSettings;Opcoes
 tooltipbuttonProfilesAndSavesRefreshAll;Actualizar
-
-    currencyEUR;Euro
-    currencyCHF;Francos Suíços
-    currencyCZK;Coroa Tcheca
-    currencyGBP;Libras Esterlinas
-    currencyPLN;Złotów Polako
-    currencyHUF;Forints Húngaros
-    currencyDKK;Krones Dinamarquesas
-    currencySEK;Kronas Suecas
-    currencyNOK;Kronas Noruegas
-    currencyRUB;Rublos Russos
-    currencyUSD;Dólares Americanos
-    currencyCAD;Dólares Canadenses
-    currencyMXN;Pesos Mexicanos
+currencyEUR;Euro
+currencyCHF;Francos Suíços
+currencyCZK;Coroa Tcheca
+currencyGBP;Libras Esterlinas
+currencyPLN;Złotów Polako
+currencyHUF;Forints Húngaros
+currencyDKK;Krones Dinamarquesas
+currencySEK;Kronas Suecas
+currencyNOK;Kronas Noruegas
+currencyRUB;Rublos Russos
+currencyUSD;Dólares Americanos
+currencyCAD;Dólares Canadenses
+currencyMXN;Pesos Mexicanos
+unsupportedGameVersionTitle;Versão {0} Não Apoiada {1}
+unsupportedGameVersionText;A versão {0} do seu jogo que está atualmente instalada não é suportada por esta ferramenta.\n\nVersão do Jogo Instalada: {1}\n\nVersões Atualmente Suportadas: {2}

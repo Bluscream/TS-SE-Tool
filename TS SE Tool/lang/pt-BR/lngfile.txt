@@ -177,3 +177,5 @@ currencyRUB;Rublo Russo
 currencyUSD;Dólar Americano
 currencyCAD;Dólar Canadense
 currencyMXN;Peso Mexicano
+unsupportedGameVersionTitle;Versão {0} Não Suportada {1}
+unsupportedGameVersionText;A sua versão atual do jogo {0} não é suportada por este ferramenta.\n\nVersão do Jogo Instalada: {1}\n\nVersões Atualmente Suportadas: {2}
