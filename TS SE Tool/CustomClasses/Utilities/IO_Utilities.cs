@@ -194,6 +194,7 @@ namespace TS_SE_Tool.Utilities {
             if (!file.IsDisabled())
                 file.MoveTo(file.FullName + ".disabled");
         }
+        internal static void CopyTo(this FileInfo source, FileInfo target) => source.CopyTo(target.FullName);
         public static void OpenWithDefaultApp(this FileInfo file) => System.Diagnostics.Process.Start(file.FullName);
         public static void OpenInExplorer(this FileInfo file) {
             if (!file.Directory.Exists) file.Directory.Create();

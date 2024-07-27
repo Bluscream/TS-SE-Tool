@@ -15,19 +15,21 @@ using MoreLinq;
 namespace TS_SE_Tool.Forms {
     public partial class FormPluginManager : Form {
         FormMain MainForm = Application.OpenForms.OfType<FormMain>().Single();
-        public static DirectoryInfo ETS2GameDir { get; private set; }
-        public static DirectoryInfo ATSGameDir { get; private set; }
-        public static BindingList<GamePlugin> Plugins = new BindingList<GamePlugin>();
+        public string GameType { get; private set; }
+        public DirectoryInfo ETS2GameDir { get; private set; }
+        public DirectoryInfo ATSGameDir { get; private set; }
+        public BindingList<GamePlugin> Plugins = new BindingList<GamePlugin>();
 
 
-        public FormPluginManager() {
+        public FormPluginManager(string gameType) {
+            GameType = gameType;
             InitializeComponent();
         }
 
         public static DirectoryInfo GetPluginsDir(DirectoryInfo gameDir, string arch = "win_x64") => gameDir.Combine("bin", arch, "plugins");
-        public static DirectoryInfo GetGameDir(string _game) => _game == "ATS" ? ATSGameDir : ETS2GameDir;
+        public DirectoryInfo GetGameDir(string _game) => _game == "ATS" ? ATSGameDir : ETS2GameDir;
 
-        public static void Initialize() {
+        public void Initialize() {
             if (Globals.SteamGameLocator.getIsSteamInstalled()) {
                 Globals.SteamDir = new DirectoryInfo(Globals.SteamGameLocator.getSteamInstallLocation());
                 try {
@@ -55,6 +57,22 @@ namespace TS_SE_Tool.Forms {
                 if (plugin.x64 && plugin.File64bit.FullName == file.FullName) return plugin;
             }
             return null;
+        }
+
+        public static List<FileInfo> AskUserImport() {
+            // Create a new instance of OpenFileDialog
+            OpenFileDialog openFileDialog = new OpenFileDialog {
+                Title = "Select one or more DLL or ZIP files",
+                Filter = "DLL Files (*.dll)|*.dll|ZIP Files (*.zip)|*.zip",
+                Multiselect = true,
+            };
+            List<FileInfo> selectedFiles = new List<FileInfo>();
+            if (openFileDialog.ShowDialog() == DialogResult.OK) {
+                foreach (string filePath in openFileDialog.FileNames) {
+                    selectedFiles.Add(new FileInfo(filePath));
+                }
+            }
+            return selectedFiles;
         }
 
         public static HashSet<GamePlugin> FindMatchingPlugins(DirectoryInfo gameDir) {
@@ -101,7 +119,7 @@ namespace TS_SE_Tool.Forms {
         }
 
         private void FormPluginManager_Load(object sender, EventArgs e) {
-            Text = $"Manage Plugins for {MainForm.GameType}";
+            Text = $"Manage Plugins for {GameType}";
             Initialize();
             tablePlugins.Columns.Clear();
             tablePlugins.Rows.Clear();
@@ -114,7 +132,7 @@ namespace TS_SE_Tool.Forms {
             tablePlugins.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             tablePlugins.CellContentClick += tablePlugins_CellContentClick;
             tablePlugins.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            PopulatePlugins(MainForm.GameType);
+            PopulatePlugins(GameType);
             foreach (var i in new[] { 0, 3, 4 })
                 tablePlugins.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             //Plugins.ListChanged += Plugins_ListChanged;
@@ -131,7 +149,7 @@ namespace TS_SE_Tool.Forms {
 
         private void openPluginsDirToolStripMenuItem_Click(object sender, EventArgs e) {
             var arch = ((ToolStripItem)sender).Text;
-            var dir = MainForm.GameType == "ATS" ? ATSGameDir : ETS2GameDir;
+            var dir = GameType == "ATS" ? ATSGameDir : ETS2GameDir;
             GetPluginsDir(dir, "win_" + arch).OpenInExplorer();
         }
 
@@ -181,7 +199,7 @@ namespace TS_SE_Tool.Forms {
             //var menuItem = sender as ToolStripMenuItem;
             if (AskUser("toggle") != DialogResult.Yes) return;
             GetPluginsFromSelected().ForEach(p => p.Enabled = !p.Enabled);
-            PopulatePlugins(MainForm.GameType);
+            PopulatePlugins(GameType);
         }
 
         private void openFoldersToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -203,7 +221,7 @@ namespace TS_SE_Tool.Forms {
             foreach (var plugin in GetPluginsFromSelected()) {
                 plugin.Delete();
             }
-            PopulatePlugins(MainForm.GameType);
+            PopulatePlugins(GameType);
         }
 
         private void tablePlugins_MouseHover(object sender, EventArgs e) {
@@ -221,7 +239,25 @@ namespace TS_SE_Tool.Forms {
         }
 
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e) {
-            PopulatePlugins(MainForm.GameType);
+            PopulatePlugins(GameType);
+        }
+
+        private void ImportDll(FileInfo file) {
+            if (!file.Exists) return;
+            if (file.Extension.ToLower() == ".dll") {
+                file.CopyTo(GetPluginsDir(GetGameDir(GameType), file.Is64BitDll() ? "win_x64" : "win_x86").CombineFile(file.Name));
+            }
+        }
+
+        private void addToolStripMenuItem_Click(object sender, EventArgs e) {
+            var selectedFiles = AskUserImport();
+            if (selectedFiles.Count < 1) return;
+            foreach (var file in selectedFiles) {
+                if (file.Extension.ToLower() == ".dll") {
+                    ImportDll(file);
+                }
+            }
+            PopulatePlugins(GameType);
         }
 
         //private void tablePlugins_CellValueChanged(object sender, DataGridViewCellEventArgs e) {

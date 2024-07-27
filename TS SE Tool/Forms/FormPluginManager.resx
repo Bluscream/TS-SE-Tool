@@ -145,6 +145,12 @@
   <data name="openPluginsDirectoryToolStripMenuItem.Text" xml:space="preserve">
     <value>Open Plugins Directory</value>
   </data>
+  <data name="addToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>40, 21</value>
+  </data>
+  <data name="addToolStripMenuItem.Text" xml:space="preserve">
+    <value>Add</value>
+  </data>
   <data name="menuStrip1.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
   </data>
@@ -1912,6 +1918,12 @@
     <value>showDebugToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;showDebugToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;addToolStripMenuItem.Name" xml:space="preserve">
+    <value>addToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;addToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

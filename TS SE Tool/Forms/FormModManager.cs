@@ -16,11 +16,13 @@ namespace TS_SE_Tool.Forms {
     public partial class FormModManager : Form {
         FormMain MainForm = Application.OpenForms.OfType<FormMain>().Single();
         public DirectoryInfo ModsDir { get; private set; }
+        public string GameType { get; private set; }
 
         public BindingList<GameMod> Mods = new BindingList<GameMod>();
 
 
-        public FormModManager() {
+        public FormModManager(string gameType) {
+            GameType = gameType;
             InitializeComponent();
         }
 

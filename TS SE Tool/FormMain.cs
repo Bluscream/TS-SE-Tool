@@ -152,11 +152,11 @@ namespace TS_SE_Tool {
             TruckPartsImg, TrailerPartsImg, VehicleIntegrityPBImg, GameIconeImg, AccessoriesImg; //Program
 
         private void modsToolStripMenuItem_Click(object sender, EventArgs e) {
-            new FormModManager().Show();
+            new FormModManager(GameType).Show();
         }
 
         private void gameToolStripMenuItem_Click(object sender, EventArgs e) {
-            new FormPluginManager().Show();
+            new FormPluginManager(GameType).Show();
         }
 
         internal Dictionary<string, Image> ProgUIImgsDict;
