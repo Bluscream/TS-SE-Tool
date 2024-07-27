@@ -33,13 +33,13 @@ namespace TS_SE_Tool {
         [STAThread]
         static void Main() {
             // Add the event handler for handling UI thread exceptions to the event
-            Application.ThreadException += new ThreadExceptionEventHandler(UIThreadException);
+            //Application.ThreadException += new ThreadExceptionEventHandler(UIThreadException);
 
             // Set the unhandled exception mode to force all Windows Forms errors to go through handler
             Application.SetUnhandledExceptionMode(UnhandledExceptionMode.CatchException);
 
             // Add the event handler for handling non-UI thread exceptions to the event
-            AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
+            //AppDomain.CurrentDomain.UnhandledException += new UnhandledExceptionEventHandler(CurrentDomain_UnhandledException);
 
             IO_Utilities.LogWriter("--- START ---");
             IO_Utilities.LogWriter(AssemblyData.AssemblyProduct + " - " + AssemblyData.AssemblyVersion);

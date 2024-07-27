@@ -317,9 +317,10 @@ namespace TS_SE_Tool {
         public static string CurrencyName = "";
         //
         public static SteamGameLocator SteamGameLocator = new SteamGameLocator();
-        public static DirectoryInfo SteamDir = null;
+        public static bool SteamInstalled { get => SteamGameLocator.getIsSteamInstalled(); }
+        public static DirectoryInfo SteamDir { get => new DirectoryInfo(SteamGameLocator.getSteamInstallLocation()); }
         public static DirectoryInfo GetLatestSteamUserDataDir() => SteamDir.Combine("userdata").GetDirectories().OrderByDescending(d => d.LastWriteTimeUtc).First(d => d.Name.All(char.IsDigit));
-        public static DirectoryInfo DocumentsDir = null;
+        public static DirectoryInfo DocumentsDir = new DirectoryInfo(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments)); // todo: make dynamic
 
         public static void Initialize() {
             SupportedGames.Clear();

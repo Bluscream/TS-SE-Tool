@@ -18,7 +18,7 @@ namespace TS_SE_Tool.CustomClasses.Program {
                 try { var _ = Globals.SteamGameLocator.getGameInfoByFolder(Name).steamGameLocation; return true; } catch { return false; }
             }
         }
-        public DirectoryInfo GameDir { get => new DirectoryInfo(Globals.SteamGameLocator.getGameInfoByFolder(Name).steamGameLocation); }
+        public DirectoryInfo GameDir { get => Installed ? new DirectoryInfo(Globals.SteamGameLocator.getGameInfoByFolder(Name).steamGameLocation) : null; }
         public DirectoryInfo SteamUserDataDir { get => Globals.GetLatestSteamUserDataDir().Combine(SteamAppId.ToString()); }
         public DirectoryInfo SteamRemoteDir { get => SteamUserDataDir.Combine("remote"); }
         public DirectoryInfo DocumentsDir { get => Globals.DocumentsDir.Combine(Name); }

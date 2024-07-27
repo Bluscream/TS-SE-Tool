@@ -489,7 +489,7 @@ namespace TS_SE_Tool {
                 bool SteamFolderExist = false, MyDocFolderExist = true;
 
                 try {
-                    Globals.SteamDir = new DirectoryInfo(new SteamGameLocator().getSteamInstallLocation()); // Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam", "InstallPath", null).ToString(); //string Globals.SteamDir = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", null).ToString();
+                    //Globals.SteamDir = new DirectoryInfo(new SteamGameLocator().getSteamInstallLocation()); // Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam", "InstallPath", null).ToString(); //string Globals.SteamDir = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", null).ToString();
                     if (Globals.SteamDir is null || !Globals.SteamDir.Exists) { //unknown steam path
                         SteamError = "Can not detect Steam install folder.";
                     } else {
