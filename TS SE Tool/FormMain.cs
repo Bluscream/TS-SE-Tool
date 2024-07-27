@@ -34,23 +34,18 @@ using TS_SE_Tool.Utilities;
 using JR.Utils.GUI.Forms;
 using Narod.SteamGameFinder;
 using TS_SE_Tool.Forms;
+using TS_SE_Tool.CustomClasses.Program;
 
 namespace TS_SE_Tool {
     public partial class FormMain : Form {
         #region  Accesslevels
-
-        internal int[] SupportedSavefileVersionETS2; //Program
-        internal string SupportedGameVersionETS2;//Program
-        //internal int SupportedSavefileVersionATS;
-        internal string SupportedGameVersionATS;//Program
+        internal SupportedGame SelectedGame;
 
         private int JobsAmountAdded;//process result
 
         private int[] UrgencyArray;//Program
 
         public bool FileDecoded;  //+
-
-        internal string GameType;//Program
 
         private string LoopStartCity;//Program
         private string LoopStartCompany;//Program
@@ -175,12 +170,6 @@ namespace TS_SE_Tool {
         public Dictionary<string, List<string>> CurrencyDictFormat;
         public Dictionary<string, double> CurrencyDictConversion;
 
-        public Dictionary<string, List<string>> CurrencyDictFormatETS2 = new Dictionary<string, List<string>>();
-        public Dictionary<string, double> CurrencyDictConversionETS2 = new Dictionary<string, double>();
-
-        public Dictionary<string, List<string>> CurrencyDictFormatATS = new Dictionary<string, List<string>>();
-        public Dictionary<string, double> CurrencyDictConversionATS = new Dictionary<string, double>();
-
         internal Dictionary<string, Dictionary<UInt16, SCS.SCSFontLetter>> GlobalFontMap;
         internal Dictionary<string, byte> LicensePlateWidth;
 
@@ -203,9 +192,13 @@ namespace TS_SE_Tool {
             this.Icon = Properties.Resources.MainIco;
             this.Text += " [ " + AssemblyData.AssemblyVersion + " ]";
 
-            IO_Utilities.LogWriter("Getting Game Paths...");
-            Globals.SteamGameLocator = new SteamGameLocator();
-            IO_Utilities.LogWriter("Done.");
+            IO_Utilities.LogWriter("Getting Supported Games...");
+            Globals.Initialize(); //Globals.SteamDir = new SteamGameLocator().getSteamInstallLocation().Cast<DirectoryInfo>().FirstOrDefault();
+            IO_Utilities.LogWriter($"Done: {Globals.SupportedGames.ToJson()}");
+
+            //IO_Utilities.LogWriter("Getting Game Paths...");
+            //Globals.SteamDir = new SteamGameLocator().getSteamInstallLocation().Cast<DirectoryInfo>().FirstOrDefault();
+            //IO_Utilities.LogWriter("Done.");
 
             SetDefaultValues(true);
             IO_Utilities.LogWriter("Loading config...");
@@ -304,11 +297,11 @@ namespace TS_SE_Tool {
         }
     }
 
-    public class Globals {
+    public static class Globals {
+        public static Dictionary<string, SupportedGame> SupportedGames = new();
         //-----
-        public static string MyDocumentsPath = "";
         public static string[] ProfilesPaths = new string[0];
-        public static List<string> ProfilesHex = new List<string>();
+        public static List<string> ProfilesHex = new();
         //
         public static string SelectedProfile = "";
         public static string SelectedProfilePath = "";
@@ -323,9 +316,55 @@ namespace TS_SE_Tool {
         public static int[] PlayerLevelUps = new int[0];
         public static string CurrencyName = "";
         //
-        public static SteamGameLocator SteamGameLocator = null;
+        public static SteamGameLocator SteamGameLocator = new SteamGameLocator();
         public static DirectoryInfo SteamDir = null;
-        public static DirectoryInfo SelectedGameDir = null;
+        public static DirectoryInfo GetLatestSteamUserDataDir() => SteamDir.Combine("userdata").GetDirectories().OrderByDescending(d => d.LastWriteTimeUtc).First(d => d.Name.All(char.IsDigit));
+        public static DirectoryInfo DocumentsDir = null;
+
+        public static void Initialize() {
+            SupportedGames.Clear();
+            SupportedGames.Add("ETS2",
+                new SupportedGame() {
+                    SteamAppId = 227300,
+                    Type = "ETS2",
+                    Name = "Euro Truck Simulator 2",
+                    SupportedGameVersions = "1.43-1.49".ParseVersions(),
+                    SupportedSaveFileVersions = new() { 61, 74 },
+                    LicensePlateWidth = 128,
+                    PlayerLevelUps = new() {200, 500, 700, 900, 1000, 1100, 1300, 1600, 1700, 2100, 2300, 2600, 2700,
+                    2900, 3000, 3100, 3400, 3700, 4000, 4300, 4600, 4700, 4900, 5200, 5700, 5900, 6000, 6200, 6600, 6800},
+                    Currencies = new() {
+                        {  "EUR", new Currency("EUR", 1, new List<string> { "", "€", "" })},
+                        {  "CHF", new Currency("CHF", 1.142, new List<string> { "", "", " CHF" })},
+                        {  "CZK", new Currency("CZK", 25.88, new List<string> { "", "", " Kč" })},
+                        {  "GBP", new Currency("GBP", 0.875, new List<string> { "", "£", "" })},
+                        {  "PLN", new Currency("PLN", 4.317, new List<string> { "", "", " zł" })},
+                        {  "HUF", new Currency("HUF", 325.3, new List<string> { "", "", " Ft" })},
+                        {  "DKK", new Currency("DKK", 7.46, new List<string> { "", "", " kr" })},
+                        {  "SEK", new Currency("SEK", 10.52, new List<string> { "", "", " kr" })},
+                        {  "NOK", new Currency("NOK", 9.51, new List<string> { "", "", " kr" })},
+                        {  "RUB", new Currency("RUB", 77.05, new List<string> { "", "₽", "" })}
+                    }
+                });
+            SupportedGames.Add("ATS",
+                new SupportedGame() {
+                    SteamAppId = 270880,
+                    Type = "ATS",
+                    Name = "American Truck Simulator",
+                    SupportedGameVersions = "1.43-1.49".ParseVersions(),
+                    LicensePlateWidth = 64,
+                    PlayerLevelUps = new() {200, 500, 700, 900, 1100, 1300, 1500, 1700, 1900, 2100, 2300, 2500, 2700,
+                    2900, 3100, 3300, 3500, 3700, 4000, 4300, 4600, 4900, 5200, 5500, 5800, 6100, 6400, 6700, 7000, 7300},
+                    Currencies = new() {
+                            {  "USD", new Currency("USD", 1, new List<string> { "", "$", "" })},
+                            {  "CAD", new Currency("CAD", 1.3, new List<string> { "", "$", "" })},
+                            {  "MXN", new Currency("MXN", 18.69, new List<string> { "", "$", "" })},
+                            {  "EUR", new Currency("EUR", 0.856, new List<string> { "", "€", "" })}
+                    }
+                });
+        }
     }
+
+
 
 }

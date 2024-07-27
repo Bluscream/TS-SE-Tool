@@ -50,8 +50,8 @@ namespace TS_SE_Tool
             labelProductName.Text = Utilities.AssemblyData.AssemblyProduct;
             labelCopyright.Text = Utilities.AssemblyData.AssemblyCopyright;
 
-            labelETS2version.Text = String.Join(" - ", MainForm.SupportedSavefileVersionETS2.Select(p => p.ToString()).ToArray()) + " (" + MainForm.SupportedGameVersionETS2 + ")";
-            labelATSversion.Text = String.Join(" - ", MainForm.SupportedSavefileVersionETS2.Select(p => p.ToString()).ToArray()) + " (" + MainForm.SupportedGameVersionATS + ")";
+            labelETS2version.Text = String.Join(" - ", MainForm.SupportedSavefileVersionsETS2.Select(p => p.ToString()).ToArray()) + " (" + MainForm.SupportedGameVersionETS2 + ")";
+            labelATSversion.Text = String.Join(" - ", MainForm.SupportedSavefileVersionsETS2.Select(p => p.ToString()).ToArray()) + " (" + MainForm.SupportedGameVersionATS + ")";
 
             //
             string[][] referencies = { 

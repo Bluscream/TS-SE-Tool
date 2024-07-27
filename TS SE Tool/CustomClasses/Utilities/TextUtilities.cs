@@ -13,17 +13,56 @@
    See the License for the specific language governing permissions and
    limitations under the License.
 */
-using MoreLinq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace TS_SE_Tool.Utilities {
     public static class TextExtensions {
+        public static List<Version> ParseVersions(this string input) {
+            var inputs = Regex.Split(input, ",(?=(?:[^\"]*\"[^\"]*\")*(?![^\"]*\"))");
+            var versions = new List<Version>();
+            foreach (var item in inputs) {
+                if (item.Contains("-")) {
+                    var rangeParts = item.Split('-');
+                    if (rangeParts.Length == 2) {
+                        if (Version.TryParse(rangeParts[0], out var startVersion) && Version.TryParse(rangeParts[1], out var endVersion)) {
+                            for (var currentVersion = startVersion; currentVersion <= endVersion; currentVersion = new Version(currentVersion.Major, currentVersion.Minor + 1)) {
+                                versions.Add(currentVersion);
+                            }
+                        }
+                    }
+                } else {
+                    if (Version.TryParse(item, out var singleVersion)) {
+                        versions.Add(singleVersion);
+                    }
+                }
+            }
+            return versions;
+        }
+        #region Json
+        public class DirectoryInfoConverter : JsonConverter<DirectoryInfo> {
+            public override DirectoryInfo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
+                return new DirectoryInfo(reader.GetString());
+            }
+            public override void Write(Utf8JsonWriter writer, DirectoryInfo value, JsonSerializerOptions options) {
+                writer.WriteStringValue(value.FullName);
+            }
+        }
+        public class FileInfoConverter : JsonConverter<FileInfo> {
+            public override FileInfo Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) {
+                return new FileInfo(reader.GetString());
+            }
+            public override void Write(Utf8JsonWriter writer, FileInfo value, JsonSerializerOptions options) {
+                writer.WriteStringValue(value.FullName);
+            }
+        }
+        //public static JsonSerializerOptions JsonSerializerOptions = new() { }
         /// <summary>
         /// Serializes the given object to a JSON string with optional indentation.
         /// </summary>
@@ -32,12 +71,15 @@ namespace TS_SE_Tool.Utilities {
         /// <returns>A JSON string representation of the object.</returns>
         public static string ToJson(this object input, bool indent = false) {
             //try {
-            return JsonSerializer.Serialize(input, new JsonSerializerOptions() { ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.Preserve, WriteIndented = indent });
+            var options = new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.Preserve, WriteIndented = indent };
+            options.Converters.Add(new FileInfoConverter()); options.Converters.Add(new DirectoryInfoConverter());
+            return JsonSerializer.Serialize(input, options);
             //} catch (Exception ex) {
             //    IO_Utilities.ErrorLogWriter($"Error serializing object: {ex.Message}");
             //    return input.ToString();
             //}
         }
+        #endregion Json
         public static string Join(this IEnumerable<object> inputs, string seperator = ", ") {
             return string.Join(seperator, inputs.Select(i => i.ToString()));
         }

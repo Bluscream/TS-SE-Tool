@@ -18,14 +18,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.Drawing.Imaging;
 using System.Globalization;
 using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using System.Reflection;
 using System.Diagnostics;
-using System.Timers;
+using TS_SE_Tool.Utilities;
 
 namespace TS_SE_Tool {
     public enum SMStatus : byte {
@@ -142,22 +141,18 @@ namespace TS_SE_Tool {
 
                 ProgSettingsV.ProgramVersion = Assembly.GetExecutingAssembly().GetName().Version.ToString();
 
-                SupportedSavefileVersionETS2 = new int[] { 61, 74 }; //Supported save version
-                SupportedGameVersionETS2 = "1.43.x - 1.49.x"; //Last game version Tested on
-                //SupportedSavefileVersionATS;
-                SupportedGameVersionATS = "1.43.x - 1.49.x"; //Last game version Tested on
-
                 comboBoxRootFolders.FlatStyle =
                 comboBoxProfiles.FlatStyle =
                 comboBoxSaves.FlatStyle = FlatStyle.Flat;
 
-                ProfileETS2 = @"\Euro Truck Simulator 2";
-                ProfileATS = @"\American Truck Simulator";
-                dictionaryProfiles = new Dictionary<string, string> { { "ETS2", ProfileETS2 }, { "ATS", ProfileATS } };
-                GameType = "ETS2"; // maybe get default from installed?
-
-                LicensePlateWidth = new Dictionary<string, byte> { { "ETS2", 128 }, { "ATS", 64 } };
-
+                try {
+                    SelectedGame = Globals.SupportedGames.First(g => g.Value.Installed).Value;
+                } catch (Exception ex) {
+                    var msg = $"None of the supported games could be found on your system!\n\n{ex.Message}";
+                    IO_Utilities.ErrorLogWriter(msg);
+                    var _ = MessageBox.Show(msg, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Application.Exit();
+                }
                 CompaniesLngDict = new Dictionary<string, string>();
                 CitiesLngDict = new Dictionary<string, string>();
                 CountriesLngDict = new Dictionary<string, string>();
@@ -195,97 +190,7 @@ namespace TS_SE_Tool {
                 PlayerLevelNames.Add(lvl_name9);
                 #endregion
 
-                string curName = ""; string[] input; List<string> curLst = new List<string>();
-
-                #region Currency ETS2
-
-                curName = "EUR";
-                CurrencyDictConversionETS2.Add(curName, 1);
-                input = new string[] { "", "€", "" };
-                curLst = new List<string>(input);
-                CurrencyDictFormatETS2.Add(curName, curLst);
-
-                curName = "CHF";
-                CurrencyDictConversionETS2.Add(curName, 1.142);
-                input = new string[] { "", "", " CHF" };
-                curLst = new List<string>(input);
-                CurrencyDictFormatETS2.Add(curName, curLst);
-
-                curName = "CZK";
-                CurrencyDictConversionETS2.Add(curName, 25.88);
-                input = new string[] { "", "", " Kč" };
-                curLst = new List<string>(input);
-                CurrencyDictFormatETS2.Add(curName, curLst);
-
-                curName = "GBP";
-                CurrencyDictConversionETS2.Add(curName, 0.875);
-                input = new string[] { "", "£", "" };
-                curLst = new List<string>(input);
-                CurrencyDictFormatETS2.Add(curName, curLst);
-
-                curName = "PLN";
-                CurrencyDictConversionETS2.Add(curName, 4.317);
-                input = new string[] { "", "", " zł" };
-                curLst = new List<string>(input);
-                CurrencyDictFormatETS2.Add(curName, curLst);
-
-                curName = "HUF";
-                CurrencyDictConversionETS2.Add(curName, 325.3);
-                input = new string[] { "", "", " Ft" };
-                curLst = new List<string>(input);
-                CurrencyDictFormatETS2.Add(curName, curLst);
-
-                curName = "DKK";
-                CurrencyDictConversionETS2.Add(curName, 7.46);
-                input = new string[] { "", "", " kr" };
-                curLst = new List<string>(input);
-                CurrencyDictFormatETS2.Add(curName, curLst);
-
-                curName = "SEK";
-                CurrencyDictConversionETS2.Add(curName, 10.52);
-                input = new string[] { "", "", " kr" };
-                curLst = new List<string>(input);
-                CurrencyDictFormatETS2.Add(curName, curLst);
-
-                curName = "NOK";
-                CurrencyDictConversionETS2.Add(curName, 9.51);
-                input = new string[] { "", "", " kr" };
-                curLst = new List<string>(input);
-                CurrencyDictFormatETS2.Add(curName, curLst);
-
-                curName = "RUB";
-                CurrencyDictConversionETS2.Add(curName, 77.05);
-                input = new string[] { "", "₽", "" };
-                curLst = new List<string>(input);
-                CurrencyDictFormatETS2.Add(curName, curLst);
-                #endregion
-
-                #region Currency ATS
-
-                curName = "USD";
-                CurrencyDictConversionATS.Add(curName, 1);
-                input = new string[] { "", "$", "" };
-                curLst = new List<string>(input);
-                CurrencyDictFormatATS.Add(curName, curLst);
-
-                curName = "CAD";
-                CurrencyDictConversionATS.Add(curName, 1.3);
-                input = new string[] { "", "$", "" };
-                curLst = new List<string>(input);
-                CurrencyDictFormatATS.Add(curName, curLst);
-
-                curName = "MXN";
-                CurrencyDictConversionATS.Add(curName, 18.69);
-                input = new string[] { "", "$", "" };
-                curLst = new List<string>(input);
-                CurrencyDictFormatATS.Add(curName, curLst);
-
-                curName = "EUR";
-                CurrencyDictConversionATS.Add(curName, 0.856);
-                input = new string[] { "", "€", "" };
-                curLst = new List<string>(input);
-                CurrencyDictFormatATS.Add(curName, curLst);
-                #endregion
+                List<string> curLst = new List<string>();
 
                 //Urgency
                 UrgencyArray = new int[] { 0, 1, 2 };
@@ -330,20 +235,13 @@ namespace TS_SE_Tool {
             SiiNunitData = null;
 
             //Game dependant
-            if (GameType == "ETS2") {
-                Globals.PlayerLevelUps = new int[] {200, 500, 700, 900, 1000, 1100, 1300, 1600, 1700, 2100, 2300, 2600, 2700,
-                    2900, 3000, 3100, 3400, 3700, 4000, 4300, 4600, 4700, 4900, 5200, 5700, 5900, 6000, 6200, 6600, 6800};
-                //Currency
-                CurrencyDictFormat = CurrencyDictFormatETS2;
-                CurrencyDictConversion = CurrencyDictConversionETS2;
-                Globals.CurrencyName = ProgSettingsV.CurrencyMesETS2;
-            } else {
-                Globals.PlayerLevelUps = new int[] {200, 500, 700, 900, 1100, 1300, 1500, 1700, 1900, 2100, 2300, 2500, 2700,
-                    2900, 3100, 3300, 3500, 3700, 4000, 4300, 4600, 4900, 5200, 5500, 5800, 6100, 6400, 6700, 7000, 7300};
-                //Currency
-                CurrencyDictFormat = CurrencyDictFormatATS;
-                CurrencyDictConversion = CurrencyDictConversionATS;
-                Globals.CurrencyName = ProgSettingsV.CurrencyMesATS;
+            switch (SelectedGame.Type) {
+                case "ETS2":
+                    Globals.CurrencyName = ProgSettingsV.CurrencyMesETS2;
+                    break;
+                case "ATS":
+                    Globals.CurrencyName = ProgSettingsV.CurrencyMesATS;
+                    break;
             }
 
             MainSaveFileProfileData = new SaveFileProfileData();

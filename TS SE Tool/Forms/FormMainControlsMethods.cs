@@ -33,6 +33,7 @@ using static System.Diagnostics.Process;
 
 using TS_SE_Tool.Utilities;
 using TS_SE_Tool.Forms;
+using Narod.SteamGameFinder;
 
 namespace TS_SE_Tool {
     public partial class FormMain {
@@ -491,50 +492,22 @@ namespace TS_SE_Tool {
 
 
                 try {
-                    //string SteamInstallPath = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", null).ToString();
-                    string SteamInstallPath = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam", "InstallPath", null).ToString();
-
-                    if (SteamInstallPath == null) {
-                        //unknown steam path
+                    Globals.SteamDir = new DirectoryInfo(new SteamGameLocator().getSteamInstallLocation()); // Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam", "InstallPath", null).ToString(); //string Globals.SteamDir = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", null).ToString();
+                    if (Globals.SteamDir is null || !Globals.SteamDir.Exists) { //unknown steam path
                         SteamError = "Can not detect Steam install folder.";
                     } else {
-                        string SteamCloudPath = SteamInstallPath + @"\userdata";
-                        if (!Directory.Exists(SteamCloudPath)) {
-                            //no userdata
-                            SteamError = "No userdata in Steam folder.";
+                        var steamCloudDir = Globals.GetLatestSteamUserDataDir();
+                        if (steamCloudDir is null || !steamCloudDir.Exists) { //no userdata
+                            SteamError = "No userdata in Steam folder or No user folders found in Steam folder.";
                         } else {
-                            string[] userdatadirectories = Directory.GetDirectories(SteamCloudPath);
-
-                            if (userdatadirectories.Length == 0) {
-                                //no steam user directories
-                                SteamError = "No user folders found in Steam folder.";
+                            string GameID = "";
+                            if (GameType == "ETS2") GameID = @"\227300"; //ETS2
+                            else GameID = @"\270880"; //ATS
+                            if (!Directory.Exists(CurrentUserDir + GameID)) {
+                                SteamError = "Game folder for - " + GameType + "game in Steam folder does not exist.";
                             } else {
-                                //DateTime lastHigh = DateTime.Now;
-
-                                string[] CurrentUserDirs = Directory.GetDirectories(SteamCloudPath).OrderByDescending(f => new FileInfo(f).LastWriteTime).ToArray();
-                                string CurrentUserDir = "";
-
-                                foreach (string tmpDir in CurrentUserDirs) {
-                                    string tmp = Path.GetFileName(tmpDir);
-
-                                    if (tmp.All(Char.IsDigit)) {
-                                        CurrentUserDir = tmpDir;
-                                        break;
-                                    }
-                                }
-
-                                string GameID = "";
-                                if (GameType == "ETS2")
-                                    GameID = @"\227300"; //ETS2
-                                else
-                                    GameID = @"\270880"; //ATS
-
-                                if (!Directory.Exists(CurrentUserDir + GameID)) {
-                                    SteamError = "Game folder for - " + GameType + "game in Steam folder does not exist.";
-                                } else {
-                                    RemoteUserdataDirectory = CurrentUserDir + GameID + @"\remote";
-                                    SteamFolderExist = true;
-                                }
+                                RemoteUserdataDirectory = CurrentUserDir + GameID + @"\remote";
+                                SteamFolderExist = true;
                             }
                         }
                     }
