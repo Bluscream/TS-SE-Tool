@@ -34,6 +34,7 @@ using static System.Diagnostics.Process;
 using TS_SE_Tool.Utilities;
 using TS_SE_Tool.Forms;
 using Narod.SteamGameFinder;
+using TS_SE_Tool.CustomClasses.Program;
 
 namespace TS_SE_Tool {
     public partial class FormMain {
@@ -255,14 +256,14 @@ namespace TS_SE_Tool {
         //Game select
         public void ToggleGame_Click(object sender, EventArgs e) {
             if (radioButtonMainGameSwitchETS.Checked)
-                ToggleGame("ETS2");
+                ToggleGame(Globals.SupportedGames["ETS2"]);
             else
-                ToggleGame("ATS");
+                ToggleGame(Globals.SupportedGames["ATS"]);
 
             FillRootFoldersPaths(); // Populate with appropriate root folders
         }
 
-        public void ToggleGame(string _game) {
+        public void ToggleGame(SupportedGame _game) {
             if (tempSavefileInMemory != null) {
                 DialogResult result = MessageBox.Show("Savefile not saved." + Environment.NewLine + "Do you want to discard changes and switch game type?", "Switching game",
                     MessageBoxButtons.YesNo);
@@ -278,7 +279,7 @@ namespace TS_SE_Tool {
                 }
             }
 
-            SelectedGame.Type = _game;
+            SelectedGame = _game;
         }
 
         private void buttonMainAddCustomFolder_Click(object sender, EventArgs e) {
@@ -383,7 +384,7 @@ namespace TS_SE_Tool {
             ToggleMainControlsAccess(true);
             buttonMainDecryptSave.Enabled = false;
 
-            ToggleGame(SelectedGame.Type);
+            ToggleGame(SelectedGame);
 
             //GC
             GC.Collect();

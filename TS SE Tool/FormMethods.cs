@@ -244,7 +244,7 @@ namespace TS_SE_Tool {
                     break;
             }
 
-            MainSaveFileProfileData = new SaveFileProfileData();
+            MainSaveFileProfileData = new SaveFileProfileData(SelectedGame);
             MainSaveFileInfoData = new SaveFileInfoData();
 
             InfoDepContinue = false;
@@ -401,13 +401,7 @@ namespace TS_SE_Tool {
 
         private void DetectGame() {
             try {
-                //Searching for ETS2
-                //Process[] ets2proc = Process.GetProcessesByName("eurotrucks2"); // unused?
-
-                //Searching for ATS
-                Process[] atsproc = Process.GetProcessesByName("amtrucks");
-
-                if (atsproc.Count() > 0)
+                if (SelectedGame.IsRunning)
                     radioButtonMainGameSwitchATS.Checked = true;
                 else
                     radioButtonMainGameSwitchETS.Checked = true;

@@ -703,7 +703,7 @@ namespace TS_SE_Tool {
             Panel lpPanel = groupBoxUserTrailerTrailerDetails.Controls.Find("TrailerLicensePlateIMG", true).FirstOrDefault() as Panel;
 
             if (lpPanel != null)
-                lpPanel.BackgroundImage = Graphics_TSSET.ResizeImage(thisLP.LicensePlateIMG, LicensePlateWidth[SelectedGame.Type], 32);
+                lpPanel.BackgroundImage = Graphics_TSSET.ResizeImage(thisLP.LicensePlateIMG, SelectedGame.LicensePlateWidth, 32);
         }
 
         //Events

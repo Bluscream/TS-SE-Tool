@@ -19,7 +19,11 @@ namespace TS_SE_Tool.Forms {
             InitializeComponent();
         }
 
-        public static DirectoryInfo GetPluginsDir(DirectoryInfo gameDir, string arch = "win_x64") => gameDir.Combine("bin", arch, "plugins");
+        public static DirectoryInfo GetPluginsDir(DirectoryInfo gameDir, string arch = "win_x64") {
+            var combined = gameDir.Combine("bin", arch, "plugins");
+            if (!combined.Exists) combined.Create();
+            return combined;
+        }
 
         public static GamePlugin? FindPluginByPath(IEnumerable<GamePlugin> plugins, FileInfo file) {
             foreach (var plugin in plugins) {
@@ -89,7 +93,7 @@ namespace TS_SE_Tool.Forms {
         }
 
         private void FormPluginManager_Load(object sender, EventArgs e) {
-            Text = $"Manage Plugins for {Game.Type}";
+            Text = $"Manage {Game.Name} plugins";
             tablePlugins.Columns.Clear();
             tablePlugins.Rows.Clear();
             tablePlugins.DataSource = Plugins;

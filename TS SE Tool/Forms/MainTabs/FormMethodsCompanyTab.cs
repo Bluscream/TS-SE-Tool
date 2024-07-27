@@ -75,7 +75,7 @@ namespace TS_SE_Tool {
 
         public void FillAccountMoneyTB() {
             //
-            Int64 valueBefore = (long)Math.Floor(SiiNunitData.Bank.money_account * CurrencyDictConversion[Globals.CurrencyName]);
+            Int64 valueBefore = (long)Math.Floor(SiiNunitData.Bank.money_account * SelectedGame.Currencies[Globals.CurrencyName].ConversionRate);
 
             textBoxUserCompanyMoneyAccount.Text = String.Format(CultureInfo.CurrentCulture, "{0:N0}", valueBefore);
 
@@ -213,7 +213,7 @@ namespace TS_SE_Tool {
         }
 
         private void textBoxUserCompanyMoneyAccount_Enter(object sender, EventArgs e) {
-            Int64 valueBefore = (long)Math.Floor(SiiNunitData.Bank.money_account * CurrencyDictConversion[Globals.CurrencyName]);
+            Int64 valueBefore = (long)Math.Floor(SiiNunitData.Bank.money_account * SelectedGame.Currencies[Globals.CurrencyName].ConversionRate);
 
             textBoxUserCompanyMoneyAccount.Text = String.Format(CultureInfo.CurrentCulture, "{0:N0}", valueBefore);
 
@@ -242,10 +242,10 @@ namespace TS_SE_Tool {
 
                 string newtext = "";
 
-                if (CurrencyDictFormat[Globals.CurrencyName][0] != "")
-                    newtext += CurrencyDictFormat[Globals.CurrencyName][0] + "-";
+                if (SelectedGame.Currencies[Globals.CurrencyName].FormatSymbols[0] != "")
+                    newtext += SelectedGame.Currencies[Globals.CurrencyName].FormatSymbols[0] + "-";
 
-                newtext += CurrencyDictFormat[Globals.CurrencyName][1];
+                newtext += SelectedGame.Currencies[Globals.CurrencyName].FormatSymbols[1];
 
                 textBoxUserCompanyMoneyAccount.SelectionStart = selbefore - newtext.Length;
 
@@ -265,14 +265,14 @@ namespace TS_SE_Tool {
             if (!Int64.TryParse(textBoxUserCompanyMoneyAccount.Text, NumberStyles.AllowThousands | NumberStyles.AllowLeadingSign, CultureInfo.CurrentCulture, out long newValue))
                 return;
 
-            SiiNunitData.Bank.money_account = (long)Math.Round(newValue / CurrencyDictConversion[Globals.CurrencyName]);
+            SiiNunitData.Bank.money_account = (long)Math.Round(newValue / SelectedGame.Currencies[Globals.CurrencyName].ConversionRate);
 
             //[sign1] - [sign2] 1.234,- [sign3]
             string newtext = "";
-            if (CurrencyDictFormat[Globals.CurrencyName][0] != "")
-                newtext += CurrencyDictFormat[Globals.CurrencyName][0] + "-";
+            if (SelectedGame.Currencies[Globals.CurrencyName].FormatSymbols[0] != "")
+                newtext += SelectedGame.Currencies[Globals.CurrencyName].FormatSymbols[0] + "-";
 
-            newtext += CurrencyDictFormat[Globals.CurrencyName][1] + String.Format(CultureInfo.CurrentCulture, "{0:N0}", newValue) + ",-" + CurrencyDictFormat[Globals.CurrencyName][2];
+            newtext += SelectedGame.Currencies[Globals.CurrencyName].FormatSymbols[1] + String.Format(CultureInfo.CurrentCulture, "{0:N0}", newValue) + ",-" + SelectedGame.Currencies[Globals.CurrencyName].FormatSymbols[2];
             //
 
             textBoxUserCompanyMoneyAccount.Text = newtext;

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using TS_SE_Tool.Utilities;
 
 namespace TS_SE_Tool.CustomClasses.Program {
@@ -9,6 +11,7 @@ namespace TS_SE_Tool.CustomClasses.Program {
         public string Type { get; internal set; }
         public string Name { get; internal set; }
         public string Description { get; internal set; }
+        public string ExecutableName { get; internal set; }
 
         public List<Version> SupportedGameVersions { get; internal set; } = new();
         public List<long> SupportedSaveFileVersions { get; internal set; } = new();
@@ -18,11 +21,18 @@ namespace TS_SE_Tool.CustomClasses.Program {
                 try { var _ = Globals.SteamGameLocator.getGameInfoByFolder(Name).steamGameLocation; return true; } catch { return false; }
             }
         }
-        public DirectoryInfo GameDir { get => Installed ? new DirectoryInfo(Globals.SteamGameLocator.getGameInfoByFolder(Name).steamGameLocation) : null; }
         public DirectoryInfo SteamUserDataDir { get => Globals.GetLatestSteamUserDataDir().Combine(SteamAppId.ToString()); }
         public DirectoryInfo SteamRemoteDir { get => SteamUserDataDir.Combine("remote"); }
+
+        public DirectoryInfo GameDir { get => Installed ? new DirectoryInfo(Globals.SteamGameLocator.getGameInfoByFolder(Name).steamGameLocation) : null; }
+        public FileInfo Executable { get => Installed ? GameDir.CombineFile("bin", "win_x64", ExecutableName) : null; }
+        public List<DirectoryInfo> PluginDirs { get => new() { GameDir.Combine("bin", "win_x64", "plugins"), GameDir.Combine("bin", "win_x86", "plugins") }; }
+
         public DirectoryInfo DocumentsDir { get => Globals.DocumentsDir.Combine(Name); }
         public DirectoryInfo ModsDir { get => DocumentsDir.Combine("mod"); }
+
+        public List<Process> Processes { get => Installed ? Process.GetProcessesByName(Executable.Name).ToList() : new(); }
+        public bool IsRunning { get => Processes.Count > 0; }
 
         public int LicensePlateWidth { get; internal set; }
         public List<int> PlayerLevelUps { get; internal set; } = new();

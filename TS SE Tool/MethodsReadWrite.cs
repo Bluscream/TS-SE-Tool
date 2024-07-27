@@ -529,7 +529,7 @@ namespace TS_SE_Tool {
             if (resulCheck.valid) {
                 tempProfileFileInMemory = resulCheck.fileArray;
 
-                MainSaveFileProfileData = new SaveFileProfileData();
+                MainSaveFileProfileData = new SaveFileProfileData(SelectedGame);
                 MainSaveFileProfileData.ProcessData(tempProfileFileInMemory);
 
                 tempProfileFileInMemory = null;
@@ -692,7 +692,7 @@ namespace TS_SE_Tool {
                     ToggleControlsAccess(false);
                 } else if (tempProfileFileInMemory != null) {
                     //UpdateStatusBarMessage.ShowStatusMessage(SMStatus.Clear);
-                    MainSaveFileProfileData = new SaveFileProfileData();
+                    MainSaveFileProfileData = new SaveFileProfileData(SelectedGame);
                     MainSaveFileProfileData.ProcessData(tempProfileFileInMemory);
                 }
             }

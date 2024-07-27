@@ -186,7 +186,6 @@
     <Compile Include="CustomClasses\Global\EnumerableExt.cs" />
     <Compile Include="CustomClasses\Global\FloatList.cs" />
     <Compile Include="CustomClasses\Program\SupportedGame.cs" />
-    <Compile Include="CustomClasses\Program\SupportedGames.cs" />
     <Compile Include="CustomClasses\Save\DataFormat\SCS_Color.cs" />
     <Compile Include="CustomClasses\Save\DataFormat\SCS_Float.cs" />
     <Compile Include="CustomClasses\Save\DataFormat\SCS_String.cs" />

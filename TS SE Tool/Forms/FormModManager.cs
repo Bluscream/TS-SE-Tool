@@ -11,7 +11,7 @@ using TS_SE_Tool.CustomClasses.Program;
 
 namespace TS_SE_Tool.Forms {
     public partial class FormModManager : Form {
-        FormMain MainForm = Application.OpenForms.OfType<FormMain>().Single();
+        //FormMain MainForm = Application.OpenForms.OfType<FormMain>().Single();
         public SupportedGame Game { get; private set; }
 
         public BindingList<GameMod> Mods = new BindingList<GameMod>();

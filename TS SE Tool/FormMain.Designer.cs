@@ -44,6 +44,7 @@
             this.checkSCSForumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkTMPForumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkGitHubRelesesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.modsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.comboBoxProfiles = new System.Windows.Forms.ComboBox();
             this.buttonProfilesAndSavesRefreshAll = new System.Windows.Forms.Button();
@@ -252,7 +253,6 @@
             this.radioButtonMainGameSwitchATS = new System.Windows.Forms.RadioButton();
             this.tableLayoutPanel11 = new System.Windows.Forms.TableLayoutPanel();
             this.buttonMainCloseSave = new System.Windows.Forms.Button();
-            this.modsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStripMain.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageProfile.SuspendLayout();
@@ -464,6 +464,13 @@
             this.checkGitHubRelesesToolStripMenuItem.Size = new System.Drawing.Size(201, 22);
             this.checkGitHubRelesesToolStripMenuItem.Text = "Check GitHub Releases";
             this.checkGitHubRelesesToolStripMenuItem.Click += new System.EventHandler(this.checkGitHubRelesesToolStripMenuItem_Click);
+            // 
+            // modsToolStripMenuItem
+            // 
+            this.modsToolStripMenuItem.Name = "modsToolStripMenuItem";
+            this.modsToolStripMenuItem.Size = new System.Drawing.Size(48, 21);
+            this.modsToolStripMenuItem.Text = "Mods";
+            this.modsToolStripMenuItem.Click += new System.EventHandler(this.modsToolStripMenuItem_Click);
             // 
             // gameToolStripMenuItem
             // 
@@ -2966,6 +2973,7 @@
             this.radioButtonMainGameSwitchETS.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioButtonMainGameSwitchETS.AutoSize = true;
             this.radioButtonMainGameSwitchETS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButtonMainGameSwitchETS.Enabled = false;
             this.radioButtonMainGameSwitchETS.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioButtonMainGameSwitchETS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.radioButtonMainGameSwitchETS.Location = new System.Drawing.Point(3, 3);
@@ -2984,6 +2992,7 @@
             this.radioButtonMainGameSwitchATS.Appearance = System.Windows.Forms.Appearance.Button;
             this.radioButtonMainGameSwitchATS.AutoSize = true;
             this.radioButtonMainGameSwitchATS.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.radioButtonMainGameSwitchATS.Enabled = false;
             this.radioButtonMainGameSwitchATS.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.radioButtonMainGameSwitchATS.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.radioButtonMainGameSwitchATS.Location = new System.Drawing.Point(125, 3);
@@ -3023,13 +3032,6 @@
             this.buttonMainCloseSave.UseVisualStyleBackColor = true;
             this.buttonMainCloseSave.Visible = false;
             this.buttonMainCloseSave.Click += new System.EventHandler(this.buttonMainCloseSave_Click);
-            // 
-            // modsToolStripMenuItem
-            // 
-            this.modsToolStripMenuItem.Name = "modsToolStripMenuItem";
-            this.modsToolStripMenuItem.Size = new System.Drawing.Size(48, 21);
-            this.modsToolStripMenuItem.Text = "Mods";
-            this.modsToolStripMenuItem.Click += new System.EventHandler(this.modsToolStripMenuItem_Click);
             // 
             // FormMain
             // 

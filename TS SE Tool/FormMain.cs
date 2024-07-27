@@ -167,11 +167,7 @@ namespace TS_SE_Tool {
         internal double WeightMultiplier = 1; //Program
         const double kg_to_lb = 2.20462262185; //Program
 
-        public Dictionary<string, List<string>> CurrencyDictFormat;
-        public Dictionary<string, double> CurrencyDictConversion;
-
         internal Dictionary<string, Dictionary<UInt16, SCS.SCSFontLetter>> GlobalFontMap;
-        internal Dictionary<string, byte> LicensePlateWidth;
 
         internal bool TssetFoldersExist = false;
         internal bool ForseExit = false;
@@ -256,6 +252,9 @@ namespace TS_SE_Tool {
 
             DetectGame();
 
+            if (Globals.SupportedGames["ETS2"].Installed) radioButtonMainGameSwitchETS.Enabled = true;
+            if (Globals.SupportedGames["ATS"].Installed) radioButtonMainGameSwitchATS.Enabled = true;
+
             void OpenSplashScreen() {
                 FormSplash WindowSplash = new FormSplash();
                 WindowSplash.ShowDialog();
@@ -313,7 +312,6 @@ namespace TS_SE_Tool {
         public static string SelectedSavePath = "";
         public static string SelectedSaveName = "";
         //----
-        public static int[] PlayerLevelUps = new int[0];
         public static string CurrencyName = "";
         //
         public static SteamGameLocator SteamGameLocator = new SteamGameLocator();
@@ -329,6 +327,7 @@ namespace TS_SE_Tool {
                     SteamAppId = 227300,
                     Type = "ETS2",
                     Name = "Euro Truck Simulator 2",
+                    ExecutableName = "eurotrucks2.exe",
                     SupportedGameVersions = "1.43-1.49".ParseVersions(),
                     SupportedSaveFileVersions = new() { 61, 74 },
                     LicensePlateWidth = 128,
@@ -352,6 +351,7 @@ namespace TS_SE_Tool {
                     SteamAppId = 270880,
                     Type = "ATS",
                     Name = "American Truck Simulator",
+                    ExecutableName = "amtrucks.exe",
                     SupportedGameVersions = "1.43-1.49".ParseVersions(),
                     LicensePlateWidth = 64,
                     PlayerLevelUps = new() {200, 500, 700, 900, 1100, 1300, 1500, 1700, 1900, 2100, 2300, 2500, 2700,
