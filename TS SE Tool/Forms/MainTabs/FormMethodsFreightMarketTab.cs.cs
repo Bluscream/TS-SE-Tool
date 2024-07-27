@@ -219,12 +219,12 @@ namespace TS_SE_Tool
 
         internal Image freightMarketGetCompanyIcon(string _companyName, Brush _brush)
         {
-            string filepath = @"img\" + GameType + @"\companies\" + _companyName + ".dds";
+            string filepath = @"img\" + SelectedGame.Type + @"\companies\" + _companyName + ".dds";
             if (File.Exists(filepath))
                 return Utilities.Graphics_TSSET.ddsImgLoader(filepath, 100, 32).images[0];
             else
             {
-                string currentDirName = Directory.GetCurrentDirectory() + @"\img\" + GameType + @"\companies";
+                string currentDirName = Directory.GetCurrentDirectory() + @"\img\" + SelectedGame.Type + @"\companies";
                 string searchpattern = _companyName.Split(new char[] { '_' })[0] + "*.dds";
                 string[] files = Directory.GetFiles(currentDirName, searchpattern);
 

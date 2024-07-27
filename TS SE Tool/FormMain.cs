@@ -147,11 +147,11 @@ namespace TS_SE_Tool {
             TruckPartsImg, TrailerPartsImg, VehicleIntegrityPBImg, GameIconeImg, AccessoriesImg; //Program
 
         private void modsToolStripMenuItem_Click(object sender, EventArgs e) {
-            new FormModManager(GameType).Show();
+            new FormModManager(SelectedGame).Show();
         }
 
         private void gameToolStripMenuItem_Click(object sender, EventArgs e) {
-            new FormPluginManager(GameType).Show();
+            new FormPluginManager(SelectedGame).Show();
         }
 
         internal Dictionary<string, Image> ProgUIImgsDict;
@@ -300,7 +300,7 @@ namespace TS_SE_Tool {
     public static class Globals {
         public static Dictionary<string, SupportedGame> SupportedGames = new();
         //-----
-        public static string[] ProfilesPaths = new string[0];
+        public static List<DirectoryInfo> ProfileDirs = new();
         public static List<string> ProfilesHex = new();
         //
         public static string SelectedProfile = "";

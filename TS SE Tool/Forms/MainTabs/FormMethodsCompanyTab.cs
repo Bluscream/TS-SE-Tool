@@ -60,7 +60,7 @@ namespace TS_SE_Tool {
         }
 
         private void FillFormCompanyControls() {
-            pictureBoxCompanyLogo.Image = Utilities.Graphics_TSSET.ddsImgLoader(@"img\" + GameType + @"\player_logo\" + MainSaveFileProfileData.Logo + ".dds", 94, 94).images[0];
+            pictureBoxCompanyLogo.Image = Utilities.Graphics_TSSET.ddsImgLoader(@"img\" + SelectedGame.Type + @"\player_logo\" + MainSaveFileProfileData.Logo + ".dds", 94, 94).images[0];
 
             textBoxUserCompanyCompanyName.Text = MainSaveFileProfileData.CompanyName.Value;
 

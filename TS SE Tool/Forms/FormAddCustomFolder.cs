@@ -34,7 +34,7 @@ namespace TS_SE_Tool
         private string SelectedfolderPath;
         private bool ListOpen = true;
         private Dictionary<string, List<string>> CustomPathsArr;
-        private string GameType = "";
+        private string SelectedGame.Type = "";
         private bool CustomPathChanged = false;
 
         public FormAddCustomFolder()
@@ -119,7 +119,7 @@ namespace TS_SE_Tool
             {
                 if (CustomPathsArr[GameType].Contains(SelectedfolderPath))
                 {
-                    MessageBox.Show("Path " + SelectedfolderPath + " already added to the " + GameType + " list", "Path exist in the list", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    MessageBox.Show("Path " + SelectedfolderPath + " already added to the " + SelectedGame.Type + " list", "Path exist in the list", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
                 else
                 {
@@ -127,7 +127,7 @@ namespace TS_SE_Tool
                     CustomPathChanged = true;
                     if (ListOpen)
                         UpdatedataGridView();
-                    MessageBox.Show("Path " + SelectedfolderPath + " added to the " + GameType + " list", "Custom path", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Path " + SelectedfolderPath + " added to the " + SelectedGame.Type + " list", "Custom path", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
             else
@@ -138,7 +138,7 @@ namespace TS_SE_Tool
                 CustomPathChanged = true;
                 if (ListOpen)
                         UpdatedataGridView();
-                MessageBox.Show("Path " + SelectedfolderPath + " added to the " + GameType + " list", "Custom path", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Path " + SelectedfolderPath + " added to the " + SelectedGame.Type + " list", "Custom path", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
             labelCustomPathDir.Text = "Choose folder...";
@@ -169,9 +169,9 @@ namespace TS_SE_Tool
         private void radioButtonGameType_CheckedChanged(object sender, EventArgs e)
         {
             if (radioButtonGameTypeETS2.Checked)
-                GameType = "ETS2";
+                SelectedGame.Type = "ETS2";
             else
-                GameType = "ATS";
+                SelectedGame.Type = "ATS";
 
             if (ListOpen)
                 UpdatedataGridView();

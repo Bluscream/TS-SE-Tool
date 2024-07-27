@@ -15,11 +15,12 @@ namespace TS_SE_Tool.CustomClasses.Program {
 
         public bool Installed {
             get {
-                try { var _ = Globals.SteamGameLocator.getGameInfoByFolder(Name).steamGameID; return true; } catch { return false; }
+                try { var _ = Globals.SteamGameLocator.getGameInfoByFolder(Name).steamGameLocation; return true; } catch { return false; }
             }
         }
         public DirectoryInfo GameDir { get => new DirectoryInfo(Globals.SteamGameLocator.getGameInfoByFolder(Name).steamGameLocation); }
         public DirectoryInfo SteamUserDataDir { get => Globals.GetLatestSteamUserDataDir().Combine(SteamAppId.ToString()); }
+        public DirectoryInfo SteamRemoteDir { get => SteamUserDataDir.Combine("remote"); }
         public DirectoryInfo DocumentsDir { get => Globals.DocumentsDir.Combine(Name); }
         public DirectoryInfo ModsDir { get => DocumentsDir.Combine("mod"); }
 

@@ -278,7 +278,7 @@ namespace TS_SE_Tool {
                 }
             }
 
-            GameType = _game;
+            SelectedGame.Type = _game;
         }
 
         private void buttonMainAddCustomFolder_Click(object sender, EventArgs e) {
@@ -383,7 +383,7 @@ namespace TS_SE_Tool {
             ToggleMainControlsAccess(true);
             buttonMainDecryptSave.Enabled = false;
 
-            ToggleGame(GameType);
+            ToggleGame(SelectedGame.Type);
 
             //GC
             GC.Collect();
@@ -485,11 +485,8 @@ namespace TS_SE_Tool {
 
         public void FillRootFoldersPaths() {
             try {
-                string RemoteUserdataDirectory = "",
-                       SteamError = "", MyDocError = "";
-
+                string SteamError = "", MyDocError = "";
                 bool SteamFolderExist = false, MyDocFolderExist = true;
-
 
                 try {
                     Globals.SteamDir = new DirectoryInfo(new SteamGameLocator().getSteamInstallLocation()); // Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\Valve\Steam", "InstallPath", null).ToString(); //string Globals.SteamDir = Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", null).ToString();
@@ -500,31 +497,22 @@ namespace TS_SE_Tool {
                         if (steamCloudDir is null || !steamCloudDir.Exists) { //no userdata
                             SteamError = "No userdata in Steam folder or No user folders found in Steam folder.";
                         } else {
-                            string GameID = "";
-                            if (GameType == "ETS2") GameID = @"\227300"; //ETS2
-                            else GameID = @"\270880"; //ATS
-                            if (!Directory.Exists(CurrentUserDir + GameID)) {
-                                SteamError = "Game folder for - " + GameType + "game in Steam folder does not exist.";
+                            if (!SelectedGame.SteamRemoteDir.Exists) {
+                                SteamError = "Game folder for - " + SelectedGame.Type + "game in Steam folder does not exist.";
                             } else {
-                                RemoteUserdataDirectory = CurrentUserDir + GameID + @"\remote";
                                 SteamFolderExist = true;
                             }
                         }
                     }
                 } catch { }
 
-                if (!SteamFolderExist)
-                    IO_Utilities.LogWriter(SteamError);
-                //
+                if (!SteamFolderExist) IO_Utilities.LogWriter(SteamError);
 
-                Globals.MyDocumentsPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + dictionaryProfiles[GameType];
-
-                if (!Directory.Exists(Globals.MyDocumentsPath)) {
-                    MyDocError = "Folder in \"My documents\" for - " + GameType + " game does not exist.";
+                if (!SelectedGame.DocumentsDir.Exists) {
+                    MyDocError = "Folder in \"My documents\" for - " + SelectedGame.Type + " game does not exist.";
                     MyDocFolderExist = false;
                     IO_Utilities.LogWriter(MyDocError);
                 }
-                //
 
                 //Setup combobox DataTable
                 DataTable combDT = new DataTable();
@@ -538,7 +526,7 @@ namespace TS_SE_Tool {
                 combDT.Columns.Add(dc);
 
                 //Collect Root folders
-                List<string> tempList = new List<string>();
+                List<DirectoryInfo> tempList = new();
 
                 // Standart folders
                 if (MyDocFolderExist || SteamFolderExist)
@@ -546,11 +534,11 @@ namespace TS_SE_Tool {
                         //If backups selected
                         //My docs Profiles
                         if (MyDocFolderExist)
-                            foreach (string folder in Directory.GetDirectories(Globals.MyDocumentsPath)) {
-                                if (Path.GetFileName(folder).StartsWith("profiles")) //Documents
+                            foreach (var folder in SelectedGame.DocumentsDir.GetDirectories()) {
+                                if (folder.Name.StartsWith("profiles")) //Documents
                                 {
-                                    if (Directory.Exists(folder) && Directory.GetDirectories(folder).Count() > 0) {
-                                        combDT.Rows.Add(folder, "[L] " + Path.GetFileName(folder), "local");
+                                    if (folder.Exists && folder.GetDirectories().Count() > 0) {
+                                        combDT.Rows.Add(folder, "[L] " + folder.Name, "local");
                                         tempList.Add(folder);
                                     }
                                 }
@@ -558,24 +546,24 @@ namespace TS_SE_Tool {
 
                         //Steam Profiles
                         if (SteamFolderExist)
-                            foreach (string folder in Directory.GetDirectories(RemoteUserdataDirectory)) {
-                                if (Path.GetFileName(folder).StartsWith("profiles")) //Steam
+                            foreach (var folder in SelectedGame.SteamUserDataDir.GetDirectories()) {
+                                if (folder.Name.StartsWith("profiles")) //Steam
                                 {
-                                    if (Directory.Exists(folder) && Directory.GetDirectories(folder).Count() > 0) {
-                                        combDT.Rows.Add(folder, "[S] " + Path.GetFileName(folder), "steam");
+                                    if (folder.Exists && folder.GetDirectories().Count() > 0) {
+                                        combDT.Rows.Add(folder, "[S] " + folder.Name, "steam");
                                         tempList.Add(folder);
                                     }
                                 }
                             }
                     } else {
                         //Without backups
-                        string folder = "";
+                        DirectoryInfo folder = null;
 
                         //My docs Profiles
                         if (MyDocFolderExist) {
-                            folder = Globals.MyDocumentsPath + @"\profiles";
+                            folder = SelectedGame.DocumentsDir.Combine("profiles");
 
-                            if (Directory.Exists(folder) && Directory.GetDirectories(folder).Count() > 0) {
+                            if (folder.Exists && folder.GetDirectories().Count() > 0) {
                                 combDT.Rows.Add(folder, "[L] profiles", "local");
                                 tempList.Add(folder);
                             }
@@ -583,9 +571,9 @@ namespace TS_SE_Tool {
 
                         //Steam Profiles
                         if (SteamFolderExist) {
-                            folder = RemoteUserdataDirectory + @"\profiles";
+                            folder = SelectedGame.SteamRemoteDir.Combine("profiles");
 
-                            if (Directory.Exists(folder) && Directory.GetDirectories(folder).Count() > 0) {
+                            if (folder.Exists && folder.GetDirectories().Count() > 0) {
                                 combDT.Rows.Add(folder, "[S] profiles", "steam");
                                 tempList.Add(folder);
                             }
@@ -594,27 +582,28 @@ namespace TS_SE_Tool {
 
                 // Custom folders
                 int cpIndex = 0;
-                if (ProgSettingsV.CustomPaths.Keys.Contains(GameType))
-                    foreach (string CustPath in ProgSettingsV.CustomPaths[GameType]) {
+                if (ProgSettingsV.CustomPaths.Keys.Contains(SelectedGame.Type))
+                    foreach (string CustPath in ProgSettingsV.CustomPaths[SelectedGame.Type]) {
                         cpIndex++;
-                        if (Directory.Exists(CustPath)) {
-                            if (Directory.Exists(CustPath + @"\profiles")) {
+                        var custDir = new DirectoryInfo(CustPath);
+                        if (custDir.Exists) {
+                            if (custDir.Combine("profiles").Exists) {
                                 combDT.Rows.Add(CustPath + @"\profiles", "[C] Custom path " + cpIndex.ToString(), "custom");
-                                tempList.Add(CustPath + @"\profiles");
+                                tempList.Add(custDir.Combine("profiles"));
                             } else {
                                 combDT.Rows.Add(CustPath, "[C] Custom path " + cpIndex.ToString(), "custom");
-                                tempList.Add(CustPath);
+                                tempList.Add(custDir);
                             }
                         }
                     }
 
                 if (!MyDocFolderExist && !SteamFolderExist) {
-                    IO_Utilities.LogWriter("Standart Save folders does not exist for this game - " + GameType + "." + Environment.NewLine + MyDocError + " " + SteamError + Environment.NewLine +
+                    IO_Utilities.LogWriter("Standart Save folders does not exist for this game - " + SelectedGame.Type + "." + Environment.NewLine + MyDocError + " " + SteamError + Environment.NewLine +
                         "Check installation. Start game first (Steam).");
                 }
 
                 //Save Root paths
-                Globals.ProfilesPaths = tempList.ToArray();
+                Globals.ProfileDirs = tempList;
 
                 //Populate combobox
                 comboBoxRootFolders.ValueMember = "ProfileID";
@@ -631,7 +620,7 @@ namespace TS_SE_Tool {
                     comboBoxProfiles.Enabled = false;
                     comboBoxSaves.Enabled = false;
 
-                    MessageBox.Show("Standart Save folders does not exist for this game - " + GameType + "." + Environment.NewLine +
+                    MessageBox.Show("Standart Save folders does not exist for this game - " + SelectedGame.Type + "." + Environment.NewLine +
                                     MyDocError + Environment.NewLine + SteamError + Environment.NewLine +
                                     "Check game installation, Start game and Refresh profiles list or Add Custom paths.");
                 }
@@ -641,7 +630,7 @@ namespace TS_SE_Tool {
         }
 
         private void comboBoxRootFolders_SelectedIndexChanged(object sender, EventArgs e) {
-            if (!Directory.Exists(Globals.ProfilesPaths[comboBoxRootFolders.SelectedIndex]))
+            if (!Globals.ProfileDirs[comboBoxRootFolders.SelectedIndex].Exists)
                 return;
 
             // Disable save\profile control buttons
@@ -674,7 +663,7 @@ namespace TS_SE_Tool {
 
         public void FillProfiles() {
             try {
-                if (!Directory.Exists(Globals.ProfilesPaths[comboBoxRootFolders.SelectedIndex])) {
+                if (!Globals.ProfileDirs[comboBoxRootFolders.SelectedIndex].Exists) {
                     FillRootFoldersPaths();
                     return;
                 }
@@ -695,7 +684,7 @@ namespace TS_SE_Tool {
                 combDT.Columns.Add(dcDisplay);
 
                 //Filter Profile folders
-                Globals.ProfilesHex = Directory.GetDirectories(SelectedFolder).OrderByDescending(f => new FileInfo(f).LastWriteTime).ToList();
+                Globals.ProfilesHex = Directory.GetDirectories(SelectedFolder).OrderByDescending(f => new FileInfo(f).LastWriteTime).ToList(); // todo: List<DirectoryInfo>
 
                 if (Globals.ProfilesHex.Count > 0) {
                     List<string> NewProfileHex = new List<string>();
@@ -704,7 +693,7 @@ namespace TS_SE_Tool {
                         string profileFolder = profilePath.Substring(profilePath.LastIndexOf(@"\") + 1);
 
                         if (!profileFolder.Contains(" ") && Directory.Exists(profilePath + @"\save")) {
-                            ProfileName = Utilities.TextUtilities.FromHexToString(Path.GetFileName(profilePath));
+                            ProfileName = TextUtilities.FromHexToString(Path.GetFileName(profilePath));
 
                             if (ProfileName != null) {
                                 combDT.Rows.Add(profilePath, ProfileName);

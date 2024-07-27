@@ -191,7 +191,7 @@ namespace TS_SE_Tool {
             DriverNames.Clear();
 
             try {
-                string[] tempFile = File.ReadAllLines(Directory.GetCurrentDirectory() + @"\lang\Default\" + GameType + "\\driver_names.csv");
+                string[] tempFile = File.ReadAllLines(Directory.GetCurrentDirectory() + @"\lang\Default\" + SelectedGame.Type + "\\driver_names.csv");
 
                 for (int i = 0; i < tempFile.Length; i++) {
                     string[] tmp = tempFile[i].Split(new char[] { ';' });
@@ -255,12 +255,12 @@ namespace TS_SE_Tool {
             SkillImgS = Graphics_TSSET.ddsImgLoader(imgPaths, 64, 64).images;
 
             // ADR icons
-            imgPaths = new string[] { @"img\" + GameType + @"\adr_1.dds", @"img\" + GameType + @"\adr_2.dds", @"img\" + GameType + @"\adr_3.dds",
-                                      @"img\" + GameType + @"\adr_4.dds", @"img\" + GameType + @"\adr_6.dds", @"img\" + GameType + @"\adr_8.dds" };
+            imgPaths = new string[] { @"img\" + SelectedGame.Type + @"\adr_1.dds", @"img\" + SelectedGame.Type + @"\adr_2.dds", @"img\" + SelectedGame.Type + @"\adr_3.dds",
+                                      @"img\" + SelectedGame.Type + @"\adr_4.dds", @"img\" + SelectedGame.Type + @"\adr_6.dds", @"img\" + SelectedGame.Type + @"\adr_8.dds" };
             ADRImgS = Graphics_TSSET.ddsImgLoader(imgPaths, 46, 46, 9, 9, 32, 32).images;
 
-            imgPaths = new string[] { @"img\" + GameType + @"\adr_1_grey.dds", @"img\" + GameType + @"\adr_2_grey.dds", @"img\" + GameType + @"\adr_3_grey.dds",
-                                      @"img\" + GameType + @"\adr_4_grey.dds", @"img\" + GameType + @"\adr_6_grey.dds", @"img\" + GameType + @"\adr_8_grey.dds" };
+            imgPaths = new string[] { @"img\" + SelectedGame.Type + @"\adr_1_grey.dds", @"img\" + SelectedGame.Type + @"\adr_2_grey.dds", @"img\" + SelectedGame.Type + @"\adr_3_grey.dds",
+                                      @"img\" + SelectedGame.Type + @"\adr_4_grey.dds", @"img\" + SelectedGame.Type + @"\adr_6_grey.dds", @"img\" + SelectedGame.Type + @"\adr_8_grey.dds" };
             ADRImgSGrey = Graphics_TSSET.ddsImgLoader(imgPaths, 46, 46, 9, 9, 32, 32).images;
 
             // skill level select
@@ -293,13 +293,13 @@ namespace TS_SE_Tool {
             //=== Truck & Trailer tab
 
             // truck parts
-            imgPaths = new string[] { @"img\" + GameType + @"\engine.dds", @"img\" + GameType + @"\transmission.dds", @"img\" + GameType + @"\chassis.dds",
-                                      @"img\" + GameType + @"\cabin.dds", @"img\" + GameType + @"\tyres.dds" };
+            imgPaths = new string[] { @"img\" + SelectedGame.Type + @"\engine.dds", @"img\" + SelectedGame.Type + @"\transmission.dds", @"img\" + SelectedGame.Type + @"\chassis.dds",
+                                      @"img\" + SelectedGame.Type + @"\cabin.dds", @"img\" + SelectedGame.Type + @"\tyres.dds" };
             TruckPartsImg = Graphics_TSSET.ddsImgLoader(imgPaths, 64, 64).images;
 
             // trailer parts
-            imgPaths = new string[] { @"img\" + GameType + @"\cargo.dds", @"img\" + GameType + @"\trailer_body.dds",
-                                      @"img\" + GameType + @"\trailer_chassis.dds", @"img\" + GameType + @"\tyres.dds" };
+            imgPaths = new string[] { @"img\" + SelectedGame.Type + @"\cargo.dds", @"img\" + SelectedGame.Type + @"\trailer_body.dds",
+                                      @"img\" + SelectedGame.Type + @"\trailer_chassis.dds", @"img\" + SelectedGame.Type + @"\tyres.dds" };
             TrailerPartsImg = Graphics_TSSET.ddsImgLoader(imgPaths, 64, 64).images;
 
             // integrity progress bar
@@ -337,7 +337,7 @@ namespace TS_SE_Tool {
             imgPaths = new string[] { @"img\UI\Trucks&Trailers\Accessories\truck_config.dds", @"img\UI\Trucks&Trailers\Accessories\upgrades.dds" };
             tmpIMGlist.AddRange(Graphics_TSSET.ddsImgLoader(imgPaths, 40, 40, 0, 0, 32, 32).images);
 
-            imgPaths = new string[] { @"img\" + GameType + @"\tyres.dds" };
+            imgPaths = new string[] { @"img\" + SelectedGame.Type + @"\tyres.dds" };
             tmpIMGlist.AddRange(Graphics_TSSET.ddsImgLoader(imgPaths, 42, 42, 5, 5, 32, 32).images);
 
             imgPaths = new string[] { @"img\UI\Trucks&Trailers\Accessories\use_preset.dds" };
@@ -511,7 +511,7 @@ namespace TS_SE_Tool {
             (bool valid, string[] fileArray) resulCheck;
 
             if (File.Exists(SiiSavePath)) {
-                string dbPath = "dbs/" + GameType + "." + Path.GetFileName(Globals.SelectedProfilePath) + ".sdf";
+                string dbPath = "dbs/" + SelectedGame.Type + "." + Path.GetFileName(Globals.SelectedProfilePath) + ".sdf";
                 DBconnection = new SqlCeConnection("Data Source = " + dbPath);
 
                 CreateDatabase(dbPath);

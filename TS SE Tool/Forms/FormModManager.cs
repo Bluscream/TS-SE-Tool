@@ -2,33 +2,29 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using FuzzySharp;
 using System.Linq;
-using System.Security.AccessControl;
 using TS_SE_Tool.Utilities;
-using System.Xml.Linq;
 using System.ComponentModel;
-using System.Drawing;
 using System.Text;
 using MoreLinq;
+using TS_SE_Tool.CustomClasses.Program;
 
 namespace TS_SE_Tool.Forms {
     public partial class FormModManager : Form {
         FormMain MainForm = Application.OpenForms.OfType<FormMain>().Single();
-        public DirectoryInfo ModsDir { get; private set; }
-        public string GameType { get; private set; }
+        public SupportedGame Game { get; private set; }
 
         public BindingList<GameMod> Mods = new BindingList<GameMod>();
 
 
-        public FormModManager(string gameType) {
-            GameType = gameType;
+        public FormModManager(SupportedGame game) {
+            Game = game;
             InitializeComponent();
         }
 
         public HashSet<GameMod> FindMatchingmods(DirectoryInfo gameDir) {
             var mods = new HashSet<GameMod>();
-            var filesToProcess = ModsDir.GetFiles("*.scs").Concat(ModsDir.GetFiles("*.disabled")).ToList();
+            var filesToProcess = Game.ModsDir.GetFiles("*.scs").Concat(Game.ModsDir.GetFiles("*.disabled")).ToList();
             while (filesToProcess.Count > 0) {
                 var file = filesToProcess[0];
                 filesToProcess.RemoveAt(0);
@@ -45,18 +41,17 @@ namespace TS_SE_Tool.Forms {
         }
 
 
-        private void Populatemods(string _game) {
+        private void Populatemods() {
             //tableMods.Rows.Clear();
             Mods.Clear();
-            FindMatchingmods(ModsDir).ForEach(p => Mods.Add(p));
+            FindMatchingmods(Game.ModsDir).ForEach(p => Mods.Add(p));
             //foreach (var mod in mods) {
             //    tableMods.Rows.Add(mod.Enabled, mod.Name, mod.InstallDate, mod.File32bit != null, mod.File64bit != null);
             //}
         }
 
         private void FormModManager_Load(object sender, EventArgs e) {
-            Text = $"Manage mods for {MainForm.GameType}";
-            ModsDir = new DirectoryInfo(Globals.MyDocumentsPath).Combine("mod");
+            Text = $"Manage {Game.Name} mods";
             tableMods.Columns.Clear();
             tableMods.Rows.Clear();
             tableMods.DataSource = Mods;
@@ -68,7 +63,7 @@ namespace TS_SE_Tool.Forms {
             tableMods.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             tableMods.CellContentClick += tableMods_CellContentClick;
             tableMods.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            Populatemods(MainForm.GameType);
+            Populatemods();
             //foreach (var i in new[] { 0, 3, 4 })
             //    tableMods.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             //mods.ListChanged += mods_ListChanged;
@@ -84,7 +79,7 @@ namespace TS_SE_Tool.Forms {
         }
 
         private void openModsDirectoryToolStripMenuItem_Click(object sender, EventArgs e) {
-            ModsDir.OpenInExplorer();
+            Game.ModsDir.OpenInExplorer();
         }
 
         private GameMod GetmodFromRow(int rowIndex, DataGridView table = null) {
@@ -133,7 +128,7 @@ namespace TS_SE_Tool.Forms {
             //var menuItem = sender as ToolStripMenuItem;
             if (AskUser("toggle") != DialogResult.Yes) return;
             GetModsFromSelected().ForEach(p => p.Enabled = !p.Enabled);
-            Populatemods(MainForm.GameType);
+            Populatemods();
         }
 
         private void openFoldersToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -155,7 +150,7 @@ namespace TS_SE_Tool.Forms {
             foreach (var mod in GetModsFromSelected()) {
                 mod.Delete();
             }
-            Populatemods(MainForm.GameType);
+            Populatemods();
         }
 
         private void tableMods_MouseHover(object sender, EventArgs e) {
@@ -173,7 +168,7 @@ namespace TS_SE_Tool.Forms {
         }
 
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e) {
-            Populatemods(MainForm.GameType);
+            Populatemods();
         }
 
         //private void tableMods_CellValueChanged(object sender, DataGridViewCellEventArgs e) {

@@ -2,54 +2,24 @@
 using System.IO;
 using System.Collections.Generic;
 using System.Windows.Forms;
-using FuzzySharp;
 using System.Linq;
-using System.Security.AccessControl;
 using TS_SE_Tool.Utilities;
-using System.Xml.Linq;
 using System.ComponentModel;
-using System.Drawing;
 using System.Text;
 using MoreLinq;
+using TS_SE_Tool.CustomClasses.Program;
 
 namespace TS_SE_Tool.Forms {
     public partial class FormPluginManager : Form {
-        FormMain MainForm = Application.OpenForms.OfType<FormMain>().Single();
-        public string GameType { get; private set; }
-        public DirectoryInfo ETS2GameDir { get; private set; }
-        public DirectoryInfo ATSGameDir { get; private set; }
+        public SupportedGame Game { get; private set; }
         public BindingList<GamePlugin> Plugins = new BindingList<GamePlugin>();
 
-
-        public FormPluginManager(string gameType) {
-            GameType = gameType;
+        public FormPluginManager(SupportedGame game) {
+            Game = game;
             InitializeComponent();
         }
 
         public static DirectoryInfo GetPluginsDir(DirectoryInfo gameDir, string arch = "win_x64") => gameDir.Combine("bin", arch, "plugins");
-        public DirectoryInfo GetGameDir(string _game) => _game == "ATS" ? ATSGameDir : ETS2GameDir;
-
-        public void Initialize() {
-            if (Globals.SteamGameLocator.getIsSteamInstalled()) {
-                Globals.SteamDir = new DirectoryInfo(Globals.SteamGameLocator.getSteamInstallLocation());
-                try {
-                    var dir = Globals.SteamGameLocator.getGameInfoByFolder("Euro Truck Simulator 2");
-                    if (!string.IsNullOrWhiteSpace(dir.steamGameLocation)) {
-                        ETS2GameDir = new DirectoryInfo(dir.steamGameLocation);
-                        IO_Utilities.LogWriter($"Found ETS2 Game Directory: {ETS2GameDir.FullString()}");
-                        //ETS2Plugins = FindMatchingPlugins(ETS2PluginsDir);
-                    }
-                } catch { }
-                try {
-                    var dir = Globals.SteamGameLocator.getGameInfoByFolder("American Truck Simulator");
-                    if (!string.IsNullOrWhiteSpace(dir.steamGameLocation)) {
-                        ATSGameDir = new DirectoryInfo(dir.steamGameLocation);
-                        IO_Utilities.LogWriter($"Found ATS Game Directory: {ATSGameDir.FullString()}");
-                        //ATSPlugins = FindMatchingPlugins(ATSPluginsDir);
-                    }
-                } catch { }
-            }
-        }
 
         public static GamePlugin? FindPluginByPath(IEnumerable<GamePlugin> plugins, FileInfo file) {
             foreach (var plugin in plugins) {
@@ -109,18 +79,17 @@ namespace TS_SE_Tool.Forms {
         }
 
 
-        private void PopulatePlugins(string _game) {
+        private void PopulatePlugins() {
             //tablePlugins.Rows.Clear();
             Plugins.Clear();
-            FindMatchingPlugins(GetGameDir(_game)).ForEach(p => Plugins.Add(p));
+            FindMatchingPlugins(Game.GameDir).ForEach(p => Plugins.Add(p));
             //foreach (var plugin in Plugins) {
             //    tablePlugins.Rows.Add(plugin.Enabled, plugin.Name, plugin.InstallDate, plugin.File32bit != null, plugin.File64bit != null);
             //}
         }
 
         private void FormPluginManager_Load(object sender, EventArgs e) {
-            Text = $"Manage Plugins for {GameType}";
-            Initialize();
+            Text = $"Manage Plugins for {Game.Type}";
             tablePlugins.Columns.Clear();
             tablePlugins.Rows.Clear();
             tablePlugins.DataSource = Plugins;
@@ -132,7 +101,7 @@ namespace TS_SE_Tool.Forms {
             tablePlugins.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             tablePlugins.CellContentClick += tablePlugins_CellContentClick;
             tablePlugins.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            PopulatePlugins(GameType);
+            PopulatePlugins();
             foreach (var i in new[] { 0, 3, 4 })
                 tablePlugins.Columns[i].AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
             //Plugins.ListChanged += Plugins_ListChanged;
@@ -149,8 +118,7 @@ namespace TS_SE_Tool.Forms {
 
         private void openPluginsDirToolStripMenuItem_Click(object sender, EventArgs e) {
             var arch = ((ToolStripItem)sender).Text;
-            var dir = GameType == "ATS" ? ATSGameDir : ETS2GameDir;
-            GetPluginsDir(dir, "win_" + arch).OpenInExplorer();
+            GetPluginsDir(Game.GameDir, "win_" + arch).OpenInExplorer();
         }
 
         private GamePlugin GetPluginFromRow(int rowIndex, DataGridView table = null) {
@@ -199,7 +167,7 @@ namespace TS_SE_Tool.Forms {
             //var menuItem = sender as ToolStripMenuItem;
             if (AskUser("toggle") != DialogResult.Yes) return;
             GetPluginsFromSelected().ForEach(p => p.Enabled = !p.Enabled);
-            PopulatePlugins(GameType);
+            PopulatePlugins();
         }
 
         private void openFoldersToolStripMenuItem_Click(object sender, EventArgs e) {
@@ -221,7 +189,7 @@ namespace TS_SE_Tool.Forms {
             foreach (var plugin in GetPluginsFromSelected()) {
                 plugin.Delete();
             }
-            PopulatePlugins(GameType);
+            PopulatePlugins();
         }
 
         private void tablePlugins_MouseHover(object sender, EventArgs e) {
@@ -239,13 +207,13 @@ namespace TS_SE_Tool.Forms {
         }
 
         private void reloadToolStripMenuItem_Click(object sender, EventArgs e) {
-            PopulatePlugins(GameType);
+            PopulatePlugins();
         }
 
         private void ImportDll(FileInfo file) {
             if (!file.Exists) return;
             if (file.Extension.ToLower() == ".dll") {
-                file.CopyTo(GetPluginsDir(GetGameDir(GameType), file.Is64BitDll() ? "win_x64" : "win_x86").CombineFile(file.Name));
+                file.CopyTo(GetPluginsDir(Game.GameDir, file.Is64BitDll() ? "win_x64" : "win_x86").CombineFile(file.Name));
             }
         }
 
@@ -257,7 +225,7 @@ namespace TS_SE_Tool.Forms {
                     ImportDll(file);
                 }
             }
-            PopulatePlugins(GameType);
+            PopulatePlugins();
         }
 
         //private void tablePlugins_CellValueChanged(object sender, DataGridViewCellEventArgs e) {
